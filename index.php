@@ -12,6 +12,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    CFY Business Management Suite
+      <p align="right">CFY Business Management Suite</p>
   </body>
 </html>

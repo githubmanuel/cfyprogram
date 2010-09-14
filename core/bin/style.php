@@ -14,6 +14,14 @@ Commnents: Apply the style to the system.
 
 */
 
-require("styles/".$CORE["style"]["name"]."/style.html");
+//require("styles/".$CORE["style"]["name"]."/style.html");
+
+$lines = file("styles/".$CORE["style"]["name"]."/style.html");
+
+foreach ($lines as $line_num => $line) {
+		$head_line = str_replace("--head--", ' ', $line);
+		$css_line = str_replace('href="', 'href="'.$CORE["system"]["site_url"].'/styles/base/', $head_line);
+		echo $css_line;
+}
 
 ?>

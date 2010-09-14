@@ -9,13 +9,12 @@ Version: 0.0.0.1a
 Author: Ernesto La Fontaine
 License: New BSD License (see docs/license.txt)
 
-File: index.php
-Commnents: Startup file.
+File: config
+Commnents: Configuration file.
 
 */
-?>
-<?php
-require("core/conf/config.php");
-require("core/bin/style.php");
+
+$CORE["style"]["name"] = "base";
+
 
 ?>

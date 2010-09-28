@@ -4,11 +4,11 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CFY program</title>
-<link href="css/base.css" rel="stylesheet" type="text/css">
+<link href="http://pajarraco.homeip.net/cfyprogram/styles/base/css/base.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
---head--
+<script src="core/scripts/menu_bar.js" type="text/javascript"></script><link href="core/css/menu_bar.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 </aside>
   <!-- end .sidebar1 -->
   </div>
-  --menu--
+  <ul id="MenuBar1" class="MenuBarHorizontal"> <li class="border"><a href="../index.php">Pricipal</a></li><li class="border"><a class="MenuBarItemSubmenu" href="#">Ventas</a>  <ul>    <li><a href="../clientes.php">Clientes</a></li>    <li><a href="../presupuesto.php">Presupuesto</a></li>  </ul> </li> <li class="border"><a class="MenuBarItemSubmenu" href="#">Archivos</a>   <ul>     <li><a href="../cargar_archivo.php">Cargar Archivo</a></li>     <li><a href="../muebles.php">Muebles</a></li>     <li><a href="../materiales.php">Materiales</a></li>    <li><a href="../accesorios.php">Accesorios</a></li>  </ul> </li> <li class="border"><a class="MenuBarItemSubmenu" href="#">Configuración</a>   <ul>     <li><a href="../gastos.php" >Gastos</a></li>     <li><a href="../proyecciones.php" >Proyecciones</a></li>     <li><a href="../utilidad.php">Utilidad</a></li>     <li><a href="../usuarios.php">Usuarios</a></li>   </ul> </li> <li class="border"><a href="../ayuda.php">Ayuda</a></li>  <li class="border_last"><a href="#">Salir</a></li></ul>
   <article class="content">
     <h1>Instructions</h1>
     <section>
@@ -50,6 +50,6 @@
   </footer>
   <!-- end .container -->
   </div>
-  --footer--
+  <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"core/image/MenuBarDownHover.gif", imgRight:"core/image/MenuBarRightHover.gif"});</script>
 </body>
 </html>

@@ -15,7 +15,8 @@ Commnents: Startup file.
 */
 ?>
 <?php
+
 require("core/conf/config.php");
-require("core/bin/style.php");
+require("core/conf/style_apply.php");
 
 ?>

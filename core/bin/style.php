@@ -10,18 +10,17 @@ Author: Ernesto La Fontaine
 License: New BSD License (see docs/license.txt)
 
 File: style.php
-Commnents: Apply the style to the system.
+Commnents: apply the style to the style file.
 
 */
 
-//require("styles/".$CORE["style"]["name"]."/style.html");
+require('../conf/config.php');
+include '../classes/files.php';
+$setStyle = new Files();
 
-$lines = file("styles/".$CORE["style"]["name"]."/style.html");
-
-foreach ($lines as $line_num => $line) {
-		$head_line = str_replace("--head--", ' ', $line);
-		$css_line = str_replace('href="', 'href="'.$CORE["system"]["site_url"].'/styles/base/', $head_line);
-		echo $css_line;
-}
+$setStyle->set_style('style_apply.php', $CORE["system"]["site_url"], $CORE["style"]["name"]);
 
 ?>
+Su estilo ha sido aplicado
+
+<a href="javascript:back()">Atras</a>

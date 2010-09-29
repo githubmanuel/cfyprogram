@@ -16,7 +16,7 @@ Commnents: class for handle the menu
 
 class Menu
 {
- 	function set_menu(){ // check if file exist
+ 	function set_menu($page){ // check if file exist
 		$menu =  '<ul id="MenuBar1" class="MenuBarHorizontal">';
  		$menu .= ' <li class="border"><a href="../index.php">Pricipal</a></li>';
  		$menu .= '<li class="border"><a class="MenuBarItemSubmenu" href="#">Ventas</a>';

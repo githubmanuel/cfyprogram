@@ -14,7 +14,7 @@ Commnents: Configuration file.
 
 */
 
-$CORE["system"]["site_url"] = "http://pajarraco.homeip.net/cfyprogram";
+$CORE["system"]["site_url"] = "http://localhost/cfy";
 $CORE["style"]["name"] = "base";
 
 

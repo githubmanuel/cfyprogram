@@ -17,6 +17,33 @@ Commnents: Startup file.
 <?php
 
 require("core/conf/config.php");
-require("core/conf/style_apply.php");
+include "core/classes/files.php";
+
+$pid = 0;
+$style_filename = '';
+$myContent = new Files();
+
+if (isset($_GET['pid'])){
+    $pid = $_GET['pid'];
+}
+
+switch ($pid) {
+    case 1:
+        echo "i equals 0";
+        break;
+    case 2:
+        echo "i equals 1";
+        break;
+    case 3:
+        echo "i equals 2";
+        break;
+    default:
+        $style_filename = 'core/conf/style_apply.php';
+        $CORE["page"]["content"] = $myContent->set_content('setting');
+        require($style_filename);
+}
+
+
+
 
 ?>

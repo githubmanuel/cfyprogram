@@ -17,33 +17,34 @@ Commnents: Startup file.
 <?php
 
 require("core/conf/config.php");
-include "core/classes/files.php";
 
 $pid = 0;
 $style_filename = '';
-$myContent = new Files();
+$module_name = '';
 
-if (isset($_GET['pid'])){
+if (isset($_GET['pid'])) {
     $pid = $_GET['pid'];
 }
 
 switch ($pid) {
     case 1:
-        echo "i equals 0";
+        $module_name = 'home';
         break;
     case 2:
-        echo "i equals 1";
+        $module_name = 'admin';
+        ;
         break;
     case 3:
-        echo "i equals 2";
+        $module_name = 'budget';
         break;
     default:
-        $style_filename = 'core/conf/style_apply.php';
-        $CORE["page"]["content"] = $myContent->set_content('setting');
-        require($style_filename);
+        $module_name = 'setting';
+        ;
 }
 
-
-
+$CORE["page"]["content"] = 'modules/'.$module_name.'/bin/index.php';
+$CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.php';
+$style_filename = 'core/conf/style_apply.php';
+require($style_filename);
 
 ?>

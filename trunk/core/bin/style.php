@@ -15,7 +15,7 @@ Commnents: apply the style to the style file.
 */
 
 require('../conf/config.php');
-include '../classes/files.php';
+require('../classes/files.php');
 
 $setStyle = new Files();
 $setStyle->set_style('style_apply.php', $CORE["system"]["site_url"], 'setting', $CORE["style"]["name"]);

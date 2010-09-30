@@ -13,7 +13,7 @@ File: files.php
 Commnents: class for handle the files
 
 */
-include 'menu.php';
+require('menu.php');
 
 class Files {
 
@@ -41,8 +41,8 @@ class Files {
         // replace the tag line
         $head_line = str_replace('--head--', $myMenu->set_head_menu(), $css_line);
         $module_line = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $myMenu->set_module_menu(), $head_line);
-        $menu_line = str_replace('--menu--', '<?php include $CORE["page"]["menu"]; ?>' , $module_line);
-        $content_line = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php include $CORE["page"]["content"]; ?>' , $menu_line);
+        $menu_line = str_replace('--menu--', '<?php require($CORE["page"]["menu"]); ?>' , $module_line);
+        $content_line = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require($CORE["page"]["content"]); ?>' , $menu_line);
         $footer_line = str_replace('--footer--', $myMenu->set_footer_menu() , $content_line);
 
         // put the new content into the files

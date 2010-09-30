@@ -17,5 +17,4 @@ Commnents: Configuration file.
 $CORE["system"]["site_url"] = "http://localhost/cfy";
 $CORE["style"]["name"] = "base";
 
-
 ?>

@@ -20,6 +20,9 @@
 /**
  * include the db class
  */ 
+ 
+sleep(2);
+
 include('db.php');
 
 class ajaxLoginModule  {
@@ -35,7 +38,7 @@ class ajaxLoginModule  {
  * Loads the configuration and initialize the DB class
  * $this->is_login(); checks if the hml form is submitted
  */    
-  	function __construct() {
+  	function __construct() { 
 		$msql  = new Db;
 		$msql->connect();
 		$this->is_login();
@@ -94,7 +97,7 @@ class ajaxLoginModule  {
  */    
   	function jscript_location() {
     	$this->set_session();
-    	echo "<script> $('#logincontainer').fadeOut();window.location.href='" . SUCCESS_LOGIN_GOTO . "'</script>";
+    	echo "<script> $('#container').fadeOut();window.location.href='" . SUCCESS_LOGIN_GOTO . "'</script>";
   	}
 /**
  * Sets the session if successful login

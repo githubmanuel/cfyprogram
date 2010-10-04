@@ -16,8 +16,7 @@
  * Dual licensed under the MIT and GPL licenses.
  * Redistributions of files must retain the above copyright notice.
  */
-   include('core/classes/ajaxLoginModule.class.php');
-   $ajaxLoginModule = new ajaxLoginModule;
+
 
 ?>
 
@@ -26,27 +25,29 @@
     <div class="logintitle">Ingreso al sistema</div>
     <form method="post" class="ajax_form">
       <ul class="login">
-        <li class="loginlabel"> Usuario</li>
+        <li class="loginlabel">Usuario</li>
         <li class="loginfield">
           <input name="username" type="text" class="text" />
         </li>
-        <li class="loginlabel"> Clave</li>
+        <li class="loginlabel">Clave</li>
         <li class="loginfield">
           <input name="password" type="password" class="text"/>
         </li>
         <li class="loginlabel"> </li>
-        <li class="loginfield"> <img src="core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo AJAX_FORM_ELEMENT?>').submit();"/>
-          <input name="submit" type="submit" style="display:none" />
+     	<li class="loginfield"> <img src="core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo AJAX_FORM_ELEMENT?>').submit();"/>
+        <input name="submit" type="submit" style="display:none" />
         </li>
-        <li class="invalid_message">
-          <div class="ajax_notify" style="display:none"> Error : Invalid username or password. Please try again. 
-            <!--don't delete this div class="ajax_notify"--> 
-          </div>
-        </li>
-        <li class="loginlabel status"> <span class="ajax_wait"> 
-          <!--don't delete this span class="ajax_wait"--> 
-          </span> </li>
-      </ul>
+<li class="invalid_message">
+        <div class="ajax_notify" style="display:none; clear:both"> 
+          Error : Invalid username or password. Please try again.
+          <!--don't delete this div class="ajax_notify"-->
+        </div>
+      </li>
+      <li class="label status"> 
+        <span class="ajax_wait">
+        <!--don't delete this span class="ajax_wait"-->
+        </span> </li>
+    </ul>
       <div class="ajax_target" style="display:none" > 
         <!--don't delete this div class="ajax_target" --> 
       </div>

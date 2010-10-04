@@ -44,6 +44,8 @@ switch ($pid) {
     default:
         $module_name = 'home';
 		$page_name = 'login';
+		include('core/classes/ajaxLoginModule.class.php');
+   		$ajaxLoginModule = new ajaxLoginModule;
 }
 
 $CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name.'.php';

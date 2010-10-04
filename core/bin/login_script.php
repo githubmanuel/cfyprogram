@@ -25,7 +25,7 @@
                 $("#logincontainer").fadeIn();
 				var options = { 
                     target       :  '.<?php echo AJAX_TARGET_ELEMENT; ?>',
-                    timeout      :    <?php echo AJAX_TIMEOUT; ?>,    
+                    timeout      :    <?php echo AJAX_TIMEOUT;?>,    
                     beforeSubmit :   request,  
                     success      :   response  
                 }; 
@@ -33,7 +33,7 @@
                 function request(formData, jqForm, options) { 
                     valid = true;
                     $('.<?php echo AJAX_WAIT_ELEMENT; ?>').hide();
-                    var label = "<span class='ajax_spinner'><img src='../imagen/ispinner.gif'/><?php echo AJAX_WAIT_TEXT;?></span>";
+                    var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo AJAX_WAIT_TEXT;?></span>";
                     $(".<?php echo AJAX_WAIT_ELEMENT; ?>").after(label);
                     $('.<?php echo AJAX_NOTIFY_ELEMENT; ?>').hide();						
                     if(valid) {

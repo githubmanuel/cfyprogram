@@ -21,33 +21,29 @@ $CORE["system"]["site_url"] 	= "http://pajarraco.homeip.net/cfyprogram";
 $CORE["system"]["db_host"] 		= "localhost";
 $CORE["system"]["db_name"]		= "cfy_base";
 $CORE["system"]["db_username"] 	= "cfyadmin";
-$CORE["system"]["db_password"] 	= "yGZUWc2rJ9PmJxhv";
+$CORE["system"]["db_password"] 	= "12345";
 
 
 
 // Style variable
 $CORE["style"]["name"] = "base";
 
-
-
-
 /* Ajax Login Module v1.1*/
-
+error_reporting(0);
 /* If login successful then it will redirect to */
-  define('SUCCESS_LOGIN_GOTO'   ,'');
+define('SUCCESS_LOGIN_GOTO', '?pid=1');
   
-  /* if the defined table in USERS_TABLE_NAME doesn't exist in the Database,
+   /* if the defined table in USERS_TABLE_NAME doesn't exist in the Database,
    * this module  will attempt to create.
    */
-  define('USERS_TABLE_NAME','app_members');
-  
-   
-    /* Advance Configuration - no need to edit this section */
-  define('AJAX_TIMEOUT',        '10000000');
-  define('AJAX_TARGET_ELEMENT', 'ajax_target');
-  define('AJAX_WAIT_TEXT',      'Please wait...');
-  define('AJAX_FORM_ELEMENT',   'ajax_form');
-  define('AJAX_WAIT_ELEMENT',   'ajax_wait');
-  define('AJAX_NOTIFY_ELEMENT', 'ajax_notify');
+define('USERS_TABLE_NAME','app_members');
+ 
+  /* Advance Configuration - no need to edit this section */
+define('AJAX_TIMEOUT',        '10000000');
+define('AJAX_TARGET_ELEMENT', 'ajax_target');
+define('AJAX_WAIT_TEXT',      'Please wait...');
+define('AJAX_FORM_ELEMENT',   'ajax_form');
+define('AJAX_WAIT_ELEMENT',   'ajax_wait');
+define('AJAX_NOTIFY_ELEMENT', 'ajax_notify');
   
 ?>

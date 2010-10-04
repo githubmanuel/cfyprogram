@@ -15,10 +15,14 @@ Commnents: Startup file.
 */
 
 ?>
-<ul id="MenuBar1" class="MenuBarHorizontal">
-    <li class="border"><a href="?pid=1">Pricipal</a></li>
-    <li class="border"><a href="docs/license.txt">Docs</a></li>
-    <li class="border"><a href="?pid=0">Ayuda</a></li>
-    <li class="border_last"><a href="#">Salir</a></li>
-</ul>
 
+<ul id="MenuBar1" class="MenuBarHorizontal">
+  <li class="border"><a href="?pid=1">Pricipal</a></li>
+  <li class="border"><a href="?pid=1-1">Setting</a></li>
+  <li class="border" ><a class="MenuBarItemSubmenu" href="#">Ayuda</a>
+    <ul>
+      <li class="border"><a href="docs/license.txt">Docs</a></li>
+    </ul>
+  </li>
+  <li class="border_last"><a href="core/bin/logout.php">Salir</a></li>
+</ul>

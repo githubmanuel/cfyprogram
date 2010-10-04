@@ -18,31 +18,35 @@ Commnents: Startup file.
 
 require("core/conf/config.php");
 
-$pid = 0;
+$pid = '';
 $style_filename = '';
 $module_name = '';
+$page_name = 'index';
 
 if (isset($_GET['pid'])) {
     $pid = $_GET['pid'];
 }
 
 switch ($pid) {
-    case 1:
+    case '1':
         $module_name = 'home';
         break;
-    case 2:
-        $module_name = 'admin';
-        ;
+	case '1-1':
+        $module_name = 'home';
+		$page_name = 'setting';
         break;
-    case 3:
+    case '2':
+        $module_name = 'admin';
+        break;
+    case '3':
         $module_name = 'budget';
         break;
     default:
-        $module_name = 'setting';
-        ;
+        $module_name = 'home';
+		$page_name = 'login';
 }
 
-$CORE["page"]["content"] = 'modules/'.$module_name.'/bin/index.php';
+$CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name.'.php';
 $CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.php';
 $style_filename = 'core/conf/style_apply.php';
 require($style_filename);

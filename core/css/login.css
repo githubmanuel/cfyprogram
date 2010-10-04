@@ -1,0 +1,127 @@
+/**
+ * Ajax Login Module v1.1
+ *
+ * Ajax Login Module is a nice Php-AJAX Login used to authenticate users without reloading a login page.
+ * Easy to integrate with your existing php applications with no further configuration and coding.
+ *
+ *
+ * @copyright     Copyright 2009, Christopher M. Natan
+ * @link          http://phpstring.co.cc/phpclasses/modules/ajax-login-module/
+ * @version       $Revision$
+ * @modifiedby    $LastChangedBy$
+ * @lastmodified  $Date$
+ * @email         chris.natan@gmail.com
+ *
+ * Dual licensed under the MIT and GPL licenses.
+ * Redistributions of files must retain the above copyright notice.
+ */
+ 
+/**
+ * Ajax Login Module v1.1
+ *
+ * Ajax Login Module is a nice Php-AJAX Login used to authenticate users without reloading a login page.
+ * Easy to integrate with your existing php applications with no further configuration and coding.
+ *
+ *
+ * @copyright     Copyright 2009, Christopher M. Natan
+ * @link          http://phpstring.co.cc/phpclasses/modules/ajax-login-module/
+ * @version       $Revision$
+ * @modifiedby    $LastChangedBy$
+ * @lastmodified  $Date$
+ * @email         chris.natan@gmail.com
+ *
+ * Dual licensed under the MIT and GPL licenses.
+ * Redistributions of files must retain the above copyright notice.
+ */
+ 
+body {
+}
+ul.login, form {
+	margin:0;
+	padding:0;
+	list-style:none;
+	clear:both
+}
+#logincontainer {
+	width:500px;
+	height:260px;
+	margin:50px auto;
+}
+#logincontainer {
+	background: url(../image/icontainer_bg.jpg) no-repeat;
+	padding:7px 10px 0 10px
+}
+div.logintitle {
+	background:url(../image/ititle_bg.gif) no-repeat;
+	width:500px;
+	height:35px;
+}
+div.logintitle {
+	margin:0 0 12px 0;
+	padding:3px 0 0 5px;
+	color:#FFFFFF;
+	font-size:23px;
+	font-weight:normal
+}
+.loginlabel, .loginfield {
+	margin-bottom:10px
+}
+.loginlabel {
+	width:170px;
+	float:left;
+	color:#333333;
+	font-size:24px;
+}
+.loginlabel {
+	height:38px;
+}
+.status {
+	font-size:15px;
+	color:#FFFFFF;
+}
+.loginfield {
+	width:270px;
+	height:38px;
+	float:left
+}
+input.text {
+	width:224px;
+	height:35px;
+	background:url(../image/itext_bg.jpg);
+}
+input.text {
+	border:0;
+	font-size:23px;
+	color:#FFFFFF;
+	padding:3px 5px 1px 5px;
+}
+.submit {
+	cursor:pointer
+}
+.invalid_message {
+	width:100%;
+	clear:both;
+	font-size:12px;
+	color:#990000;
+	text-align:center;
+	padding-top:5px;
+	height:auto
+}
+.ajax_spinner {
+	color:#003399;
+	font-size:12px;
+}
+.ajax_spinner img {
+	vertical-align:middle
+}
+.default {
+	width:500px;
+	margin:auto;
+	text-align:center;
+	clear:both;
+}
+#login_body {
+	width:600px;
+	float: left;
+	display: block;
+}

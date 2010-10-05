@@ -21,19 +21,15 @@
  * include the db class
  */ 
  
-sleep(2);
+sleep(2); //for testing ajax effects
 
-include('db.php');
+include("db.php");
+include("core/conf/config.php");
 
 class ajaxLoginModule  {
 	
-	private $timeout         = null;
-	private $target_element  = null;
-	private $wait_text       = null;
-	private $form_element    = null;
-	private $wait_element    = null;
-	private $notify_element  = null;
-
+	private $userGroup = NULL;
+	
 /**
  * Loads the configuration and initialize the DB class
  * $this->is_login(); checks if the hml form is submitted
@@ -49,7 +45,7 @@ class ajaxLoginModule  {
  * @access public
  */ 	 
 	function initJquery() { 
-		 return "<script type='text/javascript' src='core/scripts/jquery-1.3.2.min.js'></script>";
+		 return '<script type="text/javascript" src="core/scripts/jquery-1.3.2.min.js"></script>';
 	}
 /**
  * Gets the included php-jscript file and load to page.
@@ -57,7 +53,7 @@ class ajaxLoginModule  {
  * @access public
  */ 		
   	function getScript() { 
-	 	include ('core/bin/login_script.php');
+	 	include ("core/bin/login_script.php");
   	}
 /**
  * Checks if form is submitted and then submit query to database
@@ -68,12 +64,17 @@ class ajaxLoginModule  {
 		if(isset($_POST['username']))  {
 			$username   = $_POST['username'];
 		 	$password   = $_POST['password'];
-		 	$strSQL = "SELECT * FROM " . USERS_TABLE_NAME . "
+			if (isset($_GET['accesscheck'])){
+				$GLOBALS["CORE"]["login"]["success_login_goto"] = $_GET['accesscheck'];
+			}
+		 	$strSQL = "SELECT * FROM ".$GLOBALS["CORE"]["login"]["user_table_name"]."
 					   WHERE username ='$username' AND password = '$password'"; 
 			$result  = mysql_query ($strSQL); 
 			$row     = mysql_fetch_row($result);
+			$this->userGroup = $row[2];
 			$exist   = count($row);
-			if($exist >= 2) { 
+			if($exist >= 2) {
+				
 				$this->jscript_location();  
 			} 
 			else { 
@@ -88,7 +89,7 @@ class ajaxLoginModule  {
  * @access private
  */   
   	function notify_show() {
-    	echo "<script>$('." . AJAX_NOTIFY_ELEMENT . "').fadeIn();</script>";
+    	echo '<script>$(".'.$GLOBALS["CORE"]["login"]["ajax_notify_element"].'").fadeIn();</script>';
   	}
 /**
  * Used for redirecting page that defined in SUCCESS_LOGIN_GOTO 
@@ -97,7 +98,7 @@ class ajaxLoginModule  {
  */    
   	function jscript_location() {
     	$this->set_session();
-    	echo "<script> $('#container').fadeOut();window.location.href='" . SUCCESS_LOGIN_GOTO . "'</script>";
+    	echo '<script> $("#logincontainer").fadeOut();window.location.href="'.$GLOBALS["CORE"]["login"]["success_login_goto"].'"</script>';
   	}
 /**
  * Sets the session if successful login
@@ -106,8 +107,9 @@ class ajaxLoginModule  {
  */    
   	function set_session() {
       	session_start();
-	  	$_SESSION['is_successful_login'] = true;
+		$_SESSION['MM_Username'] = $_POST['username'];
+		$_SESSION['MM_UserGroup'] = $this->userGroup;
   	}  	 
 	  
 }  
-?>  
+?>

@@ -17,38 +17,39 @@
  * Redistributions of files must retain the above copyright notice.
  */
  
- ?>
+include ("core/conf/config.php");
+?>
 <script type="text/javascript">
        $(document).ready(function() { 
            formLogin();
            function	formLogin() {
                 $("#logincontainer").fadeIn();
 				var options = { 
-                    target       :  '.<?php echo AJAX_TARGET_ELEMENT; ?>',
-                    timeout      :    <?php echo AJAX_TIMEOUT;?>,    
+                    target       :  ".<?php echo $CORE["login"]["ajax_target_element"]; ?>",
+                    timeout      :    <?php echo $CORE["login"]["ajax_timeout"]; ?>,    
                     beforeSubmit :   request,  
                     success      :   response  
                 }; 
-               $('.<?php echo AJAX_FORM_ELEMENT;?>').submit(function() {  $(this).ajaxSubmit(options); return false;});   
+               $(".<?php echo $CORE["login"]["ajax_form_element"] ;?>").submit(function() {  $(this).ajaxSubmit(options); return false;});   
                 function request(formData, jqForm, options) { 
                     valid = true;
-                    $('.<?php echo AJAX_WAIT_ELEMENT; ?>').hide();
-                    var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo AJAX_WAIT_TEXT;?></span>";
-                    $(".<?php echo AJAX_WAIT_ELEMENT; ?>").after(label);
-                    $('.<?php echo AJAX_NOTIFY_ELEMENT; ?>').hide();						
+                    $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").hide();
+                    var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo $CORE["login"]["ajax_wait_text"] ;?></span>";
+                    $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").after(label);
+                    $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").hide();						
                     if(valid) {
                       return true;
                     } else { 
-                     $('.<?php echo AJAX_WAIT_ELEMENT; ?>').show();
-					 $('.ajax_spinner').fadeOut();
+                     $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
+					 $(".ajax_spinner").fadeOut();
 					 $(".ajax_spinner").remove();
-					 $('.<?php echo AJAX_NOTIFY_ELEMENT; ?>').fadeIn(); 
+					 $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").fadeIn(); 
                       return false;
                     } 
                 } 
                 function response(responseText, statusText) {
-				   $('.<?php echo AJAX_WAIT_ELEMENT; ?>').show();
-                   $('.ajax_spinner').fadeOut();
+				   $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
+                   $(".ajax_spinner").fadeOut();
 				   $(".ajax_spinner").remove();	
 				 }
             }		

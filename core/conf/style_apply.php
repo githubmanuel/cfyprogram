@@ -4,7 +4,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CFY program</title>
-        <link href="http://pajarraco.homeip.net/cfyprogram/styles/base/css/base.css" rel="stylesheet" type="text/css">
+        <link href="http://192.168.137.50/cfyprogram/styles/base/css/base.css" rel="stylesheet" type="text/css">
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->

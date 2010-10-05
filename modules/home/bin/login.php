@@ -34,7 +34,7 @@
           <input name="password" type="password" class="text"/>
         </li>
         <li class="loginlabel"> </li>
-     	<li class="loginfield"> <img src="core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo AJAX_FORM_ELEMENT?>').submit();"/>
+     	<li class="loginfield"> <img src="core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo $CORE["login"]["ajax_form_element"]; ?>').submit();"/>
         <input name="submit" type="submit" style="display:none" />
         </li>
 <li class="invalid_message">
@@ -56,5 +56,5 @@
    echo $ajaxLoginModule->getScript();
  ?>
   </div>
-  <div class="default">Default username: admin / password: admin</div>
+  <div class="default">Default username: admin / password: juan316</div>
 </div>

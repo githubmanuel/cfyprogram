@@ -15,13 +15,14 @@ Commnents: Startup file.
 */
 ?>
 <?php
+include("core/conf/config.php");
 
-require("core/conf/config.php");
 
 $pid = '';
 $style_filename = '';
 $module_name = '';
 $page_name = 'index';
+$user_auth = true;
 
 if (isset($_GET['pid'])) {
     $pid = $_GET['pid'];
@@ -44,10 +45,14 @@ switch ($pid) {
     default:
         $module_name = 'home';
 		$page_name = 'login';
-		include('core/classes/ajaxLoginModule.class.php');
-   		$ajaxLoginModule = new ajaxLoginModule;
+		$user_auth = false;
+		include("core/classes/ajaxLoginModule.class.php");
+   		$ajaxLoginModule = new ajaxLoginModule();
 }
 
+if($user_auth){
+	include("core/bin/user_auth.php");
+}
 $CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name.'.php';
 $CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.php';
 $style_filename = 'core/conf/style_apply.php';

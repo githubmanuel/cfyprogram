@@ -25,7 +25,7 @@ class Db{
  * @access public
  */ 	
 	function connect() {
-		include ('core/conf/config.php');
+		include ("core/conf/config.php");
     	$connect      = mysql_connect($CORE["system"]["db_host"], $CORE["system"]["db_username"], $CORE["system"]["db_password"]);
 	   	$select_db    = mysql_select_db($CORE["system"]["db_name"], $connect); 
 		if (!$connect) {
@@ -42,10 +42,10 @@ class Db{
 			break;
 		}
 		
-		$strSQL = "SELECT * from " . USERS_TABLE_NAME . " limit 1";
+		$strSQL = "SELECT * from ".$CORE["login"]["user_table_name"]." limit 1";
         $result = mysql_query ($strSQL); 
 		if($result == null) {
-		   $this->create_table();
+		   $this->create_table($CORE["login"]["user_table_name"]);
 		   die();
 		}
     }
@@ -56,7 +56,7 @@ class Db{
  */    
    	function error() {
     	echo "<div style='width:350;margin:auto;text-align:center;font-family:Arial'>
-			     <span style='font-size:15px;color:red'>MYSQL SERVER ERROR : " . mysql_error() . "</span> 	
+			     <span style='font-size:15px;color:red'>MYSQL SERVER ERROR : ".mysql_error()."</span> 	
 			  </div>";
 		echo "<div style='width:350;margin:auto;text-align:center;margin-top:10px;font-family:Arial'>
 				 You must edit first the <b>config.php</b> file and input your correct MySQL account, this file 
@@ -71,23 +71,23 @@ class Db{
  * @return void
  * @access private
  */     
-	function create_table() {
-    	$strSQL = " CREATE TABLE `" . USERS_TABLE_NAME . "` (
-					  `id` int(11) NOT NULL AUTO_INCREMENT,
-					  `username` varchar(200) NOT NULL DEFAULT '',
-					  `password` varchar(200) DEFAULT NULL,
-					   PRIMARY KEY (`id`)
-				   )   ENGINE=MyISAM DEFAULT CHARSET=utf8;";
-	            
+	function create_table($table_name) {
+    	$strSQL =	"CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
+  					`username` varchar(15) NOT NULL,
+  					`password` varchar(15) NOT NULL,
+  					`level` int(11) NOT NULL,
+  					`creation_date` datetime NOT NULL,
+  					`status` int(11) NOT NULL,
+  					PRIMARY KEY (`username`)
+					) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+
       $result = mysql_query ($strSQL); 
-	  $strSQL = "INSERT INTO `" . USERS_TABLE_NAME."` (`id`,`username`,`password`) VALUES (1,'admin','admin');";
+	  $strSQL = "INSERT INTO `" . $table_name."` (`username`,`password`,`level`,`creation_date`,`status `) VALUES ('admin','juan316', 0, NOW(), 0);";
 	  $result = mysql_query ($strSQL); 
 	  if(!$result) {
 		   die("Couldn't connect to mysql hostname, Please check your configuration");
 		}
 	  echo ('<meta http-equiv="refresh" content="0;">');
-   }
-	 
-	  
+   } 
  }  
 ?>  

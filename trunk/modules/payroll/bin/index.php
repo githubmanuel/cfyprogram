@@ -13,15 +13,10 @@ File: index.php
 Commnents: Startup file.
 
 */
-
 ?>
 
-<ul id="MenuBar1" class="MenuBarHorizontal">
-    <li class="border"><a href="?pid=3">Pricipal</a></li>
-  <li class="border" ><a class="MenuBarItemSubmenu" href="#">Ayuda</a>
-    <ul>
-      <li><a href="docs/license.txt">Docs</a></li>
-    </ul>
-  </li>
-  <li class="border_last"><a href="core/bin/logout.php">Salir</a></li>
-</ul>
+<h1>Payroll File</h1>
+<section>
+    <h2>Probando el insert</h2>
+    <p>Este si lo puedes cambiar.</p>
+</section>

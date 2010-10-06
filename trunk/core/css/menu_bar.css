@@ -13,17 +13,14 @@
 /* The outermost container of the Menu Bar, an auto width box with no margin or padding */
 ul.MenuBarHorizontal
 {
-    margin-left: 100px;
-    padding: 0;
-    list-style-type: none;
-    font-size: 100%;
-    cursor: default;
-    height: 23px;
-    background-color: #EEE;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-
-
+	margin-left: 100px;
+	padding: 0;
+	list-style-type: none;
+	font-size: 100%;
+	cursor: default;
+	height: 1.6em;
+	background-color: #EEE;
+	border-top: 1px solid #999;
 }
 /* Set the active Menu Bar with this class, currently setting z-index to accomodate IE rendering bug: http://therealcrisp.xs4all.nl/meuk/IE-zindexbug.html */
 ul.MenuBarActive
@@ -87,7 +84,7 @@ ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible
 /* Submenu containers have borders on all sides */
 ul.MenuBarHorizontal ul
 {
-    border: 1px solid #999;
+	border: 1px solid #999;
 }
 /* Menu items are a light gray block with padding and no text decoration */
 ul.MenuBarHorizontal a
@@ -174,9 +171,21 @@ ul.MenuBarHorizontal iframe
     }
 }
 .border {
-    border-left: 1px solid #999;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
 }
 .border_last {
-    border-right: 1px solid #999;
-    border-left: 1px solid #999;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #999;
+	border-left-color: #999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
 }

@@ -39,7 +39,10 @@ switch ($pid) {
     case '2':
         $module_name = 'admin';
         break;
-    case '3':
+	case '3':
+        $module_name = 'payroll';
+        break;
+    case '4':
         $module_name = 'budget';
         break;
     default:

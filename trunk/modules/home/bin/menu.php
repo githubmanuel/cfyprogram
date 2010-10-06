@@ -21,7 +21,7 @@ Commnents: Startup file.
   <li class="border"><a href="?pid=1-1">Setting</a></li>
   <li class="border" ><a class="MenuBarItemSubmenu" href="#">Ayuda</a>
     <ul>
-      <li class="border"><a href="docs/license.txt">Docs</a></li>
+      <li><a href="docs/license.txt">Docs</a></li>
     </ul>
   </li>
   <li class="border_last"><a href="core/bin/logout.php">Salir</a></li>

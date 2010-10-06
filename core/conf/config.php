@@ -28,7 +28,10 @@ $CORE["system"]["db_password"] = 			"12345";
 // Style variable
 $CORE["style"]["name"] = 					"base";
 
+// Modules Variables
 
+$CORE["module"]["names"] = array(1=>'home', 'admin', 'payroll', 'budget');
+$CORE["module"]["print_name"] = array(1=>'Inicio', 'Adminitración', 'Nomina', 'Presupuesto');
 
 /* Ajax Login Module v1.1*/
 /* If login successful then it will redirect to */

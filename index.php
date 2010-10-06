@@ -49,8 +49,8 @@ switch ($pid) {
         $module_name = 'home';
 		$page_name = 'login';
 		$user_auth = false;
-		include("core/classes/ajaxLoginModule.class.php");
-   		$ajaxLoginModule = new ajaxLoginModule();
+		include("core/classes/login_module.php");
+   		$LoginModule = new LoginModule();
 }
 
 if($user_auth){

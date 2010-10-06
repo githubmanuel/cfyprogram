@@ -59,8 +59,11 @@ class Files {
         $module .= '<li>';
         $module .= '<a href="?pid=2">Administración</a>';
         $module .= '</li>';
+		$module .= '<li>';
+        $module .= '<a href="?pid=3">Nomina</a>';
+        $module .= '</li>';
         $module .= '<li>';
-        $module .= '<a href="?pid=3">Presupuesto</a>';
+        $module .= '<a href="?pid=4">Presupuesto</a>';
         $module .= '</li>';
         $module .= '</ul>';
         return $module;

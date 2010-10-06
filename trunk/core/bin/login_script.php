@@ -17,7 +17,7 @@
  * Redistributions of files must retain the above copyright notice.
  */
  
-include ("core/conf/config.php");
+require_once ("core/conf/config.php");
 ?>
 <script type="text/javascript">
        $(document).ready(function() { 

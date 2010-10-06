@@ -53,7 +53,7 @@
       </div>
     </form>
     <?php 
-   echo $ajaxLoginModule->getScript();
+   echo $LoginModule->getScript();
  ?>
   </div>
   <div class="default">Default username: admin / password: juan316</div>

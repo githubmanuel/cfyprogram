@@ -23,8 +23,8 @@
  
 sleep(2); //for testing ajax effects
 
-include("db.php");
-include("core/conf/config.php");
+require_once("db.php");
+require_once("core/conf/config.php");
 
 class LoginModule  {
 	
@@ -53,7 +53,7 @@ class LoginModule  {
  * @access public
  */ 		
   	function getScript() { 
-	 	include ("core/bin/login_script.php");
+	 	require_once ("core/bin/login_script.php");
   	}
 /**
  * Checks if form is submitted and then submit query to database

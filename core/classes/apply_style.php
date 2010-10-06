@@ -14,7 +14,7 @@ Commnents: class for handle the files
 
 */
 
-include ("core/conf/config.php");
+require_once ("../conf/config.php");
 
 class Apply_Style{
 	
@@ -31,8 +31,8 @@ class Apply_Style{
         // replace the tag line
         $contents = str_replace('--head--', $this->set_head(), $contents);
         $contents = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $this->set_module_menu(), $contents);
-        $contents = str_replace('--menu--', '<?php require($CORE["page"]["menu"]); ?>' , $contents);
-        $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require($CORE["page"]["content"]); ?>' , $contents);
+        $contents = str_replace('--menu--', '<?php require_once($CORE["page"]["menu"]); ?>' , $contents);
+        $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require_once($CORE["page"]["content"]); ?>' , $contents);
         $contents = str_replace('--footer--', $this->set_footer() , $contents);
 
         // put the new content into the files
@@ -56,17 +56,15 @@ class Apply_Style{
         return $footer_menu;
     }
     function set_module_menu(){
-		
 		$module = '<ul>';
 		foreach($GLOBALS["CORE"]["module"]["names"] as $index=>$value_name){
 			$value_print_name = $GLOBALS["CORE"]["module"]["print_name"][$index];
 			$module .= '<li>';
-        	$module .= '<a href="?pid=$index">$value_print_name</a>';
+        	$module .= '<a href="?pid='.$index.'">'.$value_print_name.'</a>';
         	$module .= '</li>';
     	}
 		$module .= '</ul>';
 		return $module;
-        
     }
 }
 

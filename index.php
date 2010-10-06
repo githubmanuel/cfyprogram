@@ -15,7 +15,7 @@ Commnents: Startup file.
 */
 ?>
 <?php
-include("core/conf/config.php");
+require_once("core/conf/config.php");
 
 
 $pid = '';
@@ -49,16 +49,16 @@ switch ($pid) {
         $module_name = 'home';
 		$page_name = 'login';
 		$user_auth = false;
-		include("core/classes/login_module.php");
+		require_once("core/classes/login_module.php");
    		$LoginModule = new LoginModule();
 }
 
 if($user_auth){
-	include("core/bin/user_auth.php");
+	require_once("core/bin/user_auth.php");
 }
 $CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name.'.php';
 $CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.php';
 $style_filename = 'core/conf/style_apply.php';
-require($style_filename);
+require_once($style_filename);
 
 ?>

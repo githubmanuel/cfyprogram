@@ -14,8 +14,10 @@ Commnents: apply the style to the style file.
 
 */
 
-require('../conf/config.php');
-require('../classes/apply_style.php');
+// require_once('../conf/config.php');
+
+
+require_once('../classes/apply_style.php');
 
 $setStyle = new Apply_Style();
 $setStyle->set_style('style_apply.php', $CORE["system"]["site_url"], 'setting', $CORE["style"]["name"]);

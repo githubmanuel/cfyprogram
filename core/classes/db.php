@@ -25,7 +25,7 @@ class Db{
  * @access public
  */ 	
 	function connect() {
-		include ("core/conf/config.php");
+		require_once ("core/conf/config.php");
     	$connect      = mysql_connect($CORE["system"]["db_host"], $CORE["system"]["db_username"], $CORE["system"]["db_password"]);
 	   	$select_db    = mysql_select_db($CORE["system"]["db_name"], $connect); 
 		if (!$connect) {

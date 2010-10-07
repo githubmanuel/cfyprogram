@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+  <item id="0">
+    <url>pid</url>
+    <name>Principal</name>
+  </item>
+  <item id="1">
+    <url>#</url>
+    <name>Ayuda</name>
+    <subitem id="1-1">
+      <url>docs/license.txt</url>
+      <name>Docs</name>
+    </subitem>
+  </item>
+  <item id="2">
+    <url>core/bin/logout.php</url>
+    <name>Salir</name>
+  </item>
+</menu>

@@ -17,13 +17,13 @@ Commnents: Configuration file.
 //error_reporting(0);
 
 // System variable
-$CORE["system"]["site_url"] = 				"http://lab.pajarraco.com/cfy";
+$CORE["system"]["site_url"] = 				"http://192.168.137.50/cfyprogram";
 
 // DB variables
 $CORE["system"]["db_host"] = 				"localhost";
 $CORE["system"]["db_name"] = 				"cfy_base";
 $CORE["system"]["db_username"] = 			"cfyadmin";
-$CORE["system"]["db_password"] = 			"cfy12345";
+$CORE["system"]["db_password"] = 			"12345";
 
 // Style variable
 $CORE["style"]["name"] = 					"base";

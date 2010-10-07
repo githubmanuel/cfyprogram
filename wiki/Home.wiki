@@ -6,6 +6,6 @@ We working on it.
 
 Requirement:
 
-* web service
-* php 5.3
-* mysql 5.1
+  * web service
+  * php 5.3
+  * mysql 5.1

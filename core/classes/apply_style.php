@@ -31,7 +31,7 @@ class Apply_Style{
         // replace the tag line
         $contents = str_replace('--head--', $this->set_head(), $contents);
         $contents = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $this->set_module_menu(), $contents);
-        $contents = str_replace('--menu--', '<?php require_once($CORE["page"]["menu"]); ?>' , $contents);
+        $contents = str_replace('--menu--', '<?php echo $myMenu->printMenu($CORE["page"]["menu"], $CORE["page"]["menuid"]); ?>' , $contents);
         $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require_once($CORE["page"]["content"]); ?>' , $contents);
         $contents = str_replace('--footer--', $this->set_footer() , $contents);
 

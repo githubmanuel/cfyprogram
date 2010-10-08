@@ -22,8 +22,12 @@ class Menu{
 	private $inTag = NULL;
 	private $depth = NULL;
 	private $closeTag = NULL;
-	private $menupid = NULL;
-	private $moduleid = NULL;
+	private $menuPid = NULL;
+	private $moduleId = NULL;
+	private $urlData = NULL;
+	private $realUrl = NULL;
+	private $firstItem = TRUE;
+	
 	
 	function printMenu($file, $mid){
 		
@@ -70,10 +74,18 @@ class Menu{
 				$this->menu .= "\n$padTag<ul id='MenuBar1' class='MenuBarHorizontal'>";
 				break;
 			case "item":
-				$this->menu .= "\n$padTag<li class='border'>";
+				if ($this->firstItem) {
+					$this->menu .= "\n$padTag<li class='border_first'>";
+					$this->firstItem = FALSE;
+				}else{
+					$this->menu .= "\n$padTag<li class='border'>";
+				}
+				break;
+			case "submenu":
+				$this->menu .= "\n$padTag<ul>";
 				break;
 			case "subitem" :
-				$this->menu .= "\n$padTag<ul>\n<li>";
+				$this->menu .= "\n$padTag<li>";
 			}
 		$this->inTag = $name;
 		$this->depth++;
@@ -85,14 +97,17 @@ class Menu{
 	
 		if ($this->closeTag == TRUE) {
 			switch ($name){
-				case "menu" :
+				case "menu":
 					$this->menu .= "</ul>";
 					break;
 				case "item":
 					$this->menu .= "</li>";
 					break;
+				case "submenu":
+					$this->menu .= "</ul>";
+					break;
 				case "subitem" :
-					$this->menu .= "</li>\n</ul>";
+					$this->menu .= "</li>";
 			}	
 			$this->inTag = "";
 		} elseif ($this->inTag == $name) {
@@ -101,39 +116,53 @@ class Menu{
 		} else {
 			$padTag = str_repeat(str_pad(" ", 3), $this->depth);
 			switch ($name){
-				case "menu" :
+				case "menu":
 					$this->menu .= "\n$padTag</ul>";
 					break;
 				case "item":
 					$this->menu .= "\n$padTag</li>";
 					break;
-				case "subitem" :
-					$this->menu .= "\n$padTag</li>\n</ul>";
+				case "submenu":
+					$this->menu .= "\n$padTag</ul>";
+					break;
+				case "subitem":
+					$this->menu .= "\n$padTag</li>";
 			}	
 		} 
 	}
 	 
 	function contents($parser, $data) {
-		if ($data=="pid"){
-			$data = "?$data=$this->moduleid";
-			if ($this->menupid != 0){
-				$data .= "-$this->menupid";
-			}
-		}
+
 		$data = preg_replace("/^\s+/", "", $data);
 		$data = preg_replace("/\s+$/", "", $data);
 	
 		if (!($data == ""))  {
 			switch ($this->inTag){
+				case "type":
+					switch ($data){
+						case "pid":
+							$this->urldata = "?pid=$this->moduleid";
+							if ($this->menupid != 0){
+								$this->urldata .= "-$this->menupid";
+							}
+						break;
+						case "url":
+							$this->realurl = TRUE;
+						break;
+						case "submenu":
+							$this->urldata = "#' class='MenuBarItemSubmenu'";
+					}
+					break;
 				case "url" :
-					$this->menu .= "<a href='$data' ";
-					if ($data=="#"){
-						$this->menu .= "class='MenuBarItemSubmenu' ";
+					if ($this->realurl){
+						$this->menu .= "<a href='$data' >";
+						$this->realurl = FALSE;
+					}else{
+						$this->menu .= "<a href='$this->urldata' >";
 					}
 					break;
 				case "name":
-					$this->menu .= ">$data</a>";
-					break;
+					$this->menu .= "$data</a>";
 			}	
 			$this->closeTag = TRUE;
 		} else {

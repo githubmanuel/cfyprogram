@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
   <item id="0">
-    <url>pid</url>
+    <type>pid</type>
+    <url>index.php</url>
     <name>Principal</name>
   </item>
-  <item id="1">
+  <item id="2">
+    <type>submenu</type>
     <url>#</url>
     <name>Ayuda</name>
-    <subitem id="1-1">
-      <url>docs/license.txt</url>
-      <name>Docs</name>
-    </subitem>
+    <submenu>
+      <subitem id="2-1">
+        <type>url</type>
+        <url>docs/license.txt</url>
+        <name>Docs</name>
+      </subitem>
+    </submenu>
   </item>
-  <item id="2">
+  <item id="3">
+    <type>url</type>
     <url>core/bin/logout.php</url>
     <name>Salir</name>
   </item>

@@ -1,22 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
   <item id="0">
-    <url>pid</url>
+    <type>pid</type>
+    <url>index.php</url>
     <name>Principal</name>
   </item>
-    <item id="1">
-    <url>pid</url>
+  <item id="1">
+    <type>pid</type>
+    <url>setting.php</url>
     <name>Configuracion</name>
   </item>
   <item id="2">
+    <type>submenu</type>
     <url>#</url>
     <name>Ayuda</name>
-    <subitem id="2-1">
-      <url>docs/license.txt</url>
-      <name>Docs</name>
-    </subitem>
+    <submenu>
+      <subitem id="2-1">
+        <type>url</type>
+        <url>docs/license.txt</url>
+        <name>Docs</name>
+      </subitem>
+      <subitem id="2-2">
+        <type>submenu</type>
+        <url>#</url>
+        <name>Docs 2</name>
+        <submenu>
+          <subitem id="2-2-1">
+            <type>pid</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+          </subitem>
+          <subitem id="2-2-2">
+            <type>pid</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+          </subitem>
+          <subitem id="2-2-3">
+            <type>url</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+			<submenu>
+          <subitem id="2-2-1">
+            <type>pid</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+          </subitem>
+          <subitem id="2-2-2">
+            <type>pid</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+          </subitem>
+          <subitem id="2-2-3">
+            <type>url</type>
+            <url>setting.php</url>
+            <name>Docs 3</name>
+          </subitem>
+        </submenu>
+          </subitem>
+        </submenu>
+      </subitem>
+    </submenu>
   </item>
   <item id="3">
+    <type>url</type>
     <url>core/bin/logout.php</url>
     <name>Salir</name>
   </item>

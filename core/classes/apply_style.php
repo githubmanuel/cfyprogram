@@ -3,14 +3,17 @@
 
 CFY program - CFY Business Management Suite
 
-Integrated enterprise applications to execute and optimize business and IT strategies. Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
 
 Version: 0.0.0.1a
 Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
 License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
 
-File: files.php
-Commnents: class for handle the files
+File: 
+Commnents: 
 
 */
 
@@ -18,7 +21,7 @@ require_once ("../conf/config.php");
 
 class Apply_Style{
 	
-	function set_style($file, $url, $content_page, $style_name) { // apply style to a style page
+	function set_style($file, $url, $style_name) { // apply style to a style page
 		$contents = '';		
         // get contents of a file into a string
         $filename = '../../styles/'.$style_name.'/style.html';
@@ -31,7 +34,7 @@ class Apply_Style{
         // replace the tag line
         $contents = str_replace('--head--', $this->set_head(), $contents);
         $contents = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $this->set_module_menu(), $contents);
-        $contents = str_replace('--menu--', '<?php echo $myMenu->printMenu($CORE["page"]["menu"], $CORE["page"]["menuid"]); ?>' , $contents);
+        $contents = str_replace('--menu--', '<?php echo $myMenu->printMenu($CORE["page"]["menu"]); ?>' , $contents);
         $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require_once($CORE["page"]["content"]); ?>' , $contents);
         $contents = str_replace('--footer--', $this->set_footer() , $contents);
 

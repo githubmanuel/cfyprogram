@@ -3,14 +3,17 @@
 
 CFY program - CFY Business Management Suite
 
-Integrated enterprise applications to execute and optimize business and IT strategies. Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
 
 Version: 0.0.0.1a
 Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
 License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
 
-File: style.php
-Commnents: apply the style to the style file.
+File: user_auth.php
+Commnents: page use for check user session.
 
 */
 
@@ -46,7 +49,8 @@ function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
   return $isValid; 
 }
 
-$MM_restrictGoTo = "index.php";
+// redirect no logged user
+$MM_restrictGoTo = "index.php"; // :TODO: use a global varible for this
 if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {   
   $MM_qsChar = "?";
   $MM_referrer = $_SERVER['PHP_SELF'];

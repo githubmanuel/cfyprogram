@@ -1,5 +1,24 @@
 <?php
-/**
+/*
+
+CFY program - CFY Business Management Suite
+
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+
+Version: 0.0.0.1a
+Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
+License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
+
+File: login_script.php
+Commnents: script use for login module.
+
+some modification on the original files
+
+-- Original --
+
  * Ajax Login Module v1.1
  *
  * Ajax Login Module is a nice Php-AJAX Login used to authenticate users without reloading a login page.

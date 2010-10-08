@@ -1,4 +1,24 @@
 <?php
+/*
+
+CFY program - CFY Business Management Suite
+
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+
+Version: 0.0.0.1a
+Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
+License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
+
+File: 
+Commnents: 
+
+some modification on the original files
+
+-- Original --
+
 /**
  * Ajax Login Module v1.1
  *
@@ -21,7 +41,7 @@
  * include the db class
  */ 
  
-sleep(2); //for testing ajax effects
+//sleep(2); //for testing ajax effects
 
 require_once("db.php");
 require_once("core/conf/config.php");

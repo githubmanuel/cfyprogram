@@ -1,3 +1,23 @@
+//
+//
+// CFY program - CFY Business Management Suite
+//
+// Integrated enterprise applications to execute and optimize business and IT strategies. 
+// Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+//
+// Version: 0.0.0.1a
+// Author: Ernesto La Fontaine
+// Mail: mail@pajarraco.com
+// License: New BSD License (see docs/license.txt)
+// Redistributions of files must retain the copyright notice.
+//
+// File: 
+// Commnents: 
+//
+// some modification on the original files
+//
+// -- Original --
+//
 // SpryMenuBar.js - version 0.13 - Spry Pre-Release 1.6.1
 //
 // Copyright (c) 2006. Adobe Systems Incorporated.

@@ -3,18 +3,24 @@
 
 CFY program - CFY Business Management Suite
 
-Integrated enterprise applications to execute and optimize business and IT strategies. Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
 
 Version: 0.0.0.1a
 Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
 License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
+
+File: 
+Commnents: 
 
 File: menu.php
 Commnents: class for handle the menues
 
 */
 
-//require_once ("../conf/config.php");
+require_once ("core/conf/config.php");
 
 class Menu{
 	
@@ -27,11 +33,12 @@ class Menu{
 	private $urlData = NULL;
 	private $realUrl = NULL;
 	private $firstItem = TRUE;
+	private $modulePageId = NULL;
+	private $pageId = NULL;	
 	
-	
-	function printMenu($file, $mid){
+	function printMenu($file){
 		
-		$this->moduleid = $mid;
+		$this->moduleid = $GLOBALS["CORE"]["page"]["module_menu_id"];
 		
 		$xml_parser = xml_parser_create();
 		xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, 0);
@@ -59,6 +66,60 @@ class Menu{
 			
 		return $this->menu;
 			
+	}
+	
+	function getModuleName($pid){
+		$this->getId($pid);
+		$GLOBALS["CORE"]["page"]["module_menu_id"] = $this->modulePageId;
+		$moduleName = $GLOBALS["CORE"]["module"]["names"][$this->modulePageId];
+		return $moduleName;
+	}
+	
+	function getPageName($pid, $xmlstr){
+		if (!$this->pageId){
+			$pageName = "index.php";
+		}else{
+			$xml =  simplexml_load_file($xmlstr);
+			foreach ($xml->item as $item) {
+				if ($item["id"] == $this->pageId){
+					$pageName = $item->url;
+					break;
+				}elseif($item->count()>3){
+					foreach ($item->submenu->subitem as $subitem){
+						if ($subitem["id"] == $this->pageId){
+							$pageName = $subitem->url;
+							break;
+						}elseif ($subitem->count()>3){
+							foreach ($subitem->submenu->subitem as $subitem){
+								if ($subitem["id"] == $this->pageId){
+									$pageName = $subitem->url;
+									break;
+								}elseif ($subitem->count()>3){
+									foreach ($subitem->submenu->subitem as $subitem){
+										if ($subitem["id"] == $this->pageId){
+											$pageName = $subitem->url;
+											break;
+										}elseif ($subitem->count()>3){
+											foreach ($subitem->submenu->subitem as $subitem){
+												if ($subitem["id"] == $this->pageId){
+													$pageName = $subitem->url;
+													break;
+												}
+											}			
+										}
+									}		
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return $pageName;
+	}
+	
+	function getId($pid){
+		list($this->modulePageId, $this->pageId) = explode("-", $pid);		
 	}
 	
 	function startElement($parser, $name, $attrs) {
@@ -179,8 +240,7 @@ class Menu{
 	function pi_handler($parser, $target, $data) {
 		global $menu;
 		$this->menu .= "<?$target $data?>\n";
-	}
-		
+	}		
 }
 
 ?>

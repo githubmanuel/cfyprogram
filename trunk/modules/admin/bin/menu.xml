@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+
+CFY program - CFY Business Management Suite
+
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+
+Version: 0.0.0.1a
+Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
+License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
+
+File: 
+Commnents: 
+
+-->
 <menu>
   <item id="0">
     <type>pid</type>
     <url>index.php</url>
     <name>Principal</name>
   </item>
-  <item id="2">
+  <item id="1">
     <type>submenu</type>
     <url>#</url>
     <name>Ayuda</name>
     <submenu>
-      <subitem id="2-1">
+      <subitem id="2">
         <type>url</type>
         <url>docs/license.txt</url>
         <name>Docs</name>

@@ -12,18 +12,14 @@ Mail: mail@pajarraco.com
 License: New BSD License (see docs/license.txt)
 Redistributions of files must retain the copyright notice.
 
-File: apply_style.php
-Commnents: file used for call the apply_style class.
+File: index.php
+Commnents: Startup file.
 
 */
-
-
-require_once('../classes/apply_style.php'); // class to apply the styles. see core/classes/apply_style.php for detail
-
-$setStyle = new Apply_Style();
-$setStyle->set_style('style_apply.php', $CORE["system"]["site_url"], $CORE["style"]["name"]);
-
 ?>
 
-Su estilo ha sido aplicado
-<a href="javascript:back()">Atras</a>
+<h1>Help File</h1>
+<section>
+    <h2>Probando el insert</h2>
+    <p>Este si lo puedes cambiar.</p>
+</section>

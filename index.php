@@ -19,9 +19,6 @@ require_once("core/conf/config.php");
 require_once ("core/classes/menu.php");
 $myMenu = new Menu();
 
-
-
-
 $pid = '';
 $style_filename = '';
 $module_name = '';
@@ -60,7 +57,6 @@ switch ($pid) {
 if($user_auth){
 	require_once("core/bin/user_auth.php");
 }
-
 
 $CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name.'.php';
 $CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.xml';

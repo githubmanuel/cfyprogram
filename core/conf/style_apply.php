@@ -1,3 +1,20 @@
+<!--
+
+CFY program - CFY Business Management Suite
+
+Integrated enterprise applications to execute and optimize business and IT strategies. 
+Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+
+Version: 0.0.0.1a
+Author: Ernesto La Fontaine
+Mail: mail@pajarraco.com
+License: New BSD License (see docs/license.txt)
+Redistributions of files must retain the copyright notice.
+
+File: 
+Commnents: 
+
+-->
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -8,7 +25,7 @@
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="core/scripts/menu_bar.js" type="text/javascript"></script><link href="core/css/menu_bar.css" rel="stylesheet" type="text/css" /><link href="core/css/login.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="core/scripts/jquery-1.3.2.min.js"></script>
+        <script src="core/scripts/menu_bar.js" type="text/javascript"></script><link href="core/css/menu_bar.css" rel="stylesheet" type="text/css" /><link href="core/css/login.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="core/scripts/jquery-1.3.2.min.js"></script><?php require_once($CORE["module"]["head_content"]); ?>
     </head>
 
     <body>
@@ -18,16 +35,16 @@
             </header>
             <div class="sidebar">
                 <nav>
-                    <ul><li><a href="?pid=1">Home</a></li><li><a href="?pid=2">Administración</a></li><li><a href="?pid=3">Presupuesto</a></li></ul>
+                    <ul><li><a href="?pid=1">Inicio</a></li><li><a href="?pid=2">Adminitración</a></li><li><a href="?pid=3">Nomina</a></li><li><a href="?pid=4">Presupuesto</a></li></ul>
                 </nav>
                 <aside>
                     <p>prueba final de estilo</p>
                 </aside>
                 <!-- end .sidebar -->
             </div>
-            <?php require($CORE["page"]["menu"]); ?>
+            <?php echo $myMenu->printMenu($CORE["page"]["menu"]); ?>
             <article class="content">
-                <?php require($CORE["page"]["content"]); ?>
+                <?php require_once($CORE["page"]["content"]); ?>
                 <!-- end .content -->
             </article>
             <footer>

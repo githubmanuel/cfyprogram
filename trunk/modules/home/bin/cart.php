@@ -18,7 +18,7 @@
  */
 ?>
 
-<h1>Users File</h1>
+<h1>Shoping Cart File</h1>
 <section>
     <div id="login_body">
         <p class="pagetitle">Welcome to the Ajax Shopping Cart!</p>
@@ -26,16 +26,16 @@
         <div id="msgdiv" style="display: none" class="msgarea" title="Click to hide"></div>
 
         <!-- Our Search Controls -->
-        <DIV id="searchdiv">
+        <div id="searchdiv">
             <p class="sectionheader">To begin please use search to locate some products.</p>
 
             <form name="searchform">
-                <INPUT type="text" name="searchinp" size="20">
+                <input type="text" name="searchinp" size="20">
                 <input type="hidden" name="pid" value="1-4">
-                <INPUT type="submit" name="submit" value="  Search  ">
-                <SPAN id="searchmsgspan"></SPAN>
+                <input type="submit" name="submit" value="  Search  ">
+                <span id="searchmsgspan"></span>
             </form>
-        </DIV>
+        </div>
 
         <!-- Search Results section -->
         <DIV id="productdiv" class="searchresults" style="display: none"> <!-- style is here to remove slight flicker of page -->

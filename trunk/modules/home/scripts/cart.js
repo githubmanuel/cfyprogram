@@ -29,9 +29,9 @@ window.onload = function ()
 	//handler for submitting the search form
 	document.getElementsByName("searchform")[0].onsubmit = function ()	
 	{
-		return productSearch(document.getElementsByName("searchinp")[0].value);
+		return userSearch(document.getElementsByName("searchinp")[0].value);
 	}
-	
+
 	//add event-handlers for user details
 	document.getElementById("finalcheckout").onclick = function()
 	{
@@ -64,6 +64,19 @@ function showMsg(msg)
 /*
 * Called when the user types something into the input box and selects search
 */
+function userSearch(input)
+{
+	//clear the message pane
+	showMsg("");
+
+	document.getElementById("searchmsgspan").innerHTML="Searching...";
+	Effect.Pulsate("searchmsgspan"); //scriptaculous feature requires effects.js
+	makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + input, "handleSearchResults", "true");
+
+	//prevents the browser from trying to submit the form
+	return false;
+}
+
 function productSearch(input)
 {	
 	//clear the message pane

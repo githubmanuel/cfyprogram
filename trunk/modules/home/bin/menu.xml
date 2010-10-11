@@ -17,53 +17,53 @@ Commnents:
 
 -->
 <menu>
-  <item id="0">
-    <type>pid</type>
-    <url>index.php</url>
-    <name>Principal</name>
-  </item>
-  <item id="1">
-    <type>submenu</type>
-    <url>#</url>
-    <name>Preferencias</name>
-    <submenu>
-      <subitem id="2">
+    <item id="0">
         <type>pid</type>
-        <url>setting.php</url>
-        <name>Configuracion</name>
-      </subitem>
-      <subitem id="3">
+        <url>index.php</url>
+        <name>Principal</name>
+    </item>
+    <item id="1">
+        <type>submenu</type>
+        <url>#</url>
+        <name>Preferencias</name>
+        <submenu>
+            <subitem id="2">
+                <type>pid</type>
+                <url>setting.php</url>
+                <name>Configuracion</name>
+            </subitem>
+            <subitem id="3">
+                <type>pid</type>
+                <url>users.php</url>
+                <name>Usuarios</name>
+            </subitem>
+        </submenu>
+    </item>
+    <item id="4">
         <type>pid</type>
-        <url>users.php</url>
-        <name>Usuarios</name>
-      </subitem>
-    </submenu>
-  </item>
-  <item id="4">
-    <type>pid</type>
-    <url>cart.php</url>
-    <name>Shopping Cart</name>
-  </item>
-  <item id="5">
-    <type>submenu</type>
-    <url>#</url>
-    <name>Ayuda</name>
-    <submenu>
-      <subitem id="6">
-        <type>url</type>
-        <url>docs/license.txt</url>
-        <name>Docs</name>
-      </subitem>
-      <subitem id="7">
-        <type>pid</type>
-        <url>help.php</url>
+        <url>cart.php</url>
+        <name>Shopping Cart</name>
+    </item>
+    <item id="5">
+        <type>submenu</type>
+        <url>#</url>
         <name>Ayuda</name>
-      </subitem>
-    </submenu>
-  </item>
-  <item id="8">
-    <type>url</type>
-    <url>core/bin/logout.php</url>
-    <name>Salir</name>
-  </item>
+        <submenu>
+            <subitem id="6">
+                <type>url</type>
+                <url>docs/license.txt</url>
+                <name>Docs</name>
+            </subitem>
+            <subitem id="7">
+                <type>pid</type>
+                <url>help.php</url>
+                <name>Ayuda</name>
+            </subitem>
+        </submenu>
+    </item>
+    <item id="8">
+        <type>url</type>
+        <url>core/bin/logout.php</url>
+        <name>Salir</name>
+    </item>
 </menu>

@@ -22,7 +22,7 @@ require_once("core/conf/config.php"); // Global configuration varibles
 require_once ("core/classes/menu.php"); // Class for read xml menus and call pages
 $myMenu = new Menu(); 
 
-$pid = NULL; // page ID, used to call pages
+$pid = 0; // page ID, used to call pages
 $module_name = NULL; // name of the module used
 $user_auth = TRUE; // asing security to the page 
 
@@ -47,6 +47,7 @@ if($user_auth){ // check for user session open
 
 $CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name; // path to the content page
 $CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.xml'; // path tho the xml menu
+$CORE["module"]["head_content"] = 'modules/'.$module_name.'/conf/config.php';
 
 require_once('core/conf/style_apply.php'); // call the style file create
 

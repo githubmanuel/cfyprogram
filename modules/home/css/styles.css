@@ -1,0 +1,94 @@
+td.pricecell 
+{
+	text-align: right;	
+}
+
+td.amountcell
+{
+	text-align: right;
+	cursor: pointer;
+}
+
+td.desc-header
+{
+	text-align: center;
+}
+
+td.price-header
+{
+	text-align: right;
+}
+
+td.control
+{
+	text-align: center;
+}
+
+table.searchresultstable
+{
+	font-size: 10pt;	
+}
+
+td.searchresultstable
+{
+	padding: 5;
+}
+
+tr.searchresultstable1
+{
+	background-color: #A4ED9E;
+}
+
+tr.searchresultstable2
+{
+	background-color: #B0DCAD;
+}
+
+tr.tableheader
+{
+	background-color: #51824E;
+	color: white;
+	font-weight: bold;
+}
+
+tr.total
+{
+	background-color: #51824E;
+	color: white;
+	font-weight: bold;
+	height: 18pt;
+}
+
+p.pagetitle
+{
+	font-size: 14pt
+}
+
+p.sectionheader
+{
+	font-size: 12pt;
+	font-weight: bold;
+}
+.reviewdiv
+{
+	border-style: groove;
+	border-color: #e7e7e7;
+	padding: 10;
+}
+
+.msgarea
+{
+	color: red;
+	cursor: pointer;
+}
+
+button.cartbutton
+{
+	font-size: 8pt;
+}
+
+a
+{
+	color: blue;
+	cursor: pointer;
+}

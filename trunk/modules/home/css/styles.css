@@ -18,97 +18,97 @@ Commnents:
 
 */
 
-td.pricecell 
+td.cell 
 {
-	text-align: right;	
+    text-align: center;
+    padding: 2px;
+
 }
 
 td.amountcell
 {
-	text-align: right;
-	cursor: pointer;
+    text-align: center;
+    cursor: pointer;
+
 }
 
 td.desc-header
 {
-	text-align: center;
+    text-align: center;
+    padding: 5px;
+
 }
 
 td.price-header
 {
-	text-align: right;
+    text-align: center;
+    padding: 5px;
+
 }
 
 td.control
 {
-	text-align: center;
+    text-align: center;
+    padding: 5px;
 }
 
 table.searchresultstable
 {
-	font-size: 10pt;	
+    border: 0;
+    width: 100%;
+    border-spacing: 2px;
 }
 
 td.searchresultstable
 {
-	padding: 5;
+    height: 25px
 }
 
 tr.searchresultstable1
 {
-	background-color: #A4ED9E;
+    background-color: #dddbdb;
 }
 
 tr.searchresultstable2
 {
-	background-color: #B0DCAD;
+    background-color: #ffffff;
 }
 
 tr.tableheader
 {
-	background-color: #51824E;
-	color: white;
-	font-weight: bold;
+    background-color: #ADB96E;
+    color: white;
+    font-weight: bold;
 }
 
 tr.total
 {
-	background-color: #51824E;
-	color: white;
-	font-weight: bold;
-	height: 18pt;
+    background-color: #51824E;
+    color: white;
+    font-weight: bold;
+    height: 18pt;
 }
 
-p.pagetitle
-{
-	font-size: 14pt
-}
-
-p.sectionheader
-{
-	font-size: 12pt;
-	font-weight: bold;
-}
 .reviewdiv
 {
-	border-style: groove;
-	border-color: #e7e7e7;
-	padding: 10;
+    border-style: groove;
+    border-color: #e7e7e7;
+    padding: 10;
 }
 
 .msgarea
 {
-	color: red;
-	cursor: pointer;
+    color: red;
+    cursor: pointer;
 }
 
 button.cartbutton
 {
-	font-size: 8pt;
+    font-size: 8pt;
 }
 
 a
 {
-	color: blue;
-	cursor: pointer;
+    color: blue;
+    cursor: pointer;
 }

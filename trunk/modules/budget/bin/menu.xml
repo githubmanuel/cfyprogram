@@ -23,23 +23,18 @@ Commnents:
     <name>Principal</name>
   </item>
   <item id="1">
-    <type>pid</type>
-    <url>help.php</url>
-    <name>help</name>
-  </item>
-  <item id="2">
     <type>submenu</type>
     <url>#</url>
     <name>Ayuda</name>
     <submenu>
-      <subitem id="3">
+      <subitem id="2">
         <type>url</type>
         <url>docs/license.txt</url>
         <name>Docs</name>
       </subitem>
     </submenu>
   </item>
-  <item id="4">
+  <item id="3">
     <type>url</type>
     <url>core/bin/logout.php</url>
     <name>Salir</name>

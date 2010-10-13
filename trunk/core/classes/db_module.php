@@ -60,13 +60,6 @@ class Db {
             $this->error();
             break;
         }
-
-        $strSQL = "SELECT * from " . $CORE["login"]["user_table_name"] . " limit 1";
-        $result = mysql_query($strSQL);
-        if ($result == null) {
-            $this->create_table($CORE["login"]["user_table_name"]);
-            die();
-        }
     }
 
     /**
@@ -87,29 +80,6 @@ class Db {
         die();
     }
 
-    /**
-     * Creates table in the database that defined in USERS_TABLE_NAME  
-     * @return void
-     * @access private
-     */
-    function create_table($table_name) {
-        $strSQL = "CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
-  					`username` varchar(15) NOT NULL,
-  					`password` varchar(15) NOT NULL,
-  					`level` int(11) NOT NULL,
-  					`creation_date` datetime NOT NULL,
-  					`status` int(11) NOT NULL,
-  					PRIMARY KEY (`username`)
-					) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-        $result = mysql_query($strSQL);
-        $strSQL = "INSERT INTO `" . $table_name . "` (`username`,`password`,`level`,`creation_date`,`status `) VALUES ('admin','juan316', 0, NOW(), 0);";
-        $result = mysql_query($strSQL);
-        if (!$result) {
-            die("Couldn't connect to mysql hostname, Please check your configuration");
-        }
-        echo ('<meta http-equiv="refresh" content="0;">');
-    }
 }
 
 ?>  

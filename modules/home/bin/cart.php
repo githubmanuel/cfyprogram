@@ -32,6 +32,7 @@
             <form name="searchform">
                 <input type="text" name="searchinp" size="20">
                 <input type="hidden" name="pid" value="1-4">
+                <input type="hidden" name="table" value="productos">
                 <input type="submit" name="submit" value="  Search  ">
                 <span id="searchmsgspan"></span>
             </form>

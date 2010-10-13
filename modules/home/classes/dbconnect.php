@@ -56,10 +56,13 @@ class dbconnect {
         $result = NULL;
         $result .= "<total>$totalRows</total>";
         for ($i = 0; $i <= $totalRows - 1; $i++) {
-            $result .= "<result>\r\n<code>" . $this->data[$i]["username"] .
-                    "</code>\r\n<name>" . $this->data[$i]["password"] .
-                    "</name>\r\n<price>" . $this->data[$i]["level"] .
-                    "</price>\r\n</result>\r\n";
+            $result .=  "<result>\r\n".
+                        "<username>".$this->data[$i]["username"]."</username>\r\n".
+                        "<password>".$this->data[$i]["password"]."</password>\r\n".
+                        "<level>".$this->data[$i]["level"]."</level>\r\n".
+                        "<creation_date>".$this->data[$i]["creation_date"]."</creation_date>\r\n".
+                        "<status>".$this->data[$i]["status"]."</status>\r\n".
+                        "</result>\r\n";
         }
         return $result;
     }

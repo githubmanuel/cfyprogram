@@ -19,6 +19,7 @@
  */
 
 require_once ("../conf/config.php");
+require_once ("../conf/global.php");
 
 class Apply_Style {
 

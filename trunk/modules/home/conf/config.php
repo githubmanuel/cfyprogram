@@ -22,8 +22,7 @@ if ($pid != 0) {
     $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="modules/home/scripts/prototype.js"></SCRIPT>';
     $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="modules/home/scripts/scriptaculous.js"></SCRIPT> <!-- calls effects.js -->';
     $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="modules/home/scripts/ajax.js"></SCRIPT>';
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="modules/home/scripts/cart.js"></SCRIPT>';
-
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="modules/home/scripts/users.js"></SCRIPT>';
 
     echo $head_script;
 }

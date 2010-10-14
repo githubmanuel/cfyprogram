@@ -40,28 +40,23 @@ Commnents:
         </submenu>
     </item>
     <item id="4">
-        <type>pid</type>
-        <url>cart.php</url>
-        <name>Shopping Cart</name>
-    </item>
-    <item id="5">
         <type>submenu</type>
         <url>#</url>
         <name>Ayuda</name>
         <submenu>
-            <subitem id="6">
+            <subitem id="5">
                 <type>url</type>
                 <url>docs/license.txt</url>
                 <name>Docs</name>
             </subitem>
-            <subitem id="7">
+            <subitem id="6">
                 <type>pid</type>
                 <url>help.php</url>
                 <name>Ayuda</name>
             </subitem>
         </submenu>
     </item>
-    <item id="8">
+    <item id="7">
         <type>url</type>
         <url>core/bin/logout.php</url>
         <name>Salir</name>

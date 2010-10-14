@@ -1,26 +1,29 @@
 <?php
+
 /*
 
-CFY program - CFY Business Management Suite
+  CFY program - CFY Business Management Suite
 
-Integrated enterprise applications to execute and optimize business and IT strategies. 
-Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+  Integrated enterprise applications to execute and optimize business and IT strategies.
+  Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
 
-Version: 0.0.0.1a
-Author: Ernesto La Fontaine
-Mail: mail@pajarraco.com
-License: New BSD License (see docs/license.txt)
-Redistributions of files must retain the copyright notice.
+  Version: 0.0.0.1a
+  Author: Ernesto La Fontaine
+  Mail: mail@pajarraco.com
+  License: New BSD License (see docs/license.txt)
+  Redistributions of files must retain the copyright notice.
 
-File: index.php
-Commnents: Startup file.
+  File: index.php
+  Commnents: Startup file.
 
-*/
+ */
 ?>
 <?php
-require_once("core/conf/config.php"); // Global configuration varibles
+
+require_once("core/conf/config.php"); // Configuration varibles
+require_once("core/conf/global.php"); // Global varibles
 require_once ("core/classes/menu.php"); // Class for read xml menus and call pages
-$myMenu = new Menu(); 
+$myMenu = new Menu();
 
 $pid = 0; // page ID, used to call pages
 $module_name = NULL; // name of the module used
@@ -31,24 +34,23 @@ if (isset($_GET['pid'])) { // asing page ID form url varible
     $pid = $_GET['pid'];
 }
 
-if($pid==0) { // on ID 0, call the login page
-	$module_name = 'home';
-	$page_name = 'login.php';
-	$user_auth = FALSE;
-	require_once("core/classes/login_module.php"); // class that create the login screen
-   	$LoginModule = new LoginModule();
-}else{  // for any other ID call the class menu to asing the page
-	$module_name = $myMenu->getModuleName($pid); // get the name of the module called
-	$page_name = $myMenu->getPageName($pid, 'modules/'.$module_name.'/bin/menu.xml'); // get the page called
+if ($pid == 0) { // on ID 0, call the login page
+    $module_name = 'home';
+    $page_name = 'login.php';
+    $user_auth = FALSE;
+    require_once("core/classes/login_module.php"); // class that create the login screen
+    $LoginModule = new LoginModule();
+} else {  // for any other ID call the class menu to asing the page
+    $module_name = $myMenu->getModuleName($pid); // get the name of the module called
+    $page_name = $myMenu->getPageName($pid, 'modules/' . $module_name . '/bin/menu.xml'); // get the page called
 }
-if($user_auth){ // check for user session open
-	require_once("core/bin/user_auth.php");
+if ($user_auth) { // check for user session open
+    require_once("core/bin/user_auth.php");
 }
 
-$CORE["page"]["content"] = 'modules/'.$module_name.'/bin/'.$page_name; // path to the content page
-$CORE["page"]["menu"] = 'modules/'.$module_name.'/bin/menu.xml'; // path tho the xml menu
-$CORE["module"]["head_content"] = 'modules/'.$module_name.'/conf/config.php';
+$CORE["page"]["content"] = 'modules/' . $module_name . '/bin/' . $page_name; // path to the content page
+$CORE["page"]["menu"] = 'modules/' . $module_name . '/conf/menu.xml'; // path tho the xml menu
+$CORE["module"]["head_content"] = 'modules/' . $module_name . '/conf/config.php';
 
 require_once('core/conf/style_apply.php'); // call the style file create
-
 ?>

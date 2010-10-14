@@ -1,7 +1,25 @@
-
+//
+//
+// CFY program - CFY Business Management Suite
+//
+// Integrated enterprise applications to execute and optimize business and IT strategies.
+// Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+//
+// Version: 0.0.0.1a
+// Author: Ernesto La Fontaine
+// Mail: mail@pajarraco.com
+// License: New BSD License (see docs/license.txt)
+// Redistributions of files must retain the copyright notice.
+//
+// File:
+// Commnents:
+//
+// some modification on the original files
+//
+// -- Original --
 /* 
-* Code below initializes any variables that are specific to IE or other browsers 
-*/
+ * Code below initializes any variables that are specific to IE or other browsers
+ */
 if (window.ActiveXObject) { //Internet Explorer
     //use for DOM setAttribute for assigning a CSS class to an element
     var classLiteral = "className";
@@ -10,26 +28,29 @@ if (window.ActiveXObject) { //Internet Explorer
 }
 
 /*
-* We're going to store the XML representation of the product list globally
-* for use in the add to cart functionality
-*/
+ * We're going to store the XML representation of the product list globally
+ * for use in the add to cart functionality
+ */
 var productListXml = "";
 
 /*
-* Use this to paint alternate rows in tables
-*/
+ * Use this to paint alternate rows in tables
+ */
 var styleChooser = true;
 
 /*
-* This section initializes event handlers for various element of the HTML page
-* and anything else that needs done when the page is loaded.
-*/
+ * This section initializes event handlers for various element of the HTML page
+ * and anything else that needs done when the page is loaded.
+ */
 window.onload = function () 
-{	
+{
+
+    userSearch("all");
+
     //handler for submitting the search form
     document.getElementsByName("searchform")[0].onsubmit = function ()
     {
-        return userSearch(document.getElementsByName("searchinp")[0].value, document.getElementsByName("table")[0].value);
+        return userSearch(document.getElementsByName("searchinp")[0].value);
     }
 
     //add event-handlers for user details
@@ -42,11 +63,12 @@ window.onload = function ()
     {
         showMsg("");
     }
+
 }
 
 /**
-* Display a message to the user.
-*/
+ * Display a message to the user.
+ */
 function showMsg(msg)
 {
     document.getElementById("msgdiv").innerHTML = msg;
@@ -60,22 +82,20 @@ function showMsg(msg)
         document.getElementById("msgdiv").style.display = "inline";
     }
 }
-
 /*
-* Called when the user types something into the input box and selects search
-*/
-function userSearch(input, table)
+ * Called when the page is loaded and when the user types something into the input box and selects search
+ */
+function userSearch(input)
 {
     //clear the message pane
     showMsg("");
-
-    document.getElementById("searchmsgspan").innerHTML="Searching...";
-    Effect.Pulsate("searchmsgspan"); //scriptaculous feature requires effects.js
-    if (table == "usuarios"){
-        makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + input, "handleSearchResults", "true");
+    if (input=="all"){
+        document.getElementById("searchmsgspan").innerHTML="Opening...";
     }else{
-        makeHttpRequest("modules/home/bin/searchResults.php?sinput=" + input, "handleSearchResults", "true");
+        document.getElementById("searchmsgspan").innerHTML="Searching...";
     }
+    Effect.Pulsate("searchmsgspan"); //scriptaculous feature requires effects.js
+    makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + input, "handleSearchResults", "true");
     //prevents the browser from trying to submit the form
     return false;
 }

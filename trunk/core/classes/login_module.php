@@ -44,11 +44,12 @@
 //sleep(2); //for testing ajax effects
 
 require_once("db.php");
-require_once("core/conf/config.php");
+require_once("core/conf/global.php");
 
 class LoginModule {
 
     private $userGroup = NULL;
+
     /**
      * Loads the configuration and initialize the DB class
      * $this->is_login(); checks if the hml form is submitted

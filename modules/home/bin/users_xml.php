@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: text/xml');
 /*
 
@@ -18,7 +19,7 @@ header('Content-Type: text/xml');
  * 
  */
 
-//sleep(5);
+sleep(2);
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
 $xmlheader .= "<search-results>";
@@ -27,8 +28,13 @@ echo $xmlheader;
 require_once ('../classes/dbconnect.php');
 $myData = new dbconnect();
 $xml = "";
-$xml = $myData->select_all("core_user");
-$xml .= "</search-results>";
 
+$sinput = "";
+if (isset($_GET['sinput'])) {
+    $sinput = mysql_escape_string(substr(trim($_GET['sinput']), 0, 255));
+}
+
+$xml = $myData->select("username", $sinput, "core_user");
+$xml .= "</search-results>";
 echo $xml;
 ?>

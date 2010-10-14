@@ -60,7 +60,7 @@
 
 (function() { // BeginSpryComponent
 
-if (typeof Spry == "undefined") window.Spry = {}; if (!Spry.Widget) Spry.Widget = {};
+if (typeof Spry == "undefined") window.Spry = {};f (!Spry.Widget) Spry.Widget = {};
 
 Spry.BrowserSniff = function()
 {
@@ -189,7 +189,7 @@ Spry.Widget.MenuBar.prototype.init = function(element, opts)
 		if (this.enableKeyboardNavigation)
 		{
 			var self = this;
-			this.addEventListener(document, 'keydown', function(e){self.keyDown(e); }, false);
+			this.addEventListener(document, 'keydown', function(e){self.keyDown(e);}, false);
 		}
 
 		if(Spry.is.ie)
@@ -384,7 +384,7 @@ Spry.Widget.MenuBar.prototype.initialize = function(listitem, element)
 	// need to save this for scope further down
 	var self = this;
 	this.addEventListener(listitem, 'mouseover', function(e){self.mouseOver(listitem, e);}, false);
-	this.addEventListener(listitem, 'mouseout', function(e){if (self.enableKeyboardNavigation) self.clearSelection(); self.mouseOut(listitem, e);}, false);
+	this.addEventListener(listitem, 'mouseout', function(e){if (self.enableKeyboardNavigation) self.clearSelection();self.mouseOut(listitem, e);}, false);
 
 	if (this.enableKeyboardNavigation)
 	{
@@ -479,11 +479,11 @@ Spry.Widget.MenuBar.prototype.keyDown = function (e)
 		case 9:
 			this.clearSelection();
 			this.hasFocus = false;
-		default: return;
+		default:return;
 	}
 	switch (found)
 	{
-		case 0: return;
+		case 0:return;
 		case 1:
 			//subopts
 			this.mouseOver(listitem, e);

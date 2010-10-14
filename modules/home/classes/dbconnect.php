@@ -1,4 +1,5 @@
 <?php
+
 /*
 
   CFY program - CFY Business Management Suite
@@ -23,13 +24,19 @@ class dbconnect {
 
     private $data = NULL;
 
-    function select_all($table) {
+    function createConnection() {
         $msql = new Db;
         $msql->connect();
+    }
 
+    function select($field, $input, $table) {
+        $this->createConnection();
         $query_result = NULL;
-
-        $query = "SELECT * FROM " . $table;
+        if ($input == "all") {
+            $query = "SELECT * FROM " . $table;
+        } else {
+            $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' ";
+        }
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);
         $totalRows = mysql_num_rows($rsUsuarios);
@@ -40,29 +47,21 @@ class dbconnect {
             $i++;
         } while ($row_rsUsuarios = mysql_fetch_assoc($rsUsuarios));
 
-        if ($totalRows >= 1) {
-            $query_result = $this->query_result($totalRows);
-        } else {
-            $query_result = $this->notify_show();
-        }
+        $query_result = $this->query_result($totalRows);
         return $query_result;
-    }
-
-    function notify_show() {
-        return 'error';
     }
 
     function query_result($totalRows) {
         $result = NULL;
         $result .= "<total>$totalRows</total>";
         for ($i = 0; $i <= $totalRows - 1; $i++) {
-            $result .=  "<result>\r\n".
-                        "<username>".$this->data[$i]["username"]."</username>\r\n".
-                        "<password>".$this->data[$i]["password"]."</password>\r\n".
-                        "<level>".$this->data[$i]["level"]."</level>\r\n".
-                        "<creation_date>".$this->data[$i]["creation_date"]."</creation_date>\r\n".
-                        "<status>".$this->data[$i]["status"]."</status>\r\n".
-                        "</result>\r\n";
+            $result .= "<result>\r\n" .
+                    "<username>" . $this->data[$i]["username"] . "</username>\r\n" .
+                    "<password>" . $this->data[$i]["password"] . "</password>\r\n" .
+                    "<level>" . $this->data[$i]["level"] . "</level>\r\n" .
+                    "<creation_date>" . $this->data[$i]["creation_date"] . "</creation_date>\r\n" .
+                    "<status>" . $this->data[$i]["status"] . "</status>\r\n" .
+                    "</result>\r\n";
         }
         return $result;
     }

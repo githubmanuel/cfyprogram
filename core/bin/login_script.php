@@ -1,23 +1,23 @@
 <?php
 /*
 
-CFY program - CFY Business Management Suite
+  CFY program - CFY Business Management Suite
 
-Integrated enterprise applications to execute and optimize business and IT strategies. 
-Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
+  Integrated enterprise applications to execute and optimize business and IT strategies.
+  Enable you to perform essential, industry-specific, and business-support processes with modular solutions.
 
-Version: 0.0.0.1a
-Author: Ernesto La Fontaine
-Mail: mail@pajarraco.com
-License: New BSD License (see docs/license.txt)
-Redistributions of files must retain the copyright notice.
+  Version: 0.0.0.1a
+  Author: Ernesto La Fontaine
+  Mail: mail@pajarraco.com
+  License: New BSD License (see docs/license.txt)
+  Redistributions of files must retain the copyright notice.
 
-File: login_script.php
-Commnents: script use for login module.
+  File: login_script.php
+  Commnents: script use for login module.
 
-some modification on the original files
+  some modification on the original files
 
--- Original --
+  -- Original --
 
  * Ajax Login Module v1.1
  *
@@ -35,42 +35,42 @@ some modification on the original files
  * Dual licensed under the MIT and GPL licenses.
  * Redistributions of files must retain the above copyright notice.
  */
- 
-require("core/conf/config.php");
+
+require("core/conf/global.php");
 ?>
 <script type="text/javascript">
-       $(document).ready(function() { 
-           formLogin();
-           function	formLogin() {
-                $("#logincontainer").fadeIn();
-				var options = { 
-                    target       :  ".<?php echo $CORE["login"]["ajax_target_element"]; ?>",
-                    timeout      :    <?php echo $CORE["login"]["ajax_timeout"]; ?>,    
-                    beforeSubmit :   request,  
-                    success      :   response  
-                }; 
-               $(".<?php echo $CORE["login"]["ajax_form_element"] ;?>").submit(function() {  $(this).ajaxSubmit(options); return false;});   
-                function request(formData, jqForm, options) { 
-                    valid = true;
-                    $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").hide();
-                    var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo $CORE["login"]["ajax_wait_text"] ;?></span>";
-                    $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").after(label);
-                    $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").hide();						
-                    if(valid) {
-                      return true;
-                    } else { 
-                     $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
-					 $(".ajax_spinner").fadeOut();
-					 $(".ajax_spinner").remove();
-					 $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").fadeIn(); 
-                      return false;
-                    } 
-                } 
-                function response(responseText, statusText) {
-				   $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
-                   $(".ajax_spinner").fadeOut();
-				   $(".ajax_spinner").remove();	
-				 }
-            }		
-        }); 		
- </script>
+    $(document).ready(function() {
+        formLogin();
+        function	formLogin() {
+            $("#logincontainer").fadeIn();
+            var options = {
+                target       :  ".<?php echo $CORE["login"]["ajax_target_element"]; ?>",
+                timeout      :    <?php echo $CORE["login"]["ajax_timeout"]; ?>,
+                beforeSubmit :   request,
+                success      :   response
+            };
+            $(".<?php echo $CORE["login"]["ajax_form_element"]; ?>").submit(function() {  $(this).ajaxSubmit(options); return false;});
+            function request(formData, jqForm, options) {
+                valid = true;
+                $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").hide();
+                var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo $CORE["login"]["ajax_wait_text"]; ?></span>";
+                $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").after(label);
+                $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").hide();
+                if(valid) {
+                    return true;
+                } else {
+                    $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
+                    $(".ajax_spinner").fadeOut();
+                    $(".ajax_spinner").remove();
+                    $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").fadeIn();
+                    return false;
+                }
+            }
+            function response(responseText, statusText) {
+                $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").show();
+                $(".ajax_spinner").fadeOut();
+                $(".ajax_spinner").remove();
+            }
+        }
+    });
+</script>

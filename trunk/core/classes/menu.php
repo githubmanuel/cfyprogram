@@ -20,7 +20,7 @@ Commnents: class for handle the menues
 
 */
 
-require_once ("core/conf/config.php");
+require ("core/conf/config.php");
 
 class Menu{
 	
@@ -76,6 +76,7 @@ class Menu{
 	}
 	
 	function getPageName($pid, $xmlstr){
+		
 		if (!$this->pageId){
 			$pageName = "index.php";
 		}else{
@@ -83,31 +84,54 @@ class Menu{
 			foreach ($xml->item as $item) {
 				if ($item["id"] == $this->pageId){
 					$pageName = $item->url;
-					break;
-				}elseif($item->count()>3){
-					foreach ($item->submenu->subitem as $subitem){
-						if ($subitem["id"] == $this->pageId){
-							$pageName = $subitem->url;
-							break;
-						}elseif ($subitem->count()>3){
-							foreach ($subitem->submenu->subitem as $subitem){
-								if ($subitem["id"] == $this->pageId){
-									$pageName = $subitem->url;
-									break;
-								}elseif ($subitem->count()>3){
+				}else{
+					$l = 0;
+					foreach($item as $value) {
+						$l = $l+1;	
+					}
+					if($l>3){
+						foreach ($item->submenu->subitem as $subitem){
+							if ($subitem["id"] == $this->pageId){
+								$pageName = $subitem->url;
+								break;
+							}else{
+								$l = 0;
+								foreach($subitem as $value) {
+									$l = $l+1;
+								}
+								if ($l>3){
 									foreach ($subitem->submenu->subitem as $subitem){
 										if ($subitem["id"] == $this->pageId){
 											$pageName = $subitem->url;
 											break;
-										}elseif ($subitem->count()>3){
-											foreach ($subitem->submenu->subitem as $subitem){
-												if ($subitem["id"] == $this->pageId){
-													$pageName = $subitem->url;
-													break;
-												}
-											}			
+										}else{
+											$l = 0;
+											foreach($subitem as $value) {
+												$l = $l+1;
+											}
+											if ($l>3){
+												foreach ($subitem->submenu->subitem as $subitem){
+													if ($subitem["id"] == $this->pageId){
+														$pageName = $subitem->url;
+														break;
+													}else{
+														$l = 0;
+														foreach($subitem as $value) {
+															$l = $l+1;
+														}
+														if ($l>3){
+															foreach ($subitem->submenu->subitem as $subitem){
+																if ($subitem["id"] == $this->pageId){
+																	$pageName = $subitem->url;
+																	break;
+																}
+															}
+														}			
+													}
+												}		
+											}
 										}
-									}		
+									}
 								}
 							}
 						}

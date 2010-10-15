@@ -43,8 +43,8 @@
  */
 //sleep(2); //for testing ajax effects
 
-require_once("db.php");
-require_once("core/conf/global.php");
+require_once(PATH_site . "core/classes/db.php");
+require_once(PATH_site . "core/conf/global.php");
 
 class LoginModule {
 
@@ -75,7 +75,7 @@ class LoginModule {
      * @access public
      */
     function getScript() {
-        require_once ("core/bin/login_script.php");
+        require_once ( PATH_site . "core/bin/login_script.php");
     }
 
     /**

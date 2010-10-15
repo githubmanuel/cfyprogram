@@ -36,7 +36,8 @@
  * Redistributions of files must retain the above copyright notice.
  */
 
-require("core/conf/global.php");
+require(PATH_site . "core/conf/global.php");
+require(PATH_site . "core/conf/config.php");
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -53,7 +54,7 @@ require("core/conf/global.php");
             function request(formData, jqForm, options) {
                 valid = true;
                 $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").hide();
-                var label = "<span class='ajax_spinner'><img src='core/image/ispinner.gif'/><?php echo $CORE["login"]["ajax_wait_text"]; ?></span>";
+                var label = "<span class='ajax_spinner'><img src='<?php echo $CORE["system"]["site_url"]; ?>core/image/ispinner.gif'/><?php echo $CORE["login"]["ajax_wait_text"]; ?></span>";
                 $(".<?php echo $CORE["login"]["ajax_wait_element"]; ?>").after(label);
                 $(".<?php echo $CORE["login"]["ajax_notify_element"]; ?>").hide();
                 if(valid) {

@@ -1,4 +1,5 @@
 <?php
+
 /*
 
   CFY program - CFY Business Management Suite
@@ -16,6 +17,11 @@
   Commnents: Configuration file.
 
  */
+
+require_once(PATH_site . "core/conf/config.php"); // Configuration varibles
+// Modules Variables
+$CORE["module"]["names"] = array(1 => 'home', 'admin', 'payroll', 'budget');
+$CORE["module"]["print_name"] = array(1 => 'Inicio', 'Adminitración', 'Nomina', 'Presupuesto');
 
 /* Ajax Login Module v1.1 */
 /* If login successful then it will redirect to */
@@ -37,5 +43,4 @@ $CORE["login"]["ajax_notify_element"] = "ajax_notify";
 /* module varible */
 
 $CORE["page"]["module_menu_id"] = 1;
-
 ?>

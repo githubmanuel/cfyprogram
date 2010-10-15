@@ -29,7 +29,7 @@
             <p class="sectionheader">To begin please use search to locate some products.</p>
             <form name="searchform">
                 <input type="text" name="searchinp" size="20">
-                <input type="hidden" name="pid" value="1-3">
+                <input type="hidden" name="pid" value="<?php echo $_GET["pid"]; ?>">
                 <input type="hidden" name="table" value="usuarios">
                 <input type="submit" name="submit" value="  Search  ">
                 <span id="searchmsgspan"></span>

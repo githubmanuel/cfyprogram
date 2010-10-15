@@ -18,10 +18,8 @@
 
  */
 
-//error_reporting(0);
-
 // System variable
-$CORE["system"]["site_url"] = "http://192.168.137.50/cfyprogram";
+$CORE["system"]["site_url"] = "http://192.168.137.50/cfyprogram/";
 
 // DB variables
 $CORE["system"]["db_host"] = "localhost";
@@ -31,10 +29,4 @@ $CORE["system"]["db_password"] = "12345";
 
 // Style variable
 $CORE["style"]["name"] = "base";
-
-// Modules Variables
-
-$CORE["module"]["names"] = array(1 => 'home', 'admin', 'payroll', 'budget');
-$CORE["module"]["print_name"] = array(1 => 'Inicio', 'Adminitración', 'Nomina', 'Presupuesto');
-
 ?>

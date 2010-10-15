@@ -21,8 +21,7 @@
 
  */
 
-require ("core/conf/config.php");
-require ("core/conf/global.php");
+require_once (PATH_site . "core/conf/global.php");
 
 class Menu {
 

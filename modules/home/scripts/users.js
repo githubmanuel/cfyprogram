@@ -95,6 +95,7 @@ function userSearch(input)
         document.getElementById("searchmsgspan").innerHTML="Searching...";
     }
     Effect.Pulsate("searchmsgspan"); //scriptaculous feature requires effects.js
+
     makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + input, "handleSearchResults", "true");
     //prevents the browser from trying to submit the form
     return false;

@@ -17,40 +17,24 @@
   Commnents: Startup file.
 
  */
-?>
-<?php
 
-require_once("core/conf/config.php"); // Configuration varibles
-require_once("core/conf/global.php"); // Global varibles
-require_once ("core/classes/menu.php"); // Class for read xml menus and call pages
-$myMenu = new Menu();
+// *******************************
+// Set error reporting
+// *******************************
 
-$pid = 0; // page ID, used to call pages
-$module_name = NULL; // name of the module used
-$user_auth = TRUE; // asing security to the page 
-
-
-if (isset($_GET['pid'])) { // asing page ID form url varible
-    $pid = $_GET['pid'];
+if (defined('E_DEPRECATED')) {
+    error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+} else {
+    error_reporting(E_ALL ^ E_NOTICE);
 }
 
-if ($pid == 0) { // on ID 0, call the login page
-    $module_name = 'home';
-    $page_name = 'login.php';
-    $user_auth = FALSE;
-    require_once("core/classes/login_module.php"); // class that create the login screen
-    $LoginModule = new LoginModule();
-} else {  // for any other ID call the class menu to asing the page
-    $module_name = $myMenu->getModuleName($pid); // get the name of the module called
-    $page_name = $myMenu->getPageName($pid, 'modules/' . $module_name . '/bin/menu.xml'); // get the page called
-}
-if ($user_auth) { // check for user session open
-    require_once("core/bin/user_auth.php");
-}
+// ******************
+// Constants defined
+// ******************
 
-$CORE["page"]["content"] = 'modules/' . $module_name . '/bin/' . $page_name; // path to the content page
-$CORE["page"]["menu"] = 'modules/' . $module_name . '/conf/menu.xml'; // path tho the xml menu
-$CORE["module"]["head_content"] = 'modules/' . $module_name . '/conf/config.php';
+define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
-require_once('core/conf/style_apply.php'); // call the style file create
+define('PATH_site', dirname(PATH_thisScript) . '/');
+
+require_once (PATH_site . 'core/bin/index_core.php');
 ?>

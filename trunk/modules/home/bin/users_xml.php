@@ -19,13 +19,17 @@ header('Content-Type: text/xml');
  * 
  */
 
+define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
+
+define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
+
 sleep(2);
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
 $xmlheader .= "<search-results>";
 echo $xmlheader;
 
-require_once ('../classes/dbconnect.php');
+require_once (PATH_site . 'modules/home/classes/dbconnect.php');
 $myData = new dbconnect();
 $xml = "";
 

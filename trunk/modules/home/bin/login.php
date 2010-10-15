@@ -52,7 +52,7 @@
                     <input name="password" type="password" class="text"/>
                 </li>
                 <li class="loginlabel"> </li>
-                <li class="loginfield"> <img src="core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo $CORE["login"]["ajax_form_element"]; ?>').submit();"/>
+                <li class="loginfield"> <img src="<?php echo $CORE["system"]["site_url"]; ?>core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo $CORE["login"]["ajax_form_element"]; ?>').submit();"/>
                     <input name="submit" type="submit" style="display:none" />
                 </li>
                 <li class="invalid_message">
@@ -70,9 +70,7 @@
                 <!--don't delete this div class="ajax_target" -->
             </div>
         </form>
-<?php
-echo $LoginModule->getScript();
-?>
+<?php echo $LoginModule->getScript(); ?>
     </div>
     <div class="default">Default username: admin / password: juan316</div>
 </div>

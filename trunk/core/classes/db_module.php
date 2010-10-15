@@ -37,6 +37,8 @@
  * Redistributions of files must retain the above copyright notice.
  */
 
+require(PATH_site . "core/conf/global.php");
+
 class Db {
 
     /**
@@ -45,10 +47,9 @@ class Db {
      * @access public
      */
     function connect() {
-        require("../../../core/conf/config.php");
-        require("../../../core/conf/global.php");
-        $connect = mysql_connect($CORE["system"]["db_host"], $CORE["system"]["db_username"], $CORE["system"]["db_password"]);
-        $select_db = mysql_select_db($CORE["system"]["db_name"], $connect);
+
+        $connect = mysql_connect($GLOBALS["CORE"]["system"]["db_host"], $GLOBALS["CORE"]["system"]["db_username"], $GLOBALS["CORE"]["system"]["db_password"]);
+        $select_db = mysql_select_db($GLOBALS["CORE"]["system"]["db_name"], $connect);
         if (!$connect) {
             $errno = mysql_errno();
             switch ($errno) {

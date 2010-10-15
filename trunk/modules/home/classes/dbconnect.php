@@ -18,7 +18,7 @@
 
  */
 
-require_once("../../../core/classes/db_module.php");
+require_once(PATH_site . "core/classes/db_module.php");
 
 class dbconnect {
 

@@ -34,29 +34,34 @@ Commnents:
             </subitem>
             <subitem id="3">
                 <type>pid</type>
+                <url>apply_style.php</url>
+                <name>Aplicar Estilo</name>
+            </subitem>
+            <subitem id="4">
+                <type>pid</type>
                 <url>users.php</url>
                 <name>Usuarios</name>
             </subitem>
         </submenu>
     </item>
-    <item id="4">
+    <item id="5">
         <type>submenu</type>
         <url>#</url>
         <name>Ayuda</name>
         <submenu>
-            <subitem id="5">
+            <subitem id="6">
                 <type>url</type>
                 <url>docs/license.txt</url>
-                <name>Docs</name>
+                <name>Licencia</name>
             </subitem>
-            <subitem id="6">
+            <subitem id="7">
                 <type>pid</type>
                 <url>help.php</url>
                 <name>Ayuda</name>
             </subitem>
         </submenu>
     </item>
-    <item id="7">
+    <item id="8">
         <type>url</type>
         <url>core/bin/logout.php</url>
         <name>Salir</name>

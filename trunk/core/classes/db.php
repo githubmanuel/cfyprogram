@@ -36,6 +36,7 @@
  * Dual licensed under the MIT and GPL licenses.
  * Redistributions of files must retain the above copyright notice.
  */
+require_once(PATH_site."core/conf/global.php");
 
 class Db {
 
@@ -45,10 +46,9 @@ class Db {
      * @access public
      */
     function connect() {
-        require("core/conf/config.php");
-        require("core/conf/global.php");
-        $connect = mysql_connect($CORE["system"]["db_host"], $CORE["system"]["db_username"], $CORE["system"]["db_password"]);
-        $select_db = mysql_select_db($CORE["system"]["db_name"], $connect);
+        
+        $connect = mysql_connect($GLOBALS["CORE"]["system"]["db_host"], $GLOBALS["CORE"]["system"]["db_username"], $GLOBALS["CORE"]["system"]["db_password"]);
+        $select_db = mysql_select_db($GLOBALS["CORE"]["system"]["db_name"], $connect);
         if (!$connect) {
             $errno = mysql_errno();
             switch ($errno) {
@@ -62,10 +62,10 @@ class Db {
             break;
         }
 
-        $strSQL = "SELECT * from " . $CORE["login"]["user_table_name"] . " limit 1";
+        $strSQL = "SELECT * from " . $GLOBALS["CORE"]["login"]["user_table_name"] . " limit 1";
         $result = mysql_query($strSQL);
         if ($result == null) {
-            $this->create_table($CORE["login"]["user_table_name"]);
+            $this->create_table($GLOBALS["CORE"]["login"]["user_table_name"]);
             die();
         }
     }

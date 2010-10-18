@@ -9,3 +9,9 @@ Requirement:
   * web service
   * php 5.3
   * mysql 5.1
+
+=What is done now?=
+
+Most of the core system is working, using a simple authentication method, Modules Menus, and General Menus. 
+
+We working on user table and system configuration inside *"Home Module"*.

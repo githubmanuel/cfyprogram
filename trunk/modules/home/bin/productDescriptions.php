@@ -19,9 +19,9 @@ else
 //Normally, you'd search a database, but for ease, we'll do it this way
 //some databases allow you to return the results in xml format
 
-if ($productCode == "1") {
+if ($productCode == "admin") {
     $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" .
-            "<product><code>1</code>
+            "<product><code>admin</code>
 			<description>The Focus is a vehicle that delivers good value of money, particularly the diesel version.</description>
 			<reviews>
 				<review>
@@ -36,9 +36,9 @@ if ($productCode == "1") {
 				</review>		
 			</reviews>
 			</product>";
-} else if ($productCode == "2") {
+} else if ($productCode == "general") {
     $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" .
-            "<product><code>2</code>
+            "<product><code>general</code>
 			<description>The Audi A4 is a great car particularly in winter conditions.</description>
 			<reviews>
 				<review>

@@ -175,24 +175,28 @@ function appendSearchResult(username, password, level, creation_date, status, re
 		
     //Name/Description
     var usernamecell = document.createElement("td"); //displays name of the product
-    usernamecell.setAttribute("id", "namecell-" + username); //we'll need this cell later in showProductDetails()
+    usernamecell.setAttribute("id", "usernamecell-" + username); //we'll need this cell later in showProductDetails()
     usernamecell.setAttribute(classLiteral,"cell"); //we'll need this cell later in showProductDetails()
     codecell.setAttribute(classLiteral,"searchresultstable");
 	
     //password
     var passwordcell = document.createElement("td");
+    passwordcell.setAttribute("id", "passwordcell-" + username); //we'll need this cell later in showProductDetails()
     passwordcell.setAttribute(classLiteral,"cell");
 
     //level
     var levelcell = document.createElement("td");
+    levelcell.setAttribute("id", "levelcell-" + username); //we'll need this cell later in showProductDetails()
     levelcell.setAttribute(classLiteral,"cell");
 
     //date
     var datecell = document.createElement("td");
+    datecell.setAttribute("id", "datecell-" + username); //we'll need this cell later in showProductDetails()
     datecell.setAttribute(classLiteral,"cell");
 
     //status
     var statuscell = document.createElement("td");
+    statuscell.setAttribute("id", "statuscell-" + username); //we'll need this cell later in showProductDetails()
     statuscell.setAttribute(classLiteral,"cell");
 
     //add to cart links
@@ -408,12 +412,15 @@ function resetAmountCell(amountcell, amount, pricecell, price)
 /*
 * Called to make an ajax request to load the details of a product
 */
-function showProductDetails(productCode)
+function showProductDetails(username)
 {		
     //clear the message pane
     showMsg("");
 
-    makeHttpRequest("modules/home/bin/productDescriptions.php?productCode=" + productCode, "handleProductDetails", "true");
+    //makeHttpRequest("modules/home/bin/productDescriptions.php?productCode=" + productCode, "handleProductDetails", "true");
+    
+    makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + username, "handleProductDetails", "true");
+
     return false;
 }
 
@@ -425,47 +432,90 @@ function handleProductDetails(results)
     //clear the message pane
     showMsg("");
 
-    var productCode = results.getElementsByTagName("code").item(0).firstChild.nodeValue;
-    var desDiv = "descriptiondiv-" + productCode;
+    var username = results.getElementsByTagName("username").item(0).firstChild.nodeValue;
+    var password = results.getElementsByTagName("password").item(0).firstChild.nodeValue;
+    var level = results.getElementsByTagName("level").item(0).firstChild.nodeValue;
+    var creation_date = results.getElementsByTagName("creation_date").item(0).firstChild.nodeValue;
+    var status = results.getElementsByTagName("status").item(0).firstChild.nodeValue;
+
+
+    var desDiv = "username-" + username;
 
     if(document.getElementById(desDiv)==null) //we don't want to load more than once
     {
-        var description = results.getElementsByTagName("description").item(0).firstChild.nodeValue;
-		
+
         //get a handle to the table cell that contains the description
-        var namecell = document.getElementById("namecell-" + productCode);
+        var usernamecell = document.getElementById("usernamecell-" + username);
+        var passwordcell = document.getElementById("passwordcell-" + username);
+        var levelcell = document.getElementById("levelcell-" + username);
+        var datecell = document.getElementById("datecell-" + username);
+        var statuscell = document.getElementById("statuscell-" + username);
+		        
+        //clear the existing results if any
+        var usernamechild =  usernamecell.childNodes[0];
+        var passwordchild =  passwordcell.childNodes[0];
+        var levelchild =  levelcell.childNodes[0];
+        var datechild =  datecell.childNodes[0];
+        var statuschild =  statuscell.childNodes[0];
+
+        usernamecell.removeChild(usernamechild);
+        passwordcell.removeChild(passwordchild);
+        levelcell.removeChild(levelchild);
+        datecell.removeChild(datechild);
+        statuscell.removeChild(statuschild);
+
+
+        var usernameinput = document.createElement("input");
+        var passwordinput = document.createElement("input");
+        var levelinput = document.createElement("input");
+        var dateinput = document.createElement("input");
+        var statusinput = document.createElement("input");
+
+        usernameinput.setAttribute("id", desDiv);
+        passwordinput.setAttribute("id", "password-" + username);
+        levelinput.setAttribute("id", "level-" + username);
+        dateinput.setAttribute("id", "date-" + username);
+        statusinput.setAttribute("id", "status-" + username);
+
+        usernameinput.setAttribute("value", username);
+        passwordinput.setAttribute("value", password);
+        levelinput.setAttribute("value", level);
+        dateinput.setAttribute("value", creation_date);
+        statusinput.setAttribute("value", status);
+
+        usernamecell.appendChild(usernameinput);
+        passwordcell.appendChild(passwordinput);
+        levelcell.appendChild(levelinput);
+        datecell.appendChild(dateinput);
+        statuscell.appendChild(statusinput);
+
+      		
+    //       div.appendChild(document.createTextNode(description));
+    //       div.appendChild(document.createElement("p"));
+    //       var boldTag = document.createElement("strong");
 		
-        //add a div below the description
-        var div = document.createElement("div");
-        div.setAttribute("id", desDiv);
-        namecell.appendChild(div);
+    //        boldTag.appendChild(document.createTextNode("Reviews"));
+    //        div.appendChild(boldTag);
+    //        div.appendChild(document.createElement("p"));
 		
-        div.appendChild(document.createTextNode(description));
-        div.appendChild(document.createElement("p"));
-        var boldTag = document.createElement("strong");
-		
-        boldTag.appendChild(document.createTextNode("Reviews"));
-        div.appendChild(boldTag);
-        div.appendChild(document.createElement("p"));
-		
-        //get the reviews
-        var reviews = results.getElementsByTagName("review");
-        for(i=0; i < reviews.length; i++)
-        {
-            var review = reviews.item(i);
-            var name = review.getElementsByTagName("name").item(0).firstChild.nodeValue;
-            var rating = review.getElementsByTagName("rating").item(0).firstChild.nodeValue;
-            var comment = review.getElementsByTagName("comment").item(0).firstChild.nodeValue;
+    //get the reviews
+    //        var reviews = results.getElementsByTagName("review");
+    //        for(i=0; i < reviews.length; i++)
+    //        {
+    //            var review = reviews.item(i);
+    //            var name = review.getElementsByTagName("name").item(0).firstChild.nodeValue;
+    //            var rating = review.getElementsByTagName("rating").item(0).firstChild.nodeValue;
+    //            var comment = review.getElementsByTagName("comment").item(0).firstChild.nodeValue;
 			
-            //build some text
-            var reviewdiv = document.createElement("div");
-            reviewdiv.setAttribute(classLiteral, "reviewdiv");
-            reviewdiv.appendChild(document.createTextNode(name + " [" + rating + " out of 5]"));
-            reviewdiv.appendChild(document.createElement("p"));
-            reviewdiv.appendChild(document.createTextNode(comment));
-            div.appendChild(reviewdiv);
+    //build some text
+    //            var reviewdiv = document.createElement("div");
+    //            reviewdiv.setAttribute(classLiteral, "reviewdiv");
+    //            reviewdiv.appendChild(document.createTextNode(name + " [" + rating + " out of 5]"));
+    //            reviewdiv.appendChild(document.createElement("p"));
+    //            reviewdiv.appendChild(document.createTextNode(comment));
+    //            div.appendChild(reviewdiv);
 			
-        }
+    //        }
     }
     else //remove the extended description node
     {

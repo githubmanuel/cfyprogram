@@ -23,7 +23,8 @@ define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAP
 
 define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
 
-sleep(2);
+//sleep(2);
+
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
 $xmlheader .= "<search-results>";

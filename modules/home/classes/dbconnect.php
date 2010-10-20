@@ -66,6 +66,32 @@ class dbconnect {
         return $result;
     }
 
+    function update($myInput, $key, $table) {
+        $this->createConnection();
+        $query_result = NULL;
+
+
+        $query = sprintf("UPDATE %s SET %s WHERE %s",
+                        $table,
+                        $this->getInputData($myInput),
+                        $key);
+
+
+        $query_result = mysql_query($query) or die(mysql_error());
+        //$query_result = $query;
+        return $query_result;
+    }
+
+    function getInputData($myInput){
+
+        $returnData = NULL;
+        foreach ($myInput as $key => $value) {
+            $returnData .= $key. "='" .$value. "', ";
+        }
+        $returnData .= substr($returnData, 0, -2);
+        return $returnData;
+
+    }
 }
 
 ?>

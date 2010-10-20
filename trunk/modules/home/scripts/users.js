@@ -81,6 +81,7 @@ function showMsg(msg)
     {
         document.getElementById("msgdiv").style.display = "inline";
     }
+    Effect.Pulsate("msgdiv");
 }
 /*
  * Called when the page is loaded and when the user types something into the input box and selects search
@@ -168,16 +169,11 @@ function appendSearchResult(username, password, level, creation_date, status, re
     if(styleChooser) a = "1"; else a = "2";
     row.setAttribute(classLiteral, "searchresultstable" + a);
 	
-    //product code
-    var codecell = document.createElement("td"); //displays product code
-    codecell.setAttribute(classLiteral,"searchresultstable");
-    codecell.setAttribute("align","center");
-		
-    //Name/Description
+    //username
     var usernamecell = document.createElement("td"); //displays name of the product
     usernamecell.setAttribute("id", "usernamecell-" + username); //we'll need this cell later in showProductDetails()
     usernamecell.setAttribute(classLiteral,"cell"); //we'll need this cell later in showProductDetails()
-    codecell.setAttribute(classLiteral,"searchresultstable");
+
 	
     //password
     var passwordcell = document.createElement("td");
@@ -199,29 +195,38 @@ function appendSearchResult(username, password, level, creation_date, status, re
     statuscell.setAttribute("id", "statuscell-" + username); //we'll need this cell later in showProductDetails()
     statuscell.setAttribute(classLiteral,"cell");
 
+
+    //edit cell
+    var editcell = document.createElement("td"); //displays product code
+    editcell.setAttribute("id", "editcell-" + username); //we'll need this cell later in showProductDetails()
+    editcell.setAttribute(classLiteral,"cell");
+
+
+
     //add to cart links
-    var addToCartLink = document.createElement("a");
-    addToCartLink.setAttribute(classLiteral, "control");
-    addToCartLink.setAttribute("title", "Click to add this item to your cart");
-    addToCartLink.appendChild(document.createTextNode("Add"));
-    addToCartLink.onclick = function()
+    var addUsersLink = document.createElement("a");
+    addUsersLink.setAttribute(classLiteral, "control");
+    addUsersLink.setAttribute("id", "control-"+username);
+    addUsersLink.setAttribute("title", "Crea un nuevo usuario");
+    addUsersLink.appendChild(document.createTextNode("Nuevo"));
+    addUsersLink.onclick = function()
     {
         return addToCart(username);
     }
 	
     //product link
-    var link = document.createElement("a");
-    link.setAttribute("href","");
-    link.appendChild(document.createTextNode(username));
+    var updateLink = document.createElement("a");
+    updateLink.setAttribute("href","");
+    updateLink.appendChild(document.createTextNode(username));
 	
     //add event handlers
-    link.onclick = function()
+    updateLink.onclick = function()
     {
         return showProductDetails(username);
     }
 		
     //add username
-    usernamecell.appendChild(link);
+    usernamecell.appendChild(updateLink);
     row.appendChild(usernamecell);
 	
     //add password
@@ -241,8 +246,8 @@ function appendSearchResult(username, password, level, creation_date, status, re
     row.appendChild(statuscell);
 	
     //add addlink
-    codecell.appendChild(addToCartLink);
-    row.appendChild(codecell);
+    editcell.appendChild(addUsersLink);
+    row.appendChild(editcell);
 	
 	
     resultstable.appendChild(row);
@@ -444,14 +449,14 @@ function handleProductDetails(results)
     if(document.getElementById(desDiv)==null) //we don't want to load more than once
     {
 
-        //get a handle to the table cell that contains the description
+        //get a handle to the table cell that contains the values
         var usernamecell = document.getElementById("usernamecell-" + username);
         var passwordcell = document.getElementById("passwordcell-" + username);
         var levelcell = document.getElementById("levelcell-" + username);
         var datecell = document.getElementById("datecell-" + username);
         var statuscell = document.getElementById("statuscell-" + username);
 		        
-        //clear the existing results if any
+        //clear the existing text
         var usernamechild =  usernamecell.childNodes[0];
         var passwordchild =  passwordcell.childNodes[0];
         var levelchild =  levelcell.childNodes[0];
@@ -464,58 +469,65 @@ function handleProductDetails(results)
         datecell.removeChild(datechild);
         statuscell.removeChild(statuschild);
 
-
+        // create the input element
         var usernameinput = document.createElement("input");
         var passwordinput = document.createElement("input");
         var levelinput = document.createElement("input");
         var dateinput = document.createElement("input");
         var statusinput = document.createElement("input");
 
+        // set id to the input
         usernameinput.setAttribute("id", desDiv);
         passwordinput.setAttribute("id", "password-" + username);
         levelinput.setAttribute("id", "level-" + username);
         dateinput.setAttribute("id", "date-" + username);
         statusinput.setAttribute("id", "status-" + username);
 
+        // set value to the input
         usernameinput.setAttribute("value", username);
+        usernameinput.setAttribute("disabled", true);
         passwordinput.setAttribute("value", password);
         levelinput.setAttribute("value", level);
         dateinput.setAttribute("value", creation_date);
         statusinput.setAttribute("value", status);
 
+        // appent input to the table
         usernamecell.appendChild(usernameinput);
         passwordcell.appendChild(passwordinput);
         levelcell.appendChild(levelinput);
         datecell.appendChild(dateinput);
         statuscell.appendChild(statusinput);
 
-      		
-    //       div.appendChild(document.createTextNode(description));
-    //       div.appendChild(document.createElement("p"));
-    //       var boldTag = document.createElement("strong");
-		
-    //        boldTag.appendChild(document.createTextNode("Reviews"));
-    //        div.appendChild(boldTag);
-    //        div.appendChild(document.createElement("p"));
-		
-    //get the reviews
-    //        var reviews = results.getElementsByTagName("review");
-    //        for(i=0; i < reviews.length; i++)
-    //        {
-    //            var review = reviews.item(i);
-    //            var name = review.getElementsByTagName("name").item(0).firstChild.nodeValue;
-    //            var rating = review.getElementsByTagName("rating").item(0).firstChild.nodeValue;
-    //            var comment = review.getElementsByTagName("comment").item(0).firstChild.nodeValue;
-			
-    //build some text
-    //            var reviewdiv = document.createElement("div");
-    //            reviewdiv.setAttribute(classLiteral, "reviewdiv");
-    //            reviewdiv.appendChild(document.createTextNode(name + " [" + rating + " out of 5]"));
-    //            reviewdiv.appendChild(document.createElement("p"));
-    //            reviewdiv.appendChild(document.createTextNode(comment));
-    //            div.appendChild(reviewdiv);
-			
-    //        }
+        // change add boton to edit
+
+        var control = document.getElementById("control-"+username);
+        var controlchild =  control.childNodes[0];
+        control.removeChild(controlchild);
+        control.setAttribute("title", "Editar usuario");
+        control.appendChild(document.createTextNode("Editar"));
+        control.onclick = function()
+        {
+            var usernameinput = document.getElementById("username-" + username).value;
+            var passwordinput = document.getElementById("password-" + username).value;
+            var levelinput = document.getElementById("level-" + username).value;
+            var dateinput = document.getElementById("date-" + username).value;
+            var statusinput = document.getElementById("status-" + username).value;
+
+            return editTable(usernameinput, passwordinput, levelinput, dateinput, statusinput);
+        }
+        // create cancel boton
+        var cancel = document.createElement("a");
+        cancel.setAttribute(classLiteral, "control");
+        cancel.setAttribute("title", "Click to remove this item from your cart");
+        cancel.appendChild(document.createTextNode("Cancelar"));
+        cancel.onclick = function()
+        {
+            return userSearch(document.getElementsByName("searchinp")[0].value);
+        }
+        var editcell = document.getElementById("editcell-" + username);
+        editcell.appendChild(document.createTextNode(" | "));
+        editcell.appendChild(cancel);
+    
     }
     else //remove the extended description node
     {
@@ -527,64 +539,21 @@ function handleProductDetails(results)
 /*
 * Called to add checked items to the cart.
 */
-function addToCart(productCode)
+function editTable(username, password, level, creation_date, status)
 {	
     //clear the message pane
     showMsg("");
-    var res = "";
-	
-    //if the user tries to add the same item twice we ignore the request...
-    if(!document.getElementById("amountcell-" + productCode))
-    {
-        //if an item is selected we add it to our node
-        res = extractXmlForProductCode(productCode,productListXml); //it's not really xml we're extracting
-        //send to server
-        makeHttpRequest("modules/home/bin/addToCart.php?prod=" + res, "handleCartUpdate", "true");
-    }
-    else //...and show a message
-    {
-        showMsg("The item you selected is already in your cart. " +
-            "<br>You can add more than one by clicking on the AMOUNT and changing the number.");
-    }
-	
+    showMsg("The Usuario esta siendo actualizado...");
+    //send to server
+    makeHttpRequest("modules/home/bin/users_update.php?username="+username+"&password="+password+"&level="+level+"&creation_date="+creation_date+"&status="+status, "handleUsersUpdate", "true");
     //prevents the browser from activating the hyperlink
     return false;
 }
 
 /*
-* Private function to find a matching product XML node and return a delimited string.
-* @param code the product code to add to the cart
-* @param results the search results from which the selection was made
-* @param amount the amount of the product
-*/
-function extractXmlForProductCode(code, results, amount)
-{	
-    if(!amount) amount=1; //because sometimes we might call the function without the amount argument
-
-    var res = "";
-    var total = results.getElementsByTagName("result").length; // the number of results
-    for(i=0; i < total; i++)
-    {
-        var currentResult = results.getElementsByTagName("result").item(i);
-        var currcode = currentResult.getElementsByTagName("code").item(0).firstChild.nodeValue;
-        var name = currentResult.getElementsByTagName("name").item(0).firstChild.nodeValue;
-        var price = currentResult.getElementsByTagName("price").item(0).firstChild.nodeValue;
-        if(code==currcode)
-        {
-            res = code + "/" + name + "/" + price + "/" + amount;
-            break;
-        }
-    }
-	
-    return res;
-	
-}
-
-
-/*
 * Updates the diplay of the cart contents. This function is called after adding or deleting items from the cart.
 */
-function handleCartUpdate(results)
+function handleUsersUpdate(results)
 {		
     //clear the message pane
     showMsg("");
@@ -594,80 +563,93 @@ function handleCartUpdate(results)
 	
     if(results)
     {
-        document.getElementById("cartdiv").style.display = "inline";
-		
-        //clear the existing results if any
-        var cartcontentstable = document.getElementById("cartcontentstable");
-        clearANode(cartcontentstable);
-		
-        //get the results that were returned
-        var itemsInCart = results.getElementsByTagName("item").length; // the number of items in the cart
-		
-        var total = 0;
-		
-        for(i=0; i < itemsInCart; i++)
-        {   //it's more efficient to assign to variables (like below), so that javascript has a handle to the xml, instead of iterating through it over and over
-            var currentResult = results.getElementsByTagName("item").item(i);
-            var name = currentResult.getElementsByTagName("name").item(0).firstChild.nodeValue;
-            var code = currentResult.getElementsByTagName("code").item(0).firstChild.nodeValue;
-            var price = currentResult.getElementsByTagName("price").item(0).firstChild.nodeValue;
-            var amount = currentResult.getElementsByTagName("amount").item(0).firstChild.nodeValue;
-			
-            total = total + (amount*price);
-			
-            //add a row to the CART HTML table
-            appendCartEntry(code,amount,name,price, cartcontentstable);
-        }
-		
-        //if any exception message we show it
-        if(results.getElementsByTagName("exception").item(0))
+        var updateresult = results.getElementsByTagName("result").item(0).firstChild.nodeValue
+
+
+        if (updateresult=="  1")
         {
-            showMsg(results.getElementsByTagName("exception").item(0).firstChild.nodeValue);
+            showMsg("Actualizacion Lista");
+            userSearch(document.getElementsByName("searchinp")[0].value);
+
+        }else{
+            
+            showMsg("Error en actualizacion");
         }
-		
-        //add the total and 'checkout' link
-        if(itemsInCart > 0)
-        {
-            //add row with 2 empty cells
-            var trow = document.createElement("tr");
-            trow.setAttribute(classLiteral, "total");
-            trow.appendChild(document.createElement("td"));
-            trow.appendChild(document.createElement("td"));
-			
-            //add 3rd column for TOTAL
-            var tcol = document.createElement("td");
-            tcol.setAttribute("align","right");
-            tcol.appendChild(document.createTextNode("TOTAL: $" + formatCurrency( total)));
-            trow.appendChild(tcol);
-		
-            //checkout (4th) column
-            var col = document.createElement("td");
-            col.setAttribute("align","center");
-            col.setAttribute("valign","center");
-            trow.appendChild(col);
-			
-            //checkout button
-            var checkout = document.createElement("button");
-            checkout.setAttribute("type","button");
-            checkout.setAttribute("name","checkoutfromcart");
-            checkout.setAttribute("title","Click here to checkout");
-            checkout.setAttribute(classLiteral,"cartbutton");
-            checkout.appendChild(document.createTextNode("Checkout"));
-            col.appendChild(checkout);
-						
-            //add the total + delete-link row to the table
-            cartcontentstable.appendChild(trow);
-			
-            //event handler for the checkout button
-            checkout.onclick = function()
-            {
-                return checkoutCart();
-            }
-        }
-        else
-        {
-            document.getElementById("cartdiv").style.display = "none";
-        }
+
+    //        document.getElementById("cartdiv").style.display = "inline";
+    //
+    //        //clear the existing results if any
+    //        var cartcontentstable = document.getElementById("cartcontentstable");
+    //        clearANode(cartcontentstable);
+    //
+    //        //get the results that were returned
+    //        var itemsInCart = results.getElementsByTagName("item").length; // the number of items in the cart
+    //
+    //        var total = 0;
+    //
+    //        for(i=0; i < itemsInCart; i++)
+    //        {   //it's more efficient to assign to variables (like below), so that javascript has a handle to the xml, instead of iterating through it over and over
+    //            var currentResult = results.getElementsByTagName("item").item(i);
+    //            var name = currentResult.getElementsByTagName("name").item(0).firstChild.nodeValue;
+    //            var code = currentResult.getElementsByTagName("code").item(0).firstChild.nodeValue;
+    //            var price = currentResult.getElementsByTagName("price").item(0).firstChild.nodeValue;
+    //            var amount = currentResult.getElementsByTagName("amount").item(0).firstChild.nodeValue;
+    //
+    //            total = total + (amount*price);
+    //
+    //            //add a row to the CART HTML table
+    //            appendCartEntry(code,amount,name,price, cartcontentstable);
+    //        }
+    //
+    //        //if any exception message we show it
+    //        if(results.getElementsByTagName("exception").item(0))
+    //        {
+    //            showMsg(results.getElementsByTagName("exception").item(0).firstChild.nodeValue);
+    //        }
+    //
+    //        //add the total and 'checkout' link
+    //        if(itemsInCart > 0)
+    //        {
+    //            //add row with 2 empty cells
+    //            var trow = document.createElement("tr");
+    //            trow.setAttribute(classLiteral, "total");
+    //            trow.appendChild(document.createElement("td"));
+    //            trow.appendChild(document.createElement("td"));
+    //
+    //            //add 3rd column for TOTAL
+    //            var tcol = document.createElement("td");
+    //            tcol.setAttribute("align","right");
+    //            tcol.appendChild(document.createTextNode("TOTAL: $" + formatCurrency( total)));
+    //            trow.appendChild(tcol);
+    //
+    //            //checkout (4th) column
+    //            var col = document.createElement("td");
+    //            col.setAttribute("align","center");
+    //            col.setAttribute("valign","center");
+    //            trow.appendChild(col);
+    //
+    //            //checkout button
+    //            var checkout = document.createElement("button");
+    //            checkout.setAttribute("type","button");
+    //            checkout.setAttribute("name","checkoutfromcart");
+    //            checkout.setAttribute("title","Click here to checkout");
+    //            checkout.setAttribute(classLiteral,"cartbutton");
+    //            checkout.appendChild(document.createTextNode("Checkout"));
+    //            col.appendChild(checkout);
+    //
+    //            //add the total + delete-link row to the table
+    //            cartcontentstable.appendChild(trow);
+    //
+    //            //event handler for the checkout button
+    //            checkout.onclick = function()
+    //            {
+    //                return checkoutCart();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            document.getElementById("cartdiv").style.display = "none";
+    //        }
     }
     return false;
 }

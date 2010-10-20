@@ -42,7 +42,7 @@ require(PATH_site . "core/conf/config.php");
 <script type="text/javascript">
     $(document).ready(function() {
         formLogin();
-        function	formLogin() {
+        function formLogin() {
             $("#logincontainer").fadeIn();
             var options = {
                 target       :  ".<?php echo $CORE["login"]["ajax_target_element"]; ?>",

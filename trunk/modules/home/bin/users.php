@@ -28,10 +28,11 @@
         <div id="searchdiv">
             <p class="sectionheader">To begin please use search to locate some products.</p>
             <form name="searchform">
-                <input type="text" name="searchinp" size="20">
+                <input type="text" name="searchinp" size="20" >
                 <input type="hidden" name="pid" value="<?php echo $_GET["pid"]; ?>">
                 <input type="hidden" name="table" value="usuarios">
-                <input type="submit" name="submit" value="  Search  ">
+                <input type="submit" name="submit" value="  Search  " >
+
                 <span id="searchmsgspan"></span>
             </form>
         </div>
@@ -45,9 +46,9 @@
                         <td class="desc-header">Usuario</td>
                         <td class="price-header">Clave</td>
                         <td class="price-header">Nivel</td>
-                        <td class="price-header">Fecha</td>
-                        <td class="price-header">Fecha</td>
-                        <td class="control">Add</td>
+                        <td class="price-header">Fecha de Creacion</td>
+                        <td class="price-header">Estado</td>
+                        <td class="control">Editor</td>
                     </tr>
                 </thead>
                 <!-- IE requires a TBODY for this to work -->

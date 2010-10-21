@@ -19,11 +19,18 @@ header('Content-Type: text/xml');
  *
  */
 
+
+if (defined('E_DEPRECATED')) {
+    error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+} else {
+    error_reporting(E_ALL ^ E_NOTICE);
+}
+
 define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
 define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
 
-sleep(5);
+//sleep(5);
 
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
@@ -55,9 +62,9 @@ if (isset($_GET['status'])) {
     $status = mysql_escape_string(substr(trim($_GET['status']), 0, 255));
 }
 
-$myInput = array(password=>$password, level=>$level, creation_date=>$creation_date, status=>$status);
+$myInput = array(password => $password, level => $level, creation_date => $creation_date, status => $status);
 
-$xml = $myData->update($myInput, "username='".$username."' " , "core_user");
+$xml = $myData->update($myInput, "username='" . $username . "' ", "core_user");
 
 $xml .= "</result>";
 echo $xml;

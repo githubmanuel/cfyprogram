@@ -32,22 +32,21 @@
                 <input type="hidden" name="pid" value="<?php echo $_GET["pid"]; ?>">
                 <input type="hidden" name="table" value="usuarios">
                 <input type="submit" name="submit" value="  Search  " >
-
                 <span id="searchmsgspan"></span>
             </form>
         </div>
 
         <!-- Search Results section -->
-        <div id="productdiv" class="searchresults" style="display: none"> <!-- style is here to remove slight flicker of page -->
+        <div id="tablediv" class="searchresults" style="display: none"> <!-- style is here to remove slight flicker of page -->
             <p class="sectionheader">Search Results</p>
             <table width="400" class="searchresultstable" >
                 <thead>
                     <tr class="tableheader">
-                        <td class="desc-header">Usuario</td>
-                        <td class="price-header">Clave</td>
-                        <td class="price-header">Nivel</td>
-                        <td class="price-header">Fecha de Creacion</td>
-                        <td class="price-header">Estado</td>
+                        <td class="cell-header">Usuario</td>
+                        <td class="cell-header">Clave</td>
+                        <td class="cell-header">Nivel</td>
+                        <td class="cell-header">Fecha de Creacion</td>
+                        <td class="cell-header">Estado</td>
                         <td class="control">Editor</td>
                     </tr>
                 </thead>
@@ -55,24 +54,5 @@
                 <tbody id="resultstable"></tbody>
             </table>
         </div>
-
-        <!-- Cart Contents -->
-        <div id="cartdiv" style="display: none"> <!-- style is here to remove slight flicker of page -->
-            <p class="sectionheader">Shopping Cart</p>
-            <table width="400" class="searchresultstable">
-                <thead>
-                    <tr class="tableheader">
-                        <td>Amount</td>
-                        <td class="desc-header">Product</td>
-                        <td class="price-header">Price</td>
-                        <td class="control">Delete</td>
-                    </tr>
-                </thead>
-                <!-- IE requires a TBODY for this to work -->
-                <tbody id="cartcontentstable"></tbody>
-            </table>
-        </div>
-
-
     </div>
 </section>

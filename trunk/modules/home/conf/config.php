@@ -21,11 +21,9 @@
 
 
 if ($pid != 0) {
-    $head_script = '<link rel="stylesheet" type="text/css" href="'.$CORE["system"]["site_url"].'modules/home/css/styles.css">';
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="'.$CORE["system"]["site_url"].'modules/home/scripts/prototype.js"></SCRIPT>';
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="'.$CORE["system"]["site_url"].'modules/home/scripts/scriptaculous.js"></SCRIPT> <!-- calls effects.js -->';
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="'.$CORE["system"]["site_url"].'modules/home/scripts/ajax.js"></SCRIPT>';
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="'.$CORE["system"]["site_url"].'modules/home/scripts/users.js"></SCRIPT>';
+    $head_script = '<link rel="stylesheet" type="text/css" href="' . $CORE["system"]["site_url"] . 'modules/home/css/styles.css">';
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/prototype.js"></SCRIPT>';
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/scriptaculous.js"></SCRIPT> <!-- calls effects.js -->';
 
     echo $head_script;
 }

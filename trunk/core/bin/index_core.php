@@ -47,9 +47,14 @@ if ($user_auth) { // check for user session open
     require_once(PATH_site . "core/bin/user_auth.php");
 }
 
+
 $CORE["page"]["content"] = 'modules/' . $module_name . '/bin/' . $page_name; // path to the content page
 $CORE["page"]["menu"] = 'modules/' . $module_name . '/conf/menu.xml'; // path tho the xml menu
 $CORE["module"]["head_content"] = 'modules/' . $module_name . '/conf/config.php';
+$CORE["page"]["head_content"] = $CORE["module"]["head_content"];
+if (file_exists('modules/' . $module_name . '/conf/config_' . $page_name)) {
+    $CORE["page"]["head_content"] = 'modules/' . $module_name . '/conf/config_' . $page_name;
+}
 
 require_once(PATH_site . 'core/conf/style_apply.php'); // call the style file create
 ?>

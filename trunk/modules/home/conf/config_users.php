@@ -13,20 +13,20 @@
   License: New BSD License (see docs/license.txt)
   Redistributions of files must retain the copyright notice.
 
-  File: config
-  Commnents: Configuration file.
+  File:
+  Commnents:
 
  */
 
-// System variable
-$CORE["system"]["site_url"] = "http://lab.pajarraco.com/cfy/";
 
-// DB variables
-$CORE["system"]["db_host"] = "localhost";
-$CORE["system"]["db_name"] = "cfy_base";
-$CORE["system"]["db_username"] = "cfyadmin";
-$CORE["system"]["db_password"] = "12345";
 
-// Style variable
-$CORE["style"]["name"] = "base";
+
+if ($pid != 0) {
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/ajax.js"></SCRIPT>';
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/users.js"></SCRIPT>';
+
+    echo $head_script;
+}
+echo "";
 ?>
+

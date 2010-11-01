@@ -70,11 +70,27 @@ class dbconnect {
         $this->createConnection();
         $query_result = NULL;
 
-
         $query = sprintf("UPDATE %s SET %s WHERE %s",
                         $table,
-                        $this->getInputData($myInput),
+                        $this->getUpdateData($myInput),
                         $key);
+
+        $query_result = mysql_query($query) or die(mysql_error());
+        //$query_result = $query;
+        return $query_result;
+    }
+
+    function insert($myInput, $table) {
+        $this->createConnection();
+        $query_result = NULL;
+
+        $query = sprintf("INSERT INTO %s (%s) VALUES (%s) ",
+                        $table,
+                        $this->getInsertKey($myInput),
+                        $this->getInsertValue($myInput));
+
+
+
 
 
         $query_result = mysql_query($query) or die(mysql_error());
@@ -82,16 +98,49 @@ class dbconnect {
         return $query_result;
     }
 
-    function getInputData($myInput){
+    function delete($key, $table) {
+        $this->createConnection();
+        $query_result = NULL;
+
+        $query = sprintf("DELETE FROM %s WHERE %s ",
+                        $table,
+                        $key);
+
+        $query_result = mysql_query($query) or die(mysql_error());
+        //$query_result = $query;
+        return $query_result;
+    }
+
+    function getUpdateData($myInput) {
 
         $returnData = NULL;
         foreach ($myInput as $key => $value) {
-            $returnData .= $key. "='" .$value. "', ";
+            $returnData .= $key . "='" . $value . "', ";
         }
-        $returnData .= substr($returnData, 0, -2);
+        $returnData = substr($returnData, 0, -2);
         return $returnData;
-
     }
+
+    function getInsertKey($myInput) {
+        $returnData = NULL;
+
+        foreach ($myInput as $key => $value) {
+            $returnData .= $key . ", ";
+        }
+        $returnData = substr($returnData, 0, -2);
+        return $returnData;
+    }
+
+    function getInsertValue($myInput) {
+        $returnData = NULL;
+        foreach ($myInput as $key => $value) {
+
+            $returnData .= "'" . $value . "', ";
+        }
+        $returnData = substr($returnData, 0, -2);
+        return $returnData;
+    }
+
 }
 
 ?>

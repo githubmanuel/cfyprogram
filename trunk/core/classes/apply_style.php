@@ -51,6 +51,7 @@ class Apply_Style {
         $head_menu .= '<link href="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/css/login.css" rel="stylesheet" type="text/css" />';
         $head_menu .= '<script type="text/javascript" src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.3.2.min.js"></script>';
         $head_menu .= '<?php require_once(PATH_site.$CORE["module"]["head_content"]); ?>';
+        $head_menu .= '<?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>';
         return $head_menu;
     }
 

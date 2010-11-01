@@ -53,12 +53,6 @@ window.onload = function ()
         return userSearch(document.getElementsByName("searchinp")[0].value);
     }
 
-    //add event-handlers for user details
-    document.getElementById("finalcheckout").onclick = function()
-    {
-        return submitCheckout();
-    }
-	
     document.getElementById("msgdiv").onclick = function(evt)
     {
         showMsg("");
@@ -66,9 +60,6 @@ window.onload = function ()
 
 }
 
-/**
- * Display a message to the user.
- */
 function showMsg(msg)
 {
     document.getElementById("msgdiv").innerHTML = msg;
@@ -83,9 +74,7 @@ function showMsg(msg)
     }
     Effect.Pulsate("msgdiv");
 }
-/*
- * Called when the page is loaded and when the user types something into the input box and selects search
- */
+
 function userSearch(input)
 {
     //clear the message pane
@@ -102,14 +91,10 @@ function userSearch(input)
     return false;
 }
 
-/*
-* Callback function used by productSearch() function above.
-* @param results an XML document that contains Product search results.
-*/
 function handleSearchResults(results)
 {	
     //UNCOMMENT BELOW FOR FADE APPEAR EFFECT TO WORK (also need to uncomment the Effect.Appear line later in this function
-    document.getElementById("productdiv").style.display = "none"; //scriptaculous feature
+    document.getElementById("tablediv").style.display = "none"; //scriptaculous feature
 	
     //clear the message pane
     showMsg("");
@@ -143,21 +128,38 @@ function handleSearchResults(results)
 
     //expose the search results section
 	
-    //if(total > 0) document.getElementById("productdiv").style.display = "inline";
-    //else document.getElementById("productdiv").style.display = "none";
+    //if(total > 0) document.getElementById("tablediv").style.display = "inline";
+    //else document.getElementById("tablediv").style.display = "none";
     //IF YOU UNCOMMENTED THE line at the top of this function to do the "FADE APPEAR EFFECT," then comment out the line above and uncomment the line below
-    if(total>0)	Effect.Appear(document.getElementById("productdiv")); //scriptaculous feature requires effects.js
-    else document.getElementById("productdiv").style.display = "none";
+    if(total>0)	Effect.Appear(document.getElementById("tablediv")); //scriptaculous feature requires effects.js
+    else document.getElementById("tablediv").style.display = "none";
 	
     //todo: use this same "FADE APPEAR" effect for the shopping cart
 	
     //hide the 'searching message'
     document.getElementById("searchmsgspan").innerHTML = total + " results found.";
+
+
+    // add New botton
+
+    if(document.getElementById("newboton")==null)
+    {
+        var tablediv = document.getElementById("tablediv");
+    
+        var newBoton = document.createElement("div");
+        newBoton.setAttribute("id", "newboton")
+        var newBotonLink = document.createElement("a");
+        newBotonLink.setAttribute("title", "Crear un usuario");
+        newBotonLink.appendChild(document.createTextNode("Nuevo"));
+        newBotonLink.onclick = function()
+        {
+            return addUser();
+        }
+        newBoton.appendChild(newBotonLink);
+        tablediv.appendChild(newBoton);      
+    }
 }
 
-/*
-* Adds a row to the Product Search results table.
-*/
 function appendSearchResult(username, password, level, creation_date, status, resultstable)
 {	
     //clear the message pane
@@ -174,7 +176,6 @@ function appendSearchResult(username, password, level, creation_date, status, re
     usernamecell.setAttribute("id", "usernamecell-" + username); //we'll need this cell later in showProductDetails()
     usernamecell.setAttribute(classLiteral,"cell"); //we'll need this cell later in showProductDetails()
 
-	
     //password
     var passwordcell = document.createElement("td");
     passwordcell.setAttribute("id", "passwordcell-" + username); //we'll need this cell later in showProductDetails()
@@ -194,39 +195,36 @@ function appendSearchResult(username, password, level, creation_date, status, re
     var statuscell = document.createElement("td");
     statuscell.setAttribute("id", "statuscell-" + username); //we'll need this cell later in showProductDetails()
     statuscell.setAttribute(classLiteral,"cell");
-
-
+    
     //edit cell
     var editcell = document.createElement("td"); //displays product code
     editcell.setAttribute("id", "editcell-" + username); //we'll need this cell later in showProductDetails()
     editcell.setAttribute(classLiteral,"cell");
 
-
-
     //add to cart links
-    var addUsersLink = document.createElement("a");
-    addUsersLink.setAttribute(classLiteral, "control");
-    addUsersLink.setAttribute("id", "control-"+username);
-    addUsersLink.setAttribute("title", "Crea un nuevo usuario");
-    addUsersLink.appendChild(document.createTextNode("Nuevo"));
-    addUsersLink.onclick = function()
+    var editUsersLink = document.createElement("a");
+    editUsersLink.setAttribute(classLiteral, "control");
+    editUsersLink.setAttribute("id", "control-edit-"+username);
+    editUsersLink.setAttribute("title", "Editar usuario");
+    editUsersLink.appendChild(document.createTextNode("Editar"));
+    editUsersLink.onclick = function()
     {
-        return addToCart(username);
+        return editUser(username);
     }
-	
-    //product link
-    var updateLink = document.createElement("a");
-    updateLink.setAttribute("href","");
-    updateLink.appendChild(document.createTextNode(username));
-	
-    //add event handlers
-    updateLink.onclick = function()
+
+    //delete to cart links
+    var deleteUsersLink = document.createElement("a");
+    deleteUsersLink.setAttribute(classLiteral, "control");
+    deleteUsersLink.setAttribute("id", "control-delete-"+username);
+    deleteUsersLink.setAttribute("title", "Borra un usuario");
+    deleteUsersLink.appendChild(document.createTextNode("Borrar"));
+    deleteUsersLink.onclick = function()
     {
-        return showProductDetails(username);
+        return deleteUser(username);
     }
-		
+
     //add username
-    usernamecell.appendChild(updateLink);
+    usernamecell.appendChild(document.createTextNode(username));
     row.appendChild(usernamecell);
 	
     //add password
@@ -246,193 +244,27 @@ function appendSearchResult(username, password, level, creation_date, status, re
     row.appendChild(statuscell);
 	
     //add addlink
-    editcell.appendChild(addUsersLink);
+    editcell.appendChild(editUsersLink);
+    editcell.appendChild(document.createTextNode(" | "));
+    editcell.appendChild(deleteUsersLink);
     row.appendChild(editcell);
-	
-	
+
     resultstable.appendChild(row);
 }
 
-/*
-* Adds a row to the Cart contents table.
-*/
-function appendCartEntry(code, amount, name, price, resultstable)
-{	
-    //clear the message pane
-    showMsg("");
-    //new row
-    var row = document.createElement("tr");
-    styleChooser = !styleChooser;
-    if(styleChooser) a = "1"; else a="2";
-    row.setAttribute(classLiteral,"searchresultstable" + a);
-	
-    //product code checkbox for deleting from cart
-    var codecell = document.createElement("td"); //displays product code
-    codecell.setAttribute(classLiteral,"searchresultstable");
-    codecell.setAttribute("align","center");
-		
-    //amount of product
-    var amountcell = document.createElement("td");
-    amountcell.setAttribute(classLiteral,"searchresultstable amountcell");
-    amountcell.setAttribute("id", "amountcell-" + code);
-    amountcell.setAttribute("mode", "show");
-    amountcell.setAttribute("value", amount);
-	
-    //add the text node
-    var amountTxtNode = document.createTextNode(amount);
-    amountcell.appendChild(amountTxtNode);
-	
-    //Name/Description
-    var namecell = document.createElement("td"); //displays name of the product
-    namecell.setAttribute("id", "namecell-" + code); //we'll need this cell later in showProductDetails()
-    codecell.setAttribute(classLiteral,"searchresultstable");
-	
-    //price of product
-    var pricecell = document.createElement("td");
-    pricecell.setAttribute(classLiteral,"pricecell");
-				
-    //remove from cart links
-    var removeFromCartLink = document.createElement("a");
-    removeFromCartLink.setAttribute(classLiteral, "control");
-    removeFromCartLink.setAttribute("title", "Click to remove this item from your cart");
-    removeFromCartLink.appendChild(document.createTextNode("Remove"));
-    removeFromCartLink.onclick = function()
-    {
-        return deleteFromCart(code);
-    }
-	
-    //add event handlers for amount cell
-    var val = amountcell.style.backgroundColor;
-
-    //highlight the amountcell by changing background color
-    amountcell.onmouseover = function()
-    {
-        amountcell.style.backgroundColor = "#d5d5d5";
-    }
-
-    //reset the background color
-    amountcell.onmouseout = function()
-    {
-        amountcell.style.backgroundColor = val;
-    }
-
-    //show the textbox so user can edit the amount
-    amountcell.onclick = function()
-    {
-        if(amountcell.getAttribute("mode")=="show")
-        {
-            //reset any existing cell
-            resetAmountCell(this, amount);
-			
-            var inputElement = document.createElement("input");
-            inputElement.setAttribute("type","text");
-            inputElement.setAttribute("value",amount);
-            inputElement.setAttribute("size","2");
-            inputElement.setAttribute("id","prodAmountTxt");
-			
-            //clear the existing node
-            clearANode(amountcell);
-            amountcell.appendChild(inputElement);
-			
-            amountcell.setAttribute("mode", "edit");
-            document.getElementById("prodAmountTxt").focus();
-			
-            inputElement.onkeypress = function(evt)
-            {
-                //IE handles events differently from other browsers
-                var keycode;
-                if(window.event) keycode = window.event.keyCode;
-                else keycode = evt.keyCode;
-			
-                //return key
-                if(keycode==13)
-                {
-                    amount = document.getElementById("prodAmountTxt").value;
-					
-                    if(amount && amount > 0)
-                    {
-                        showMsg("");
-                        //send the new entry to the server
-                        var data = code + "/" + name + "/" + price + "/" + amount;
-                        makeHttpRequest("modules/home/bin/addToCart.php?prod=" + data, "handleCartUpdate", "true");
-						
-                    }
-                    else
-                    {
-                        amount = amountcell.getAttribute("value");
-                        //alert user they must type a number
-                        showMsg("Please provide a number greater than 0 or press ESCAPE to keep the current value.");
-                    }
-                }
-				
-                //escape key
-                if(keycode==27)
-                {
-                    showMsg("");
-                    resetAmountCell(amountcell, amount, pricecell, price);
-                }
-            }
-        }
-        return false;
-    }
-	
-	
-	
-    //add amount
-    row.appendChild(amountcell);
-	
-    //add product name
-    namecell.appendChild(document.createTextNode(name));
-    row.appendChild(namecell);
-	
-    //add subtotal
-    var subtotal = amount*price;
-    pricecell.appendChild(document.createTextNode("$" + formatCurrency(subtotal)));
-    row.appendChild(pricecell);
-	
-    //add addlink
-    codecell.appendChild(removeFromCartLink);
-    row.appendChild(codecell);
-		
-    resultstable.appendChild(row);
-}
-
-
-function resetAmountCell(amountcell, amount, pricecell, price)
-{
-    //reset
-    amountcell.setAttribute("value", amount);
-    amountcell.innerHTML = "<p'>"+ amount + "</p>";
-    amountcell.setAttribute("mode", "show");
-	
-    if(pricecell)
-    {
-        var st = "$" + (price*amount);
-        pricecell.innerHTML = "<p>" + st + "<p>";
-    }
-}
-
-
-
-/*
-* Called to make an ajax request to load the details of a product
-*/
-function showProductDetails(username)
+function editUser(username)
 {		
     //clear the message pane
     showMsg("");
 
     //makeHttpRequest("modules/home/bin/productDescriptions.php?productCode=" + productCode, "handleProductDetails", "true");
     
-    makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + username, "handleProductDetails", "true");
+    makeHttpRequest("modules/home/bin/users_xml.php?sinput=" + username, "handleEditUser", "true");
 
     return false;
 }
 
-/*
-* Callback function to display the extended details about a selected product
-*/
-function handleProductDetails(results)
+function handleEditUser(results)
 {
     //clear the message pane
     showMsg("");
@@ -443,31 +275,179 @@ function handleProductDetails(results)
     var creation_date = results.getElementsByTagName("creation_date").item(0).firstChild.nodeValue;
     var status = results.getElementsByTagName("status").item(0).firstChild.nodeValue;
 
+    //get a handle to the table cell that contains the values
+    var usernamecell = document.getElementById("usernamecell-" + username);
+    var passwordcell = document.getElementById("passwordcell-" + username);
+    var levelcell = document.getElementById("levelcell-" + username);
+    var datecell = document.getElementById("datecell-" + username);
+    var statuscell = document.getElementById("statuscell-" + username);
+		        
+    //clear the existing text
+    var usernamechild =  usernamecell.childNodes[0];
+    var passwordchild =  passwordcell.childNodes[0];
+    var levelchild =  levelcell.childNodes[0];
+    var datechild =  datecell.childNodes[0];
+    var statuschild =  statuscell.childNodes[0];
 
+    usernamecell.removeChild(usernamechild);
+    passwordcell.removeChild(passwordchild);
+    levelcell.removeChild(levelchild);
+    datecell.removeChild(datechild);
+    statuscell.removeChild(statuschild);
+
+    // create the input element
+    var usernameinput = document.createElement("input");
+    var passwordinput = document.createElement("input");
+    var levelinput = document.createElement("input");
+    var dateinput = document.createElement("input");
+    var statusinput = document.createElement("input");
+
+    // set id to the input
+    usernameinput.setAttribute("id", "username-" + username);
+    passwordinput.setAttribute("id", "password-" + username);
+    levelinput.setAttribute("id", "level-" + username);
+    dateinput.setAttribute("id", "date-" + username);
+    statusinput.setAttribute("id", "status-" + username);
+
+    // set value to the input
+    usernameinput.setAttribute("value", username);
+    usernameinput.setAttribute("disabled", true);
+    passwordinput.setAttribute("value", password);
+    levelinput.setAttribute("value", level);
+    dateinput.setAttribute("value", creation_date);
+    statusinput.setAttribute("value", status);
+
+    // appent input to the table
+    usernamecell.appendChild(usernameinput);
+    passwordcell.appendChild(passwordinput);
+    levelcell.appendChild(levelinput);
+    datecell.appendChild(dateinput);
+    statuscell.appendChild(statusinput);
+
+    // change add boton to edit
+    var control = document.getElementById("control-edit-"+username);
+    var controlchild =  control.childNodes[0];
+    control.removeChild(controlchild);
+    control.setAttribute("title", "Editar usuario");
+    control.appendChild(document.createTextNode("Guardar"));
+    control.onclick = function()
+    {
+        var usernameinput = document.getElementById("username-" + username).value;
+        var passwordinput = document.getElementById("password-" + username).value;
+        var levelinput = document.getElementById("level-" + username).value;
+        var dateinput = document.getElementById("date-" + username).value;
+        var statusinput = document.getElementById("status-" + username).value;
+
+        return updateTable(usernameinput, passwordinput, levelinput, dateinput, statusinput);
+    }
+
+    // change delete boton to cancel
+    var cancel = document.getElementById("control-delete-"+username);
+    var cancelchild = cancel.childNodes[0];
+    cancel.removeChild(cancelchild);
+    cancel.setAttribute("title", "Cancelar la operacion");
+    cancel.appendChild(document.createTextNode("Cancelar"));
+    cancel.onclick = function()
+    {
+        return userSearch(document.getElementsByName("searchinp")[0].value);
+    }
+}
+
+function updateTable(username, password, level, creation_date, status)
+{	
+    //clear the message pane
+    showMsg("");
+    showMsg("The Usuario esta siendo actualizado...");
+    //send to server
+    makeHttpRequest("modules/home/bin/users_update.php?username="+username+"&password="+password+"&level="+level+"&creation_date="+creation_date+"&status="+status, "handleUsersUpdate", "true");
+    //prevents the browser from activating the hyperlink
+    return false;
+}
+
+function insertTable(username, password, level, creation_date, status)
+{
+    //clear the message pane
+    showMsg("");
+    showMsg("The Usuario esta siendo actualizado...");
+    //send to server
+    makeHttpRequest("modules/home/bin/users_insert.php?username="+username+"&password="+password+"&level="+level+"&creation_date="+creation_date+"&status="+status, "handleUsersUpdate", "true");
+    //prevents the browser from activating the hyperlink
+    return false;
+}
+
+function handleUsersUpdate(results)
+{		
+    //clear the message pane
+    showMsg("");
+	
+    //reset style chooser
+    styleChooser = true;
+	
+    if(results)
+    {
+        var updateresult = results.getElementsByTagName("result").item(0).firstChild.nodeValue
+
+        if (updateresult=="  1")
+        {
+            showMsg("Actualizacion Lista");
+            userSearch(document.getElementsByName("searchinp")[0].value);
+
+        }else{
+            
+            showMsg("Error en actualizacion");
+        }
+    }
+    return false;
+}
+
+function addUser()
+{
+    //clear the message pane
+    showMsg("");
+
+    var resultstable = document.getElementById("resultstable");
+
+    //Create row to hold the data
+    var row = document.createElement("tr");
+    styleChooser = !styleChooser;
+    if(styleChooser) a = "1"; else a = "2";
+    row.setAttribute(classLiteral, "searchresultstable" + a);
+
+    var username = "new";
     var desDiv = "username-" + username;
 
     if(document.getElementById(desDiv)==null) //we don't want to load more than once
     {
 
-        //get a handle to the table cell that contains the values
-        var usernamecell = document.getElementById("usernamecell-" + username);
-        var passwordcell = document.getElementById("passwordcell-" + username);
-        var levelcell = document.getElementById("levelcell-" + username);
-        var datecell = document.getElementById("datecell-" + username);
-        var statuscell = document.getElementById("statuscell-" + username);
-		        
-        //clear the existing text
-        var usernamechild =  usernamecell.childNodes[0];
-        var passwordchild =  passwordcell.childNodes[0];
-        var levelchild =  levelcell.childNodes[0];
-        var datechild =  datecell.childNodes[0];
-        var statuschild =  statuscell.childNodes[0];
+        //username
+        var usernamecell = document.createElement("td"); //displays name of the product
+        usernamecell.setAttribute("id", "usernamecell-" + username); //we'll need this cell later in showProductDetails()
+        usernamecell.setAttribute(classLiteral,"cell"); //we'll need this cell later in showProductDetails()
 
-        usernamecell.removeChild(usernamechild);
-        passwordcell.removeChild(passwordchild);
-        levelcell.removeChild(levelchild);
-        datecell.removeChild(datechild);
-        statuscell.removeChild(statuschild);
+        //password
+        var passwordcell = document.createElement("td");
+        passwordcell.setAttribute("id", "passwordcell-" + username); //we'll need this cell later in showProductDetails()
+        passwordcell.setAttribute(classLiteral,"cell");
+
+        //level
+        var levelcell = document.createElement("td");
+        levelcell.setAttribute("id", "levelcell-" + username); //we'll need this cell later in showProductDetails()
+        levelcell.setAttribute(classLiteral,"cell");
+
+        //date
+        var datecell = document.createElement("td");
+        datecell.setAttribute("id", "datecell-" + username); //we'll need this cell later in showProductDetails()
+        datecell.setAttribute(classLiteral,"cell");
+
+        //status
+        var statuscell = document.createElement("td");
+        statuscell.setAttribute("id", "statuscell-" + username); //we'll need this cell later in showProductDetails()
+        statuscell.setAttribute(classLiteral,"cell");
+
+        //edit cell
+        var editcell = document.createElement("td"); //displays product code
+        editcell.setAttribute("id", "editcell-" + username); //we'll need this cell later in showProductDetails()
+        editcell.setAttribute(classLiteral,"cell");
 
         // create the input element
         var usernameinput = document.createElement("input");
@@ -483,14 +463,6 @@ function handleProductDetails(results)
         dateinput.setAttribute("id", "date-" + username);
         statusinput.setAttribute("id", "status-" + username);
 
-        // set value to the input
-        usernameinput.setAttribute("value", username);
-        usernameinput.setAttribute("disabled", true);
-        passwordinput.setAttribute("value", password);
-        levelinput.setAttribute("value", level);
-        dateinput.setAttribute("value", creation_date);
-        statusinput.setAttribute("value", status);
-
         // appent input to the table
         usernamecell.appendChild(usernameinput);
         passwordcell.appendChild(passwordinput);
@@ -500,11 +472,11 @@ function handleProductDetails(results)
 
         // change add boton to edit
 
-        var control = document.getElementById("control-"+username);
-        var controlchild =  control.childNodes[0];
-        control.removeChild(controlchild);
-        control.setAttribute("title", "Editar usuario");
-        control.appendChild(document.createTextNode("Editar"));
+        var control = document.createElement("a");
+        control.setAttribute(classLiteral, "control");
+        control.setAttribute("id", "control-edit-"+username);
+        control.setAttribute("title", "Guardar nuevo usuario");
+        control.appendChild(document.createTextNode("Guardar"));
         control.onclick = function()
         {
             var usernameinput = document.getElementById("username-" + username).value;
@@ -513,226 +485,62 @@ function handleProductDetails(results)
             var dateinput = document.getElementById("date-" + username).value;
             var statusinput = document.getElementById("status-" + username).value;
 
-            return editTable(usernameinput, passwordinput, levelinput, dateinput, statusinput);
+            return insertTable(usernameinput, passwordinput, levelinput, dateinput, statusinput);
         }
+
         // create cancel boton
         var cancel = document.createElement("a");
         cancel.setAttribute(classLiteral, "control");
-        cancel.setAttribute("title", "Click to remove this item from your cart");
+        cancel.setAttribute("id", "control-delete-"+username);
+        cancel.setAttribute("title", "Cancelar la operacion");
         cancel.appendChild(document.createTextNode("Cancelar"));
         cancel.onclick = function()
         {
             return userSearch(document.getElementsByName("searchinp")[0].value);
         }
-        var editcell = document.getElementById("editcell-" + username);
+        editcell.appendChild(control);
         editcell.appendChild(document.createTextNode(" | "));
         editcell.appendChild(cancel);
-    
-    }
-    else //remove the extended description node
-    {
-        var parent = document.getElementById(desDiv).parentNode;
-        parent.removeChild(document.getElementById(desDiv));
-    }
-}
 
-/*
-* Called to add checked items to the cart.
-*/
-function editTable(username, password, level, creation_date, status)
-{	
-    //clear the message pane
-    showMsg("");
-    showMsg("The Usuario esta siendo actualizado...");
-    //send to server
-    makeHttpRequest("modules/home/bin/users_update.php?username="+username+"&password="+password+"&level="+level+"&creation_date="+creation_date+"&status="+status, "handleUsersUpdate", "true");
-    //prevents the browser from activating the hyperlink
-    return false;
-}
+        //add username
+        row.appendChild(usernamecell);
+        //add password
+        row.appendChild(passwordcell);
+        //add level
+        row.appendChild(levelcell);
+        //add date
+        row.appendChild(datecell);
+        //add status
+        row.appendChild(statuscell);
+        //add addlink
+        row.appendChild(editcell);
 
-/*
-* Updates the diplay of the cart contents. This function is called after adding or deleting items from the cart.
-*/
-function handleUsersUpdate(results)
-{		
-    //clear the message pane
-    showMsg("");
-	
-    //reset style chooser
-    styleChooser = true;
-	
-    if(results)
-    {
-        var updateresult = results.getElementsByTagName("result").item(0).firstChild.nodeValue
-
-
-        if (updateresult=="  1")
-        {
-            showMsg("Actualizacion Lista");
-            userSearch(document.getElementsByName("searchinp")[0].value);
-
-        }else{
-            
-            showMsg("Error en actualizacion");
-        }
-
-    //        document.getElementById("cartdiv").style.display = "inline";
-    //
-    //        //clear the existing results if any
-    //        var cartcontentstable = document.getElementById("cartcontentstable");
-    //        clearANode(cartcontentstable);
-    //
-    //        //get the results that were returned
-    //        var itemsInCart = results.getElementsByTagName("item").length; // the number of items in the cart
-    //
-    //        var total = 0;
-    //
-    //        for(i=0; i < itemsInCart; i++)
-    //        {   //it's more efficient to assign to variables (like below), so that javascript has a handle to the xml, instead of iterating through it over and over
-    //            var currentResult = results.getElementsByTagName("item").item(i);
-    //            var name = currentResult.getElementsByTagName("name").item(0).firstChild.nodeValue;
-    //            var code = currentResult.getElementsByTagName("code").item(0).firstChild.nodeValue;
-    //            var price = currentResult.getElementsByTagName("price").item(0).firstChild.nodeValue;
-    //            var amount = currentResult.getElementsByTagName("amount").item(0).firstChild.nodeValue;
-    //
-    //            total = total + (amount*price);
-    //
-    //            //add a row to the CART HTML table
-    //            appendCartEntry(code,amount,name,price, cartcontentstable);
-    //        }
-    //
-    //        //if any exception message we show it
-    //        if(results.getElementsByTagName("exception").item(0))
-    //        {
-    //            showMsg(results.getElementsByTagName("exception").item(0).firstChild.nodeValue);
-    //        }
-    //
-    //        //add the total and 'checkout' link
-    //        if(itemsInCart > 0)
-    //        {
-    //            //add row with 2 empty cells
-    //            var trow = document.createElement("tr");
-    //            trow.setAttribute(classLiteral, "total");
-    //            trow.appendChild(document.createElement("td"));
-    //            trow.appendChild(document.createElement("td"));
-    //
-    //            //add 3rd column for TOTAL
-    //            var tcol = document.createElement("td");
-    //            tcol.setAttribute("align","right");
-    //            tcol.appendChild(document.createTextNode("TOTAL: $" + formatCurrency( total)));
-    //            trow.appendChild(tcol);
-    //
-    //            //checkout (4th) column
-    //            var col = document.createElement("td");
-    //            col.setAttribute("align","center");
-    //            col.setAttribute("valign","center");
-    //            trow.appendChild(col);
-    //
-    //            //checkout button
-    //            var checkout = document.createElement("button");
-    //            checkout.setAttribute("type","button");
-    //            checkout.setAttribute("name","checkoutfromcart");
-    //            checkout.setAttribute("title","Click here to checkout");
-    //            checkout.setAttribute(classLiteral,"cartbutton");
-    //            checkout.appendChild(document.createTextNode("Checkout"));
-    //            col.appendChild(checkout);
-    //
-    //            //add the total + delete-link row to the table
-    //            cartcontentstable.appendChild(trow);
-    //
-    //            //event handler for the checkout button
-    //            checkout.onclick = function()
-    //            {
-    //                return checkoutCart();
-    //            }
-    //        }
-    //        else
-    //        {
-    //            document.getElementById("cartdiv").style.display = "none";
-    //        }
-    }
-    return false;
-}
-/**
-* Called to checkout the cart.
-*/
-function checkoutCart()
-{
-    document.getElementById("userDetailsDiv").style.display = "inline";
-//todo: check if already filled in
-}
-
-function submitCheckout()
-{
-    //clear the message pane
-    showMsg("");
-
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-	
-    if(name.length==0 || email.length==0)
-    {
-        showMsg("You must provide your name and email address in order to check out.");
-    }
-    else
-    {
-        //clear the message pane
-        showMsg("Sending your checkout request to the server. Please wait...");
-		
-        //disable the finalcheckout button so they can't click it twice
-        document.getElementById("finalcheckout").disabled = true;
-        makeHttpRequest("modules/home/bin/checkoutCart.php?name=" + name + "&email=" + email, "handleCartCheckout", "true");
+        resultstable.appendChild(row);
+    }else{
+        showMsg("Solo puedo ingresar un registro a la ves");
     }
 }
 
-function handleCartCheckout()
-{
-    //todo: code for failure: probably look for checkout errors and display them to the user
-    //todo: hide the "2 results found." text field
-    //show success message
-    showMsg("Your checkout has been confirmed. Thank you for shopping with us.");
-	
-    //re-enable the finalcheckout button
-    document.getElementById("finalcheckout").disabled = false;
-	
-    //clear the cart display and hide stuff
-    document.getElementById("cartdiv").style.display = "none";
-    document.getElementById("userDetailsDiv").style.display = "none";
-    document.getElementById("productdiv").style.display = "none";
-		
-    //clear the existing results if any
-    var cartcontentstable = document.getElementById("cartcontentstable");
-    var child = cartcontentstable.childNodes[0];
-    while(child != null)
-    {
-        cartcontentstable.removeChild(child);
-        child = cartcontentstable.childNodes[0];
-    }
-}
-
-/*
-* Called to delete checked items from the cart. Similar to addToCart except we only need to send 
-* the product code and not the description and price.
-*/
-function deleteFromCart(productCode)
+function deleteUser(username)
 {	
     //clear the message pane
     showMsg("");
 
-    if(productCode.length==0)
+    if(username.length==0)
     {
         showMsg("Please select at least one product to delete.");
     }
     else
     {
         //send to server
-        makeHttpRequest("modules/home/bin/deleteFromCart.php?prod=" + productCode, "handleCartUpdate", "true");
+        if (confirm('Se va a eliminar el Usuario "' + username + '".\nEsta Seguro que desea Eliminarlo?' )){
+            makeHttpRequest("modules/home/bin/users_delete.php?username=" + username, "handleUsersUpdate", "true");
+        }
     }
-	
+
     //prevents the browser from activating the hyperlink
     return false;
 }
-
 
 function clearANode(node)
 {
@@ -744,19 +552,3 @@ function clearANode(node)
         child = node.childNodes[0];
     }
 }
-
-/**
-* Inserts commas for display purposes
-*/
-function formatCurrency(amount)
-{
-    amount += '';
-    x = amount.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
-} 

@@ -18,32 +18,27 @@ Commnents:
 
 */
 
+a
+{
+    color: #42413C;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
 td.cell 
 {
     text-align: center;
     padding: 2px;
-
 }
 
-td.amountcell
-{
-    text-align: center;
-    cursor: pointer;
-
-}
-
-td.desc-header
+td.cell-header
 {
     text-align: center;
     padding: 5px;
-
-}
-
-td.price-header
-{
-    text-align: center;
-    padding: 5px;
-
 }
 
 td.control
@@ -81,34 +76,21 @@ tr.tableheader
     font-weight: bold;
 }
 
-tr.total
-{
-    background-color: #51824E;
-    color: white;
-    font-weight: bold;
-    height: 18pt;
-}
-
-.reviewdiv
-{
-    border-style: groove;
-    border-color: #e7e7e7;
-    padding: 10;
-}
-
 .msgarea
 {
     color: red;
     cursor: pointer;
 }
 
-button.cartbutton
+#newboton
+
 {
-    font-size: 8pt;
+    background-color: #ADB96E;
+    font-weight: bold;
+    padding: 5px;
 }
 
-a
+#newboton a
 {
-    color: blue;
-    cursor: pointer;
+    color: white;
 }

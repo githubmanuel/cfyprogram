@@ -21,11 +21,11 @@ Commnents:
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CFY program</title>
-        <link href="http://192.168.137.50/cfyprogram/styles/base/css/base.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost/cfy/styles/base/css/base.css" rel="stylesheet" type="text/css">
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="core/scripts/menu_bar.js" type="text/javascript"></script><link href="core/css/menu_bar.css" rel="stylesheet" type="text/css" /><link href="core/css/login.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="core/scripts/jquery-1.3.2.min.js"></script><?php require_once($CORE["module"]["head_content"]); ?>
+        <script src="http://localhost/cfy/core/scripts/menu_bar.js" type="text/javascript"></script><link href="http://localhost/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><link href="http://localhost/cfy/core/css/login.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="http://localhost/cfy/core/scripts/jquery-1.3.2.min.js"></script><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
     </head>
 
     <body>
@@ -44,7 +44,7 @@ Commnents:
             </div>
             <?php echo $myMenu->printMenu($CORE["page"]["menu"]); ?>
             <article class="content">
-                <?php require_once($CORE["page"]["content"]); ?>
+                <?php require_once(PATH_site.$CORE["page"]["content"]); ?>
                 <!-- end .content -->
             </article>
             <footer>
@@ -55,6 +55,6 @@ Commnents:
             </footer>
             <!-- end .container -->
         </div>
-        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"core/image/MenuBarDownHover.gif", imgRight:"core/image/MenuBarRightHover.gif"});</script>
+        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"http://localhost/cfy/core/image/MenuBarDownHover.gif", imgRight:"http://localhost/cfy/core/image/MenuBarRightHover.gif"});</script>
     </body>
 </html>

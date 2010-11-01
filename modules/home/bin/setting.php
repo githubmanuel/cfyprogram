@@ -22,5 +22,5 @@
 <section>
     <h2>Probando el insert</h2>
     <p>Este si lo puedes cambiar.</p>
-    <p><a  href="core/bin/apply_style.php">Aplicar Estilo</a></p>
+    <p><a  href="core/install/">Install Page</a></p>
 </section>

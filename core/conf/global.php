@@ -20,8 +20,10 @@
 
 require_once(PATH_site . "core/conf/config.php"); // Configuration varibles
 // Modules Variables
-$CORE["module"]["names"] = array(1 => 'home', 'admin', 'payroll', 'budget');
+$CORE["module"]["names"] =  array(1 => 'home', 'admin', 'payroll', 'budget');
 $CORE["module"]["print_name"] = array(1 => 'Inicio', 'Adminitración', 'Nomina', 'Presupuesto');
+
+
 
 /* Ajax Login Module v1.1 */
 /* If login successful then it will redirect to */
@@ -35,12 +37,18 @@ $CORE["login"]["user_table_name"] = "core_user";
 /* Advance Configuration - no need to edit this section */
 $CORE["login"]["ajax_timeout"] = "10000000";
 $CORE["login"]["ajax_target_element"] = "ajax_target";
-$CORE["login"]["ajax_wait_text"] = "Espere por favor...";
 $CORE["login"]["ajax_form_element"] = "ajax_form";
 $CORE["login"]["ajax_wait_element"] = "ajax_wait";
 $CORE["login"]["ajax_notify_element"] = "ajax_notify";
 
-/* module varible */
+/* Page varible */
 
 $CORE["page"]["module_menu_id"] = 1;
+
+// get var on database
+
+// require_once(PATH_site . "core/classes/conf_var.php");
+
+// $setVar = new conf_var("core_conf_var");
+
 ?>

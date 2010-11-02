@@ -108,7 +108,7 @@ nav ul a, nav ul a:visited { /* grouping these selectors makes sure that your li
                              padding: 5px 5px 5px 15px;
                              display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
                              width: 160px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
-                             height: 160px;
+                             height: 100px;
                              text-decoration: none;
                              background: #C6D580;
 }

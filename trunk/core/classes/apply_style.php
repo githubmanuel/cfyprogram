@@ -64,10 +64,13 @@ class Apply_Style {
 
     function set_module_menu() {
         $module = '<ul>';
-        foreach ($GLOBALS["CORE"]["module"]["names"] as $index => $value_name) {
-            $value_print_name = $GLOBALS["CORE"]["module"]["print_name"][$index];
+
+        $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
+        
+        foreach ($xml->names as $item) {
+            $GLOBALS["CORE"]["module"]["names"] = $item->name;
             $module .= '<li>';
-            $module .= '<a href="?pid=' . $index . '">' . $value_print_name . '</a>';
+            $module .= '<a href="?pid=' . $item->id . '">' . $item->print . '</a>';
             $module .= '</li>';
         }
         $module .= '</ul>';

@@ -19,7 +19,7 @@
  */
 
 // System variable
-$CORE["system"]["site_url"] = "http://lab.pajarraco.com/cfy/";
+$CORE["system"]["site_url"] = "http://192.168.137.50/cfyprogram/";
 
 // DB variables
 $CORE["system"]["db_host"] = "localhost";

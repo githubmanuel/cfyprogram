@@ -36,7 +36,8 @@
  * Dual licensed under the MIT and GPL licenses.
  * Redistributions of files must retain the above copyright notice.
  */
-require_once(PATH_site."core/conf/global.php");
+
+require(PATH_site . "core/conf/global.php");
 
 class Db {
 
@@ -46,7 +47,7 @@ class Db {
      * @access public
      */
     function connect() {
-        
+
         $connect = mysql_connect($GLOBALS["CORE"]["system"]["db_host"], $GLOBALS["CORE"]["system"]["db_username"], $GLOBALS["CORE"]["system"]["db_password"]);
         $select_db = mysql_select_db($GLOBALS["CORE"]["system"]["db_name"], $connect);
         if (!$connect) {
@@ -61,55 +62,22 @@ class Db {
             $this->error();
             break;
         }
-
-        $strSQL = "SELECT * from " . $GLOBALS["CORE"]["login"]["user_table_name"] . " limit 1";
-        $result = mysql_query($strSQL);
-        if ($result == null) {
-            $this->create_table($GLOBALS["CORE"]["login"]["user_table_name"]);
-            die();
-        }
     }
-
     /**
      * Displays the html in the page with mysql error
      * @return void
      * @access private
      */
     function error() {
-        echo "<div style='width:350;margin:auto;text-align:center;font-family:Arial'>
-			     <span style='font-size:15px;color:red'>MYSQL SERVER ERROR : " . mysql_error() . "</span>
-			  </div>";
-        echo "<div style='width:350;margin:auto;text-align:center;margin-top:10px;font-family:Arial'>
-				 You must edit first the <b>config.php</b> file and input your correct MySQL account, this file 
-				 is located under this <b>login</b> folder.
-				 <p>Note: if  the database TABLE doesn't exist this module will automatically create one.</p>
-				 <p>After done editing the config.php try to refresh this page</p>.
-			  </div>";
+        echo "<div style='width:350;margin:auto;text-align:center;font-family:Arial'>" .
+        "<span style='font-size:15px;color:red'>MYSQL SERVER ERROR : " . mysql_error() .
+        "</span></div>";
+        echo "<div style='width:350;margin:auto;text-align:center;margin-top:10px;font-family:Arial'>" .
+        "You must edit first the <b>config.php</b> file and input your correct MySQL account, this" .
+        "file is located under this <b>login</b> folder." .
+        "<p>Note: if  the database TABLE doesn't exist this module will automatically create one.</p>" .
+        "<p>After done editing the config.php try to refresh this page</p>.</div>";
         die();
-    }
-
-    /**
-     * Creates table in the database that defined in USERS_TABLE_NAME  
-     * @return void
-     * @access private
-     */
-    function create_table($table_name) {
-        $strSQL = "CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
-  					`username` varchar(15) NOT NULL,
-  					`password` varchar(15) NOT NULL,
-  					`level` int(11) NOT NULL,
-  					`creation_date` datetime NOT NULL,
-  					`status` int(11) NOT NULL,
-  					PRIMARY KEY (`username`)
-					) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-        $result = mysql_query($strSQL);
-        $strSQL = "INSERT INTO `" . $table_name . "` (`username`,`password`,`level`,`creation_date`,`status `) VALUES ('admin','juan316', 0, NOW(), 0);";
-        $result = mysql_query($strSQL);
-        if (!$result) {
-            die("Couldn't connect to mysql hostname, Please check your configuration");
-        }
-        echo ('<meta http-equiv="refresh" content="0;">');
     }
 
 }

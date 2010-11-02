@@ -30,11 +30,17 @@ define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAP
 
 define('PATH_site', str_replace("/core/install", "/", dirname(PATH_thisScript)));
 
+
+
 require_once(PATH_site.'core/classes/apply_style.php'); // class to apply the styles. see core/classes/apply_style.php for detail
 require_once(PATH_site.'core/conf/global.php');
+require_once(PATH_site . "core/classes/conf_var.php"); // Class for read xml menus and call pages
+
+$myVar = new conf_var("core_module_var");
 
 $setStyle = new Apply_Style();
 $setStyle->set_style(PATH_site.'core/conf/style_apply.php', PATH_site.'styles/' . $CORE["style"]["name"] . '/style.html');
+
 ?>
 
 El sistema se ha instalado con exito.<br />

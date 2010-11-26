@@ -63,16 +63,19 @@ window.onload = function ()
 function showMsg(msg)
 {
     document.getElementById("msgdiv").innerHTML = msg;
-	
+	 	
     if(msg.length==0)
     {
         document.getElementById("msgdiv").style.display = "none";
     }
     else
     {
+		
         document.getElementById("msgdiv").style.display = "inline";
     }
+	
     Effect.Pulsate("msgdiv");
+
 }
 
 function userSearch(input)

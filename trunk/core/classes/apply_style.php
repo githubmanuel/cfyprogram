@@ -46,10 +46,11 @@ class Apply_Style {
     }
 
     function set_head() {
-        $head_menu = '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/menu_bar.js" type="text/javascript"></script>';
+        $head_menu = '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/menu_bar.js" ></script>';
         $head_menu .= '<link href="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/css/menu_bar.css" rel="stylesheet" type="text/css" />';
         $head_menu .= '<link href="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/css/login.css" rel="stylesheet" type="text/css" />';
-        $head_menu .= '<script type="text/javascript" src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.4.4.js"></script>';
+        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.4.4.js" ></script>';
+        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery.form.js" ></script>';
         $head_menu .= '<?php require_once(PATH_site.$CORE["module"]["head_content"]); ?>';
         $head_menu .= '<?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>';
         return $head_menu;
@@ -66,7 +67,7 @@ class Apply_Style {
         $module = '<ul>';
 
         $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
-        
+
         foreach ($xml->names as $item) {
             $GLOBALS["CORE"]["module"]["names"] = $item->name;
             $module .= '<li>';

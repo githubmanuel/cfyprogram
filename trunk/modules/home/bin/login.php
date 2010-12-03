@@ -41,7 +41,7 @@
 <div id="login_body">
     <div id="logincontainer" style="display:none;">
         <div class="logintitle">Ingreso al sistema</div>
-        <form method="post" class="ajax_form">
+        <form action="" method="post" class="ajax_form">
             <ul class="login">
                 <li class="loginlabel">Usuario</li>
                 <li class="loginfield">
@@ -52,7 +52,7 @@
                     <input name="password" type="password" class="text"/>
                 </li>
                 <li class="loginlabel"> </li>
-                <li class="loginfield"> <img src="<?php echo $CORE["system"]["site_url"]; ?>core/image/isubmit.jpg" class="submit" onclick="$('.<?php echo $CORE["login"]["ajax_form_element"]; ?>').submit();"/>
+                <li class="loginfield"><img src="<?php echo $CORE["system"]["site_url"]; ?>core/image/isubmit.jpg" class="submit" onclick="$('.ajax_form').submit();"/>
                     <input name="submit" type="submit" style="display:none" />
                 </li>
                 <li class="invalid_message">
@@ -70,7 +70,45 @@
                 <!--don't delete this div class="ajax_target" -->
             </div>
         </form>
-<?php echo $LoginModule->getScript(); ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                
+                formLogin();
+                function formLogin() {
+                    $('#logincontainer').fadeIn();
+                    var options = {
+                        target       :  '.ajax_target',
+                        timeout      :   10000000,
+                        beforeSubmit :   request,
+                        success      :   response
+                    };
+                    $('.ajax_form').submit(function() { $(this).ajaxSubmit(options); return false;});
+                    function request(formData, jqForm, options) {
+                        valid = true;
+                        $('.ajax_wait').hide();
+                        var label = "<span class='ajax_spinner'><img src='<?php echo $CORE["system"]["site_url"]; ?>core/image/ispinner.gif'/>Please wait...</span>";
+                        $('.ajax_wait').after(label);
+                        $('.ajax_notify').hide();
+                        if(valid) {
+                            return true;
+                        } else {
+                            $('.ajax_wait').show();
+                            $('.ajax_spinner').fadeOut();
+                            $('.ajax_spinner').remove();
+                            $('.ajax_notify').fadeIn();
+                            return false;
+                        }
+                    }
+                    function response(responseText, statusText) {
+                        $('.ajax_wait').show();
+                        $('.ajax_spinner').fadeOut();
+                        $('.ajax_spinner').remove();
+                    }
+                }
+            });
+        </script>
+
     </div>
     <div class="default">Default username: admin / password: juan316</div>
 </div>

@@ -61,24 +61,6 @@ class LoginModule {
     }
 
     /**
-     * Returns with the jquery location
-     * @return string
-     * @access public
-     */
-    function initJquery() {
-        return '<script type="text/javascript" src="core/scripts/jquery-1.3.2.min.js"></script>';
-    }
-
-    /**
-     * Gets the included php-jscript file and load to page.
-     * @return void
-     * @access public
-     */
-    function getScript() {
-        require_once ( PATH_site . "core/bin/login_script.php");
-    }
-
-    /**
      * Checks if form is submitted and then submit query to database
      * @return void
      * @access private
@@ -97,7 +79,6 @@ class LoginModule {
             $this->userGroup = $row[2];
             $exist = count($row);
             if ($exist >= 2) {
-
                 $this->jscript_location();
             } else {
                 $this->notify_show();
@@ -112,7 +93,7 @@ class LoginModule {
      * @access private
      */
     function notify_show() {
-        echo '<script>$(".' . $GLOBALS["CORE"]["login"]["ajax_notify_element"] . '").fadeIn();</script>';
+        echo '<script>$(".ajax_notify").fadeIn();</script>';
     }
 
     /**

@@ -18,12 +18,11 @@
 
  */
 
-$head_script = '<link rel="stylesheet" type="text/css" href="' . $CORE["system"]["site_url"] . 'modules/home/css/home.css">';
+if ($pid != 0) {
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/setting.js"></SCRIPT>';
 
-if ($pid == 0) {
-    $head_script .= '<link rel="stylesheet" type="text/css" href="' . $CORE["system"]["site_url"] . 'modules/home/css/login.css">';
+    echo $head_script;
 }
-
-echo $head_script;
+echo "";
 ?>
 

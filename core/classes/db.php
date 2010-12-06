@@ -50,7 +50,7 @@ class Db {
 
         $connect = mysql_connect($GLOBALS["CORE"]["system"]["db_host"], $GLOBALS["CORE"]["system"]["db_username"], $GLOBALS["CORE"]["system"]["db_password"]);
         $select_db = mysql_select_db($GLOBALS["CORE"]["system"]["db_name"], $connect);
-        if (!$connect) {
+        /*if (!$connect) {
             $errno = mysql_errno();
             switch ($errno) {
                 case 1045 : {
@@ -61,7 +61,7 @@ class Db {
         } elseif (!$select_db) {
             $this->error();
             break;
-        }
+        }*/
     }
     /**
      * Displays the html in the page with mysql error
@@ -81,5 +81,4 @@ class Db {
     }
 
 }
-
-?>  
+?> 

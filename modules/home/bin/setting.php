@@ -18,9 +18,29 @@
  */
 ?>
 
-<h1>Setting File</h1>
-<section>
-    <h2>Probando el insert</h2>
-    <p>Este si lo puedes cambiar.</p>
-    <p><a  href="core/install/">Install Page</a></p>
-</section>
+<h1>Confuguración General del Sistema</h1>
+<article class="content">
+    <section>
+        <h2>Instalación</h2>
+        <p>Correr archivo de instalacion</p>
+        <p><a  href="core/install/">Install</a></p>
+    </section>
+</article>
+<article class="content">
+    <section>
+        <h2>Modulos</h2>
+        <p>Confguracion de modulos</p>
+        <fcontainer> 
+        <form>     
+            <flabel>Pricipal</flabel>
+            <ffield style="display: none"><input type="text" value="" /></ffield>
+            <flabel>Administracion</flabel>
+            <ffield style="display: none"><input type="text" value="" /></ffield>
+            <flabel>Nomina</flabel>
+            <ffield style="display: none"><input type="text" value="" /></ffield>
+            <flabel>Prosupuesto</flabel>
+            <ffield style="display: none"><input type="text" value="" /></ffield>
+       </form>
+        </fcontainer>
+    </section>
+</article>

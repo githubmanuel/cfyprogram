@@ -29,13 +29,21 @@ class dbconnect {
         $msql->connect();
     }
 
-    function select($field, $input, $table) {
+    function select($field, $input, $table, $where, $andor) {
         $this->createConnection();
         $query_result = NULL;
-        if ($input == "all") {
-            $query = "SELECT * FROM " . $table;
+        if ($where) {
+            if ($input == "all") {
+                $query = "SELECT * FROM " . $table . " WHERE " . $where;
+            } else {
+                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' ". $andor ." ". $where;
+            }
         } else {
-            $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' ";
+            if ($input == "all") {
+                $query = "SELECT * FROM " . $table;
+            } else {
+                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'";
+            }
         }
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);

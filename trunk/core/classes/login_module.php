@@ -112,7 +112,9 @@ class LoginModule {
      * @access private
      */
     function set_session() {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION['MM_Username'] = $_POST['username'];
         $_SESSION['MM_UserGroup'] = $this->userGroup;
     }

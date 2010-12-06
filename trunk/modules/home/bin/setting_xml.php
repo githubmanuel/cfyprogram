@@ -41,12 +41,9 @@ require_once (PATH_site . 'modules/home/classes/dbconnect.php');
 $myData = new dbconnect();
 $xml = "";
 
-$sinput = "";
-if (isset($_GET['sinput'])) {
-    $sinput = mysql_escape_string(substr(trim($_GET['sinput']), 0, 255));
-}
+$sinput = "all";
 
-$xml = $myData->select("username", $sinput, "core_user", "", "");
+$xml = $myData->select("id", $sinput, "core_module_var", "status = 0", "AND");
 $xml .= "</search-results>";
 echo $xml;
 ?>

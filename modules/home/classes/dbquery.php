@@ -36,7 +36,7 @@ class dbconnect {
             if ($input == "all") {
                 $query = "SELECT * FROM " . $table . " WHERE " . $where;
             } else {
-                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' ". $andor ." ". $where;
+                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where;
             }
         } else {
             if ($input == "all") {
@@ -62,14 +62,12 @@ class dbconnect {
     function query_result($totalRows) {
         $result = NULL;
         $result .= "<total>$totalRows</total>";
-        for ($i = 0; $i <= $totalRows - 1; $i++) {
-            $result .= "<result>\r\n" .
-                    "<username>" . $this->data[$i]["username"] . "</username>\r\n" .
-                    "<password>" . $this->data[$i]["password"] . "</password>\r\n" .
-                    "<level>" . $this->data[$i]["level"] . "</level>\r\n" .
-                    "<creation_date>" . $this->data[$i]["creation_date"] . "</creation_date>\r\n" .
-                    "<status>" . $this->data[$i]["status"] . "</status>\r\n" .
-                    "</result>\r\n";
+        foreach ($this->data as $item) {
+            $result .= "<result>\r\n";
+            foreach ($item as $key => $value) {
+                $result .= "<" . $key . ">" . $value . "</" . $key . ">\r\n";
+            }
+            $result .= "</result>\r\n";
         }
         return $result;
     }
@@ -96,10 +94,6 @@ class dbconnect {
                         $table,
                         $this->getInsertKey($myInput),
                         $this->getInsertValue($myInput));
-
-
-
-
 
         $query_result = mysql_query($query) or die(mysql_error());
         //$query_result = $query;

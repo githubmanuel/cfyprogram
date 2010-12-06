@@ -87,7 +87,7 @@
                     function request(formData, jqForm, options) {
                         valid = true;
                         $('.ajax_wait').hide();
-                        var label = "<span class='ajax_spinner'><img src='<?php echo $CORE["system"]["site_url"]; ?>core/image/ispinner.gif'/>Please wait...</span>";
+                        var label = "<span class='ajax_spinner'><img src='<?php echo $CORE["system"]["site_url"]; ?>core/fileadmin/image/ispinner.gif'/>Please wait...</span>";
                         $('.ajax_wait').after(label);
                         $('.ajax_notify').hide();
                         if(valid) {

@@ -86,9 +86,9 @@ header {
     padding-bottom: 10px;
 }
 #body_content{
-	width:auto;
-	float: left;
-	display: block;
+    width:auto;
+    float: left;
+    display: block;
 }
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
@@ -132,3 +132,31 @@ header, section, footer, aside, nav, article, figure {
 footer address {
     text-align: right;
 }
+msg_bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #cccccc;
+    z-index: 5000;
+}
+msg_dialog{
+    position: absolute;
+    width: 120px;
+    top: 280px;
+    left: 360px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #03F;
+    background-image: url(../../../core/fileadmin/image/ispinner.gif);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    padding-left: 35px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    border: 1px solid #666666;
+    z-index: 5001;
+}
+

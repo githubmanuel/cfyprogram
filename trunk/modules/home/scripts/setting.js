@@ -15,8 +15,29 @@
 // Commnents:
 
 $(document).ready(function(){
-
-    alert("hola to jquery");
-
+    showmsg("espere un momento por favor...");
+    getXML("modules/home/bin/setting_xml.php", "appendResult"); 
 });
+
+function getXML(xmlfile, callback){
+    $.ajax({
+        type: "GET",
+        url: xmlfile,
+        dataType: "xml",
+        success: eval(callback)
+    });
+}
+    
+function appendResult(xml){
+    $(xml).find("result").each(function(){
+        var id = $(this).find("id").text();
+        var name = $(this).find("name").text();
+        var print = $(this).find("print").text();
+        var status = $(this).find("status").text();
+        $("<flabel>").html(id + ":" + print ).appendTo("fcontainer");
+        var htmlInput = "<input type='text' id='" + name + "' value='"+ status +"' />";
+        $("<ffield>").html(htmlInput).appendTo("fcontainer");
+    });
+    hidemsg();
+}
 

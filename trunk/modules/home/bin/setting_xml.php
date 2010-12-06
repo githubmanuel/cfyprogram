@@ -37,7 +37,7 @@ $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
 $xmlheader .= "<search-results>";
 echo $xmlheader;
 
-require_once (PATH_site . 'modules/home/classes/dbconnect.php');
+require_once (PATH_site . 'modules/home/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 

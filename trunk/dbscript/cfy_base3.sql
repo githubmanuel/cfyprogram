@@ -54,10 +54,10 @@ DROP TABLE IF EXISTS `core_module_var`;
 CREATE TABLE `core_module_var` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `print` varchar(100) NOT NULL,
+  `print_name` varchar(100) NOT NULL,
   `status` int(11) DEFAULT '0',
   PRIMARY KEY (`id`,`name`),
-  KEY `print` (`print`)
+  KEY `print_name` (`print_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

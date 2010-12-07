@@ -38,18 +38,31 @@ function appendResult(xml){
         var check = "";
         var textstatus = "off";
         if (status == 0){
-            check = "checked='checked'";
+            check = "checked";
             textstatus = "on";
         }
-        $("<flabel>").attr("id", "label-"+id).html(print + " - " + textstatus).appendTo("fcontainer");
+        $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
+
+        $("<flabel>").attr("id", "label-"+id).html(print + " - " + textstatus).appendTo("#item-"+id);
         $("<a>").attr("id", "editbotton-"+ id).addClass("editbotton").appendTo("#label-"+id);
-        var htmlInput = "<input type='text' id='print-" + id + "' value='" + print + "' />" +
-        "<input type='checkbox' id='status-" + id + "' value='" + status + "' "+ check +" />";
-        $("<ffield>").attr("id", "field-"+id).html(htmlInput).css("display", "none").appendTo("fcontainer");
+        
+        $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
+        $("<input>")
+            .attr("type", "text")
+            .attr("id", "print-"+id)
+            .attr("value", print)
+            .appendTo("#field-"+id);
+        $("<input>")
+            .attr("type", "checkbox")
+            .attr("id", "status-"+id)
+            .attr("value", status)
+            .attr("checked", check)
+            .appendTo("#field-"+id);
         $("<a>").attr("id", "cancelbotton-"+id).addClass("cancelbotton").appendTo("#field-"+id);
         $("<a>").attr("id", "savebotton-"+id).addClass("savebotton").appendTo("#field-"+id);
+
         $("#editbotton-"+id).click(function(){
-            $("#editbotton-"+id).hide();
+            $("#label-"+id).hide();
             $("#field-"+id).show();
         });
         $("#savebotton-"+id).click(function(){
@@ -64,7 +77,7 @@ function appendResult(xml){
             $("#field-"+id).hide();
         });
         $("#cancelbotton-"+id).click(function(){
-            $("#editbotton-"+id).show();
+            $("#label-"+id).show();
             $("#field-"+id).hide();
         });
     });

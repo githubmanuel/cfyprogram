@@ -42,25 +42,13 @@ function appendResult(xml){
             textstatus = "on";
         }
         $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
-
         $("<flabel>").attr("id", "label-"+id).html(print + " - " + textstatus).appendTo("#item-"+id);
         $("<a>").attr("id", "editbotton-"+ id).addClass("editbotton").appendTo("#label-"+id);
-        
         $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
-        $("<input>")
-            .attr("type", "text")
-            .attr("id", "print-"+id)
-            .attr("value", print)
-            .appendTo("#field-"+id);
-        $("<input>")
-            .attr("type", "checkbox")
-            .attr("id", "status-"+id)
-            .attr("value", status)
-            .attr("checked", check)
-            .appendTo("#field-"+id);
+        $("<input>").attr("type", "text").attr("id", "print-"+id).attr("value", print).appendTo("#field-"+id);
+        $("<input>").attr("type", "checkbox").attr("id", "status-"+id).attr("value", status).attr("checked", check).appendTo("#field-"+id);
         $("<a>").attr("id", "cancelbotton-"+id).addClass("cancelbotton").appendTo("#field-"+id);
         $("<a>").attr("id", "savebotton-"+id).addClass("savebotton").appendTo("#field-"+id);
-
         $("#editbotton-"+id).click(function(){
             $("#label-"+id).hide();
             $("#field-"+id).show();

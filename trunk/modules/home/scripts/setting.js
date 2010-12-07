@@ -15,7 +15,7 @@
 // Commnents:
 
 $(document).ready(function(){
-    showmsg("espere un momento por favor...");
+    showmsg("Espere un momento por favor...");
     getXML("modules/home/bin/setting_xml.php", "appendResult"); 
 });
 
@@ -29,15 +29,56 @@ function getXML(xmlfile, callback){
 }
     
 function appendResult(xml){
+    $("fcontainer").empty();
     $(xml).find("result").each(function(){
         var id = $(this).find("id").text();
         var name = $(this).find("name").text();
-        var print = $(this).find("print").text();
+        var print = $(this).find("print_name").text();
         var status = $(this).find("status").text();
-        $("<flabel>").html(id + ":" + print ).appendTo("fcontainer");
-        var htmlInput = "<input type='text' id='" + name + "' value='"+ status +"' />";
-        $("<ffield>").html(htmlInput).appendTo("fcontainer");
+        var check = "";
+        var textstatus = "off";
+        if (status == 0){
+            check = "checked='checked'";
+            textstatus = "on";
+        }
+        $("<flabel>").attr("id", "label-"+id).html(print + " - " + textstatus).appendTo("fcontainer");
+        $("<a>").attr("id", "editbotton-"+ id).addClass("editbotton").appendTo("#label-"+id);
+        var htmlInput = "<input type='text' id='print-" + id + "' value='" + print + "' />" +
+        "<input type='checkbox' id='status-" + id + "' value='" + status + "' "+ check +" />";
+        $("<ffield>").attr("id", "field-"+id).html(htmlInput).css("display", "none").appendTo("fcontainer");
+        $("<a>").attr("id", "cancelbotton-"+id).addClass("cancelbotton").appendTo("#field-"+id);
+        $("<a>").attr("id", "savebotton-"+id).addClass("savebotton").appendTo("#field-"+id);
+        $("#editbotton-"+id).click(function(){
+            $("#editbotton-"+id).hide();
+            $("#field-"+id).show();
+        });
+        $("#savebotton-"+id).click(function(){
+            showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
+            var newstatus = 1;
+            if ($("#status-"+id).attr("checked")){
+                newstatus = 0;
+            }
+            var newprint = $("#print-"+id).val();
+            editSetting(id, newprint, newstatus);
+            $("#editbotton-"+id).show();
+            $("#field-"+id).hide();
+        });
+        $("#cancelbotton-"+id).click(function(){
+            $("#editbotton-"+id).show();
+            $("#field-"+id).hide();
+        });
     });
     hidemsg();
 }
+function editSetting(id, print, status){
+    getXML("modules/home/bin/setting_update.php?id="+id+"&print="+print+"&status="+status,"handlereditSetting")
+}
 
+function handlereditSetting(xml){
+    if ($(xml).find("result").text()==" 1"){
+        getXML("modules/home/bin/setting_xml.php", "appendResult");
+    }else{
+        alert("error");
+    }
+    hidemsg();
+}

@@ -159,4 +159,50 @@ msg_dialog{
     border: 1px solid #666666;
     z-index: 5001;
 }
+fcontainer{
+    width:800px;
+    display: block;
+    float: left;
+}
+flabel{
+    font-size:13px;
+    font-weight:bold;
+    clear: both;
+    width: 200px;
+    height:30px;
+    display: block;
+    float: left;
+    padding-top: 5px;
+}
+ffield{
+    width:250px;
+    height:30px;
+    float: left;
+}
+.editbotton, .savebotton, .cancelbotton, .deletebotton, .newbotton{
+    display: block;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background-repeat: no-repeat;
+}
+
+.editbotton{
+    background-image: url(../../../core/fileadmin/image/b_edit.png);
+}
+.savebotton{
+    background-image: url(../../../core/fileadmin/image/b_save.png);
+}
+.cancelbotton{
+    background-image: url(../../../core/fileadmin/image/b_drop.png);
+}
+
+.deletebotton{
+    background-image: url(../../../core/fileadmin/image/ispinner.gif);
+}
+.newbotton{
+    background-image: url(../../../core/fileadmin/image/ispinner.gif);
+}
+
+
 

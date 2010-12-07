@@ -30,7 +30,7 @@ define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAP
 
 define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
 
-//sleep(5);
+sleep(2);
 
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
@@ -41,30 +41,22 @@ require_once (PATH_site . 'modules/home/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-$username = "";
-if (isset($_GET['username'])) {
-    $username = mysql_escape_string(substr(trim($_GET['username']), 0, 255));
+$id = "";
+if (isset($_GET['id'])) {
+    $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-$password = "";
-if (isset($_GET['password'])) {
-    $password = mysql_escape_string(substr(trim($_GET['password']), 0, 255));
-}
-$level = "";
-if (isset($_GET['level'])) {
-    $level = mysql_escape_string(substr(trim($_GET['level']), 0, 255));
-}
-$creation_date = "";
-if (isset($_GET['creation_date'])) {
-    $creation_date = mysql_escape_string(substr(trim($_GET['creation_date']), 0, 255));
+$print = "";
+if (isset($_GET['print'])) {
+    $print = mysql_escape_string(substr(trim($_GET['print']), 0, 255));
 }
 $status = "";
 if (isset($_GET['status'])) {
     $status = mysql_escape_string(substr(trim($_GET['status']), 0, 255));
 }
 
-$myInput = array(password => $password, level => $level, creation_date => $creation_date, status => $status);
+$myInput = array(print_name => $print, status => $status);
 
-$xml = $myData->update($myInput, "username='" . $username . "' ", "core_user");
+$xml = $myData->update($myInput, "id=" . $id, "core_module_var");
 
 $xml .= "</result>";
 echo $xml;

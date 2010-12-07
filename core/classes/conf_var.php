@@ -27,7 +27,7 @@ class conf_var {
         $msql = new Db;
         $msql->connect();
 
-        $query = "SELECT * FROM " . $table . " ORDER BY id ";
+        $query = "SELECT * FROM " . $table . " WHERE status=0 ORDER BY id ";
 
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);
@@ -59,7 +59,7 @@ class conf_var {
            $contents .= '<names>
                             <id>'.$row_rsUsuarios["id"].'</id>
                             <name>'.$row_rsUsuarios["name"].'</name>
-                            <print>'.$row_rsUsuarios["print"].'</print>
+                            <print>'.$row_rsUsuarios["print_name"].'</print>
                         </names>';
 
             } while ($row_rsUsuarios = mysql_fetch_assoc($rsUsuarios));

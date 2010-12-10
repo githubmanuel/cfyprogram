@@ -32,7 +32,6 @@ function appendResult(xml){
     $("fcontainer").empty();
     $(xml).find("result").each(function(){
         var id = $(this).find("id").text();
-        var name = $(this).find("name").text();
         var print = $(this).find("print_name").text();
         var status = $(this).find("status").text();
         var check = "";
@@ -72,12 +71,12 @@ function appendResult(xml){
     hidemsg();
 }
 function editSetting(id, print, status){
-    getXML("modules/home/bin/setting_update.php?id="+id+"&print="+print+"&status="+status,"handlereditSetting")
+    getXML("modules/home/bin/setting_update.php?id="+id+"&print="+print+"&status="+status,"handlerEditSetting");
 }
 
-function handlereditSetting(xml){
-    if ($(xml).find("result").text()==" 1"){
-        getXML("modules/home/bin/setting_xml.php", "appendResult");
+function handlerEditSetting(xml){
+    if ($(xml).find("update-result").text()!=" error"){
+        appendResult(xml);
     }else{
         alert("error");
     }

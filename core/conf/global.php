@@ -20,8 +20,13 @@
 
 require_once(PATH_site . "core/conf/config.php"); // Configuration varibles
 // Modules Variables
-$CORE["module"]["names"] =  array(1 => 'home', 'admin', 'payroll', 'budget');
-$CORE["module"]["print_name"] = array(1 => 'Inicio', 'Adminitración', 'Nomina', 'Presupuesto');
+
+$CORE["module"]["names"] = array(0=>"");
+$xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
+foreach ($xml->names as $item) {
+    array_push($CORE["module"]["names"], $item->name);
+}
+$CORE["module"]["print_name"] = array(1 => 'Inicio');
 
 /* Ajax Login Module v1.1 */
 /* If login successful then it will redirect to */
@@ -37,9 +42,6 @@ $CORE["login"]["user_table_name"] = "core_user";
 $CORE["page"]["module_menu_id"] = 1;
 
 // get var on database
-
 // require_once(PATH_site . "core/classes/conf_var.php");
-
 // $setVar = new conf_var("core_conf_var");
-
 ?>

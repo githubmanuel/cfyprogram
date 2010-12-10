@@ -46,7 +46,7 @@ if (isset($_GET['sinput'])) {
     $sinput = mysql_escape_string(substr(trim($_GET['sinput']), 0, 255));
 }
 
-$xml = $myData->select("username", $sinput, "core_user", "", "");
+$xml = $myData->select("username", $sinput, "core_user", "", "", "");
 $xml .= "</search-results>";
 echo $xml;
 ?>

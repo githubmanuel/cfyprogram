@@ -29,22 +29,39 @@ class dbconnect {
         $msql->connect();
     }
 
-    function select($field, $input, $table, $where, $andor) {
+    function select($field, $input, $table, $where, $andor, $order) {
         $this->createConnection();
         $query_result = NULL;
-        if ($where) {
-            if ($input == "all") {
-                $query = "SELECT * FROM " . $table . " WHERE " . $where;
+        if ($order) {
+            if ($where) {
+                if ($input == "all") {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $where . " ORDER BY " . $order;
+                } else {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where  . " ORDER BY " . $order;
+                }
             } else {
-                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where;
+                if ($input == "all") {
+                    $query = "SELECT * FROM " . $table  . " ORDER BY " . $order;
+                } else {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'"  . " ORDER BY " . $order;
+                }
             }
         } else {
-            if ($input == "all") {
-                $query = "SELECT * FROM " . $table;
+            if ($where) {
+                if ($input == "all") {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $where;
+                } else {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where;
+                }
             } else {
-                $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'";
+                if ($input == "all") {
+                    $query = "SELECT * FROM " . $table;
+                } else {
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'";
+                }
             }
         }
+
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);
         $totalRows = mysql_num_rows($rsUsuarios);

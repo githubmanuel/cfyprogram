@@ -21,11 +21,11 @@ Commnents:
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>CFY program</title>
-        <link href="http://localhost/cfy/styles/base/css/base.css" rel="stylesheet" type="text/css">
+        <link href="http://192.168.137.50/cfyprogram/styles/base/css/base.css" rel="stylesheet" type="text/css">
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="http://localhost/cfy/core/scripts/menu_bar.js" type="text/javascript"></script><link href="http://localhost/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><link href="http://localhost/cfy/core/css/login.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="http://localhost/cfy/core/scripts/jquery-1.4.4.js"></script><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
+        <script src="http://192.168.137.50/cfyprogram/core/scripts/menu_bar.js" ></script><script src="http://192.168.137.50/cfyprogram/core/scripts/msg_function.js" ></script><script src="http://192.168.137.50/cfyprogram/core/scripts/jquery-1.4.4.js" ></script><script src="http://192.168.137.50/cfyprogram/core/scripts/jquery.form.js" ></script><link href="http://192.168.137.50/cfyprogram/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
     </head>
 
     <body>
@@ -35,7 +35,7 @@ Commnents:
             </header>
             <div class="sidebar">
                 <nav>
-                    <ul><li><a href="?pid=1">Inicio</a></li><li><a href="?pid=2">Administracion</a></li><li><a href="?pid=3">Nomina</a></li><li><a href="?pid=4">Presupuesto</a></li></ul>
+                    <ul><li><a href="?pid=1">Inicio</a></li><li><a href="?pid=2">Personal</a></li><li><a href="?pid=3">Administración</a></li><li><a href="?pid=4">Reservaciones</a></li><li><a href="?pid=5">Presupuesto</a></li></ul>
                 </nav>
                 <aside>
                     <p>prueba final de estilo</p>
@@ -55,6 +55,6 @@ Commnents:
             </footer>
             <!-- end .container -->
         </div>
-        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"http://localhost/cfy/core/image/MenuBarDownHover.gif", imgRight:"http://localhost/cfy/core/image/MenuBarRightHover.gif"});</script>
+        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"http://192.168.137.50/cfyprogram/core/image/MenuBarDownHover.gif", imgRight:"http://192.168.137.50/cfyprogram/core/image/MenuBarRightHover.gif"});</script>
     </body>
 </html>

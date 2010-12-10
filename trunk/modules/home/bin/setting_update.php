@@ -59,7 +59,7 @@ $myInput = array(print_name => $print, status => $status);
 $result = $myData->update($myInput, "id=" . $id, "core_module_var");
 
 if ($result == "1"){
-    $xml = $myData->select("id", $sinput, "core_module_var", "", "");
+    $xml = $myData->select("id", $sinput, "core_module_var", "", "", "id ASC");
 }else{
     $xml = "error";
 }

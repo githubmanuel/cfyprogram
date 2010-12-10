@@ -69,7 +69,7 @@ class Apply_Style {
         $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
 
         foreach ($xml->names as $item) {
-            $GLOBALS["CORE"]["module"]["names"] = $item->name;
+            array_push($GLOBALS["CORE"]["module"]["names"], $item->name);
             $module .= '<li>';
             $module .= '<a href="?pid=' . $item->id . '">' . $item->print . '</a>';
             $module .= '</li>';

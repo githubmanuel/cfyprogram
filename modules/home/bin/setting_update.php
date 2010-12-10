@@ -34,7 +34,7 @@ sleep(2);
 
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
-$xmlheader .= "<result>";
+$xmlheader .= "<update-result>";
 echo $xmlheader;
 
 require_once (PATH_site . 'modules/home/classes/dbquery.php');
@@ -56,8 +56,14 @@ if (isset($_GET['status'])) {
 
 $myInput = array(print_name => $print, status => $status);
 
-$xml = $myData->update($myInput, "id=" . $id, "core_module_var");
+$result = $myData->update($myInput, "id=" . $id, "core_module_var");
 
-$xml .= "</result>";
+if ($result == "1"){
+    $xml = $myData->select("id", $sinput, "core_module_var", "", "");
+}else{
+    $xml = "error";
+}
+
+$xml .= "</update-result>";
 echo $xml;
 ?>

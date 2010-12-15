@@ -25,16 +25,28 @@ Commnents:
   <item id="1">
     <type>submenu</type>
     <url>#</url>
-    <name>Ayuda</name>
+    <name>Preferencias</name>
     <submenu>
       <subitem id="2">
+        <type>pid</type>
+        <url>destination.php</url>
+        <name>Destinos</name>
+      </subitem>
+    </submenu>
+  </item>
+  <item id="3">
+    <type>submenu</type>
+    <url>#</url>
+    <name>Ayuda</name>
+    <submenu>
+      <subitem id="4">
         <type>url</type>
         <url>docs/license.txt</url>
         <name>Docs</name>
       </subitem>
     </submenu>
   </item>
-  <item id="3">
+  <item id="5">
     <type>url</type>
     <url>core/bin/logout.php</url>
     <name>Salir</name>

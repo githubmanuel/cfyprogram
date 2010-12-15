@@ -16,9 +16,8 @@ header('Content-Type: text/xml');
 
   File:
   Commnents:
- *
+ * 
  */
-
 
 if (defined('E_DEPRECATED')) {
     error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
@@ -28,44 +27,23 @@ if (defined('E_DEPRECATED')) {
 
 define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
-define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
+define('PATH_site', str_replace("/modules/booking/bin", "/", dirname(PATH_thisScript)));
 
-//sleep(5);
+
+//sleep(2);
 
 $xmlheader = "";
 $xmlheader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
-$xmlheader .= "<result>";
+$xmlheader .= "<search-results>";
 echo $xmlheader;
 
 require_once (PATH_site . 'core/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-$username = "";
-if (isset($_GET['username'])) {
-    $username = mysql_escape_string(substr(trim($_GET['username']), 0, 255));
-}
-$password = "";
-if (isset($_GET['password'])) {
-    $password = mysql_escape_string(substr(trim($_GET['password']), 0, 255));
-}
-$level = "";
-if (isset($_GET['level'])) {
-    $level = mysql_escape_string(substr(trim($_GET['level']), 0, 255));
-}
-$creation_date = "";
-if (isset($_GET['creation_date'])) {
-    $creation_date = mysql_escape_string(substr(trim($_GET['creation_date']), 0, 255));
-}
-$status = "";
-if (isset($_GET['status'])) {
-    $status = mysql_escape_string(substr(trim($_GET['status']), 0, 255));
-}
+$sinput = "all";
 
-$myInput = array(username => $username, password => $password, level => $level, creation_date => $creation_date, status => $status);
-
-$xml = $myData->insert($myInput, "core_user");
-
-$xml .= "</result>";
+$xml = $myData->select("id", $sinput, "bk_destination", "", "", "id ASC");
+$xml .= "</search-results>";
 echo $xml;
 ?>

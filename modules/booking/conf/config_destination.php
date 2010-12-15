@@ -19,7 +19,7 @@
  */
 
 if ($pid != 0) {
-    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/home/scripts/setting.js"></SCRIPT>';
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/booking/scripts/destination.js"></SCRIPT>';
 
     echo $head_script;
 }

@@ -94,7 +94,6 @@ content {
 content ul, content ol {
     padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
 }
-
 /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 nav ul {
     list-style: none; /* this removes the list marker */
@@ -160,7 +159,6 @@ msg_dialog{
     z-index: 5001;
 }
 fcontainer{
-    width: 800px;
     display: block;
     float: left;
 }
@@ -194,7 +192,6 @@ ftotal{
     float: left;
     clear: both;
     font-size:12px;
-    /*font-weight:bold;*/
     text-align: center;
     display: block;
     margin-top: 3px;
@@ -210,7 +207,6 @@ ftotal{
     background-repeat: no-repeat;
     cursor: pointer;
 }
-
 .editbotton{
     background-image: url(../../../core/fileadmin/image/b_edit.png);
 }
@@ -220,7 +216,6 @@ ftotal{
 .cancelbotton{
     background-image: url(../../../core/fileadmin/image/b_cancel.png);
 }
-
 .deletebotton{
     background-image: url(../../../core/fileadmin/image/b_delete.png);
 }

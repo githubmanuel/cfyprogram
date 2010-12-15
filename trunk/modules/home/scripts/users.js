@@ -12,7 +12,7 @@
 // Redistributions of files must retain the copyright notice.
 //
 // File:
-// Commnents:
+// Commnents: TODO: change to jquery and eliminate prototype
 //
 // some modification on the original files
 //

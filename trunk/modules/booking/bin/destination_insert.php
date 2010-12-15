@@ -28,7 +28,7 @@ if (defined('E_DEPRECATED')) {
 
 define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
-define('PATH_site', str_replace("/modules/home/bin", "/", dirname(PATH_thisScript)));
+define('PATH_site', str_replace("/modules/booking/bin", "/", dirname(PATH_thisScript)));
 
 sleep(2);
 
@@ -45,23 +45,18 @@ $id = "";
 if (isset($_GET['id'])) {
     $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-$print = "";
-if (isset($_GET['print'])) {
-    $print = mysql_escape_string(substr(trim($_GET['print']), 0, 255));
-}
-$status = "";
-if (isset($_GET['status'])) {
-    $status = mysql_escape_string(substr(trim($_GET['status']), 0, 255));
+$name = "";
+if (isset($_GET['name'])) {
+    $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
 }
 
-$myInput = array(print_name => $print, status => $status);
+$myInput = array(id => $id, name => $name);
 
-$result = $myData->update($myInput, "id=" . $id, "core_module_var");
+$result = $myData->insert($myInput, "bk_destination");
 
 $sinput = "all";
-
 if ($result == "1"){
-    $xml = $myData->select("id", $sinput, "core_module_var", "", "", "id ASC");
+    $xml = $myData->select("id", $sinput, "bk_destination", "", "", "id ASC");
 }else{
     $xml = "error";
 }

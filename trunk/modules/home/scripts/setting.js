@@ -42,15 +42,16 @@ function appendResult(xml){
         }
         $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
         $("<flabel>").attr("id", "label-"+id).html(print + " - " + textstatus).appendTo("#item-"+id);
-        $("<a>").attr("id", "editbotton-"+ id).addClass("editbotton").appendTo("#label-"+id);
+        $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
         $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
         $("<input>").attr("type", "text").attr("id", "print-"+id).attr("value", print).appendTo("#field-"+id);
         $("<input>").attr("type", "checkbox").attr("id", "status-"+id).attr("value", status).attr("checked", check).appendTo("#field-"+id);
-        $("<a>").attr("id", "cancelbotton-"+id).addClass("cancelbotton").appendTo("#field-"+id);
-        $("<a>").attr("id", "savebotton-"+id).addClass("savebotton").appendTo("#field-"+id);
+        $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
+        $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
         $("#editbotton-"+id).click(function(){
-            $("#label-"+id).hide();
-            $("#field-"+id).show();
+            $("#label-"+id).hide(function(){
+                $("#field-"+id).show();
+            });
         });
         $("#savebotton-"+id).click(function(){
             showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
@@ -60,12 +61,11 @@ function appendResult(xml){
             }
             var newprint = $("#print-"+id).val();
             editSetting(id, newprint, newstatus);
-            $("#editbotton-"+id).show();
-            $("#field-"+id).hide();
         });
         $("#cancelbotton-"+id).click(function(){
-            $("#label-"+id).show();
-            $("#field-"+id).hide();
+            $("#field-"+id).hide(function(){
+                $("#label-"+id).show();
+            });
         });
     });
     hidemsg();

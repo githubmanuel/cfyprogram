@@ -17,18 +17,18 @@
 function showmsg(msg){
     $("<msg_bg>").animate({
         opacity:0.50
-    }, 0).appendTo("body").show(2000);
-    $("<msg_dialog>").appendTo("body").html(msg).show(2000);
+    }, 0).appendTo("body").show();
+    $("<msg_dialog>").appendTo("body").html(msg).show();
 }
 function hidemsg(){
     $("msg_bg").animate({
         opacity:0
-    }, 2000, function(){
+    }, 1000, function(){
         $(this).remove();
     })
     $("msg_dialog").animate({
         opacity:0
-    }, 1000, function(){
+    }, 500, function(){
         $(this).remove();
     })
 

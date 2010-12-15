@@ -37,13 +37,13 @@ class dbconnect {
                 if ($input == "all") {
                     $query = "SELECT * FROM " . $table . " WHERE " . $where . " ORDER BY " . $order;
                 } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where  . " ORDER BY " . $order;
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where . " ORDER BY " . $order;
                 }
             } else {
                 if ($input == "all") {
-                    $query = "SELECT * FROM " . $table  . " ORDER BY " . $order;
+                    $query = "SELECT * FROM " . $table . " ORDER BY " . $order;
                 } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'"  . " ORDER BY " . $order;
+                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'" . " ORDER BY " . $order;
                 }
             }
         } else {
@@ -79,12 +79,14 @@ class dbconnect {
     function query_result($totalRows) {
         $result = NULL;
         $result .= "<total>$totalRows</total>";
-        foreach ($this->data as $item) {
-            $result .= "<result>\r\n";
-            foreach ($item as $key => $value) {
-                $result .= "<" . $key . ">" . $value . "</" . $key . ">\r\n";
+        if ($totalRows > 0) {
+            foreach ($this->data as $item) {
+                $result .= "<result>\r\n";
+                foreach ($item as $key => $value) {
+                    $result .= "<" . $key . ">" . $value . "</" . $key . ">\r\n";
+                }
+                $result .= "</result>\r\n";
             }
-            $result .= "</result>\r\n";
         }
         return $result;
     }

@@ -12,8 +12,8 @@
   License: New BSD License (see docs/license.txt)
   Redistributions of files must retain the copyright notice.
 
-  File: index.php
-  Commnents: Startup file.
+  File: 
+  Commnents: 
 
  */
 ?>

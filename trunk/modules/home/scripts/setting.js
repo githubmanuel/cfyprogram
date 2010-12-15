@@ -14,6 +14,8 @@
 // File:
 // Commnents:
 
+var speed = 200;
+
 $(document).ready(function(){
     showmsg("Espere un momento por favor...");
     getXML("modules/home/bin/setting_xml.php", "appendResult"); 
@@ -49,8 +51,8 @@ function appendResult(xml){
         $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
         $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
         $("#editbotton-"+id).click(function(){
-            $("#label-"+id).hide(function(){
-                $("#field-"+id).show();
+            $("#label-"+id).slideUp(speed, function(){
+                $("#field-"+id).slideDown(speed);
             });
         });
         $("#savebotton-"+id).click(function(){
@@ -63,8 +65,8 @@ function appendResult(xml){
             editSetting(id, newprint, newstatus);
         });
         $("#cancelbotton-"+id).click(function(){
-            $("#field-"+id).hide(function(){
-                $("#label-"+id).show();
+            $("#field-"+id).slideUp(speed, function(){
+                $("#label-"+id).slideDown(speed);
             });
         });
     });

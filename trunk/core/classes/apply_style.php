@@ -36,7 +36,7 @@ class Apply_Style {
         $contents = str_replace('--head--', $this->set_head(), $contents);
         $contents = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $this->set_module_menu(), $contents);
         $contents = str_replace('--menu--', '<?php echo $myMenu->printMenu($CORE["page"]["menu"]); ?>', $contents);
-        $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<?php require_once(PATH_site.$CORE["page"]["content"]); ?>', $contents);
+        $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<user>Usuario:<b><?php echo $_SESSION["MM_Username"]; ?></b></user><?php require_once(PATH_site.$CORE["page"]["content"]); ?>', $contents);
         $contents = str_replace('--footer--', $this->set_footer(), $contents);
 
         // put the new content into the files
@@ -46,10 +46,10 @@ class Apply_Style {
     }
 
     function set_head() {
-        $head_menu  = '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/menu_bar.js" ></script>';
-        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/msg_function.js" ></script>';
+        $head_menu = '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/menu_bar.js" ></script>';
         $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.4.4.js" ></script>';
         $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery.form.js" ></script>';
+        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/msg_function.js" ></script>';
         $head_menu .= '<link href="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/css/menu_bar.css" rel="stylesheet" type="text/css" />';
         $head_menu .= '<?php require_once(PATH_site.$CORE["module"]["head_content"]); ?>';
         $head_menu .= '<?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>';
@@ -67,13 +67,14 @@ class Apply_Style {
         $module = '<ul>';
 
         $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
-
+        
         foreach ($xml->names as $item) {
-            array_push($GLOBALS["CORE"]["module"]["names"], $item->name);
+            $GLOBALS["CORE"]["module"]["names"]["$item->id"] = $item->name;
             $module .= '<li>';
             $module .= '<a href="?pid=' . $item->id . '">' . $item->print . '</a>';
             $module .= '</li>';
         }
+        
         $module .= '</ul>';
         return $module;
     }

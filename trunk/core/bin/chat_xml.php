@@ -16,7 +16,7 @@ header('Content-Type: text/xml');
 
   File:
   Commnents:
- * 
+ *
  */
 
 if (defined('E_DEPRECATED')) {
@@ -27,7 +27,7 @@ if (defined('E_DEPRECATED')) {
 
 define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
-define('PATH_site', str_replace("/modules/booking/bin", "/", dirname(PATH_thisScript)));
+define('PATH_site', str_replace("/core/bin", "/", dirname(PATH_thisScript)));
 
 
 //sleep(2);
@@ -41,9 +41,39 @@ require_once (PATH_site . 'core/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-$sinput = "all";
 
-$xml = $myData->select("", "id", $sinput, "bk_destination", "", "", "id ASC", "");
+$acction = "";
+if (isset($_GET['acction'])) {
+    $acction = mysql_escape_string(substr(trim($_GET['acction']), 0, 255));
+}
+
+$username = "";
+if (isset($_GET['username'])) {
+    $username = mysql_escape_string(substr(trim($_GET['username']), 0, 255));
+}
+
+$recive = "";
+if (isset($_GET['recive'])) {
+    $recive = mysql_escape_string(substr(trim($_GET['recive']), 0, 255));
+}
+switch ($acction) {
+    case "online" :
+        $myInput = array(online => "CURRENT_TIMESTAMP");
+        $xml = $myData->update($myInput, "username='" . $username . "'", "core_user");
+        break;
+
+    case "getuser" :
+        $xml = $myData->select("", "username", "all", "core_user", "", "", "username ASC", "");
+        break;
+
+    case "getsection" :
+        $where = " ( `from` = '".$username."' and `to` = '".$recive."') or ( `from` = '".$recive."' and `to` = '".$username."') ";
+        $xml = $myData->select("", "", "all", "core_chat", $where, "", " id ASC", "");
+        break;
+
+    default :
+        $xml = "1";
+}
 $xml .= "</search-results>";
 echo $xml;
 ?>

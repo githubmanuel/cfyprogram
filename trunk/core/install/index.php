@@ -40,6 +40,7 @@ $myVar = new conf_var("core_module_var");
 
 $setStyle = new Apply_Style();
 $setStyle->set_style(PATH_site . 'core/conf/style_apply.php', PATH_site . 'styles/' . $CORE["style"]["name"] . '/style.html');
+
 ?>
 
 El sistema se ha instalado con exito.<br />

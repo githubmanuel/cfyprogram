@@ -24,7 +24,7 @@ require_once(PATH_site . "core/conf/config.php"); // Configuration varibles
 $CORE["module"]["names"] = array(0=>"");
 $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
 foreach ($xml->names as $item) {
-    array_push($CORE["module"]["names"], $item->name);
+    $CORE["module"]["names"]["$item->id"] = $item->name;
 }
 $CORE["module"]["print_name"] = array(1 => 'Inicio');
 

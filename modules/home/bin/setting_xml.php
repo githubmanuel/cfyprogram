@@ -43,7 +43,7 @@ $xml = "";
 
 $sinput = "all";
 
-$xml = $myData->select("id", $sinput, "core_module_var", "", "", "id ASC");
+$xml = $myData->select("", "id", $sinput, "core_module_var", "", "", "id ASC", "");
 $xml .= "</search-results>";
 echo $xml;
 ?>

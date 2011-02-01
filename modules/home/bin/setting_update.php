@@ -61,7 +61,7 @@ $result = $myData->update($myInput, "id=" . $id, "core_module_var");
 $sinput = "all";
 
 if ($result == "1"){
-    $xml = $myData->select("id", $sinput, "core_module_var", "", "", "id ASC");
+    $xml = $myData->select("", "id", $sinput, "core_module_var", "", "", "id ASC", "");
 }else{
     $xml = "error";
 }

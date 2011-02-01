@@ -56,7 +56,7 @@ $result = $myData->insert($myInput, "bk_destination");
 
 $sinput = "all";
 if ($result == "1"){
-    $xml = $myData->select("id", $sinput, "bk_destination", "", "", "id ASC");
+    $xml = $myData->select("", "id", $sinput, "bk_destination", "", "", "id ASC", "");
 }else{
     $xml = "error";
 }

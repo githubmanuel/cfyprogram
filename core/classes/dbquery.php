@@ -29,38 +29,34 @@ class dbconnect {
         $msql->connect();
     }
 
-    function select($field, $input, $table, $where, $andor, $order) {
+    function select($select, $inputfield, $input, $table, $where, $andor, $order, $limit) {
         $this->createConnection();
         $query_result = NULL;
-        if ($order) {
+
+        $query = "SELECT ";
+        if ($select) {
+            $query .= $select;
+        } else {
+            $query .= " * ";
+        }
+        $query .= " FROM " . $table;
+        if ($input != "all") {
+            $query .= " WHERE " . $inputfield . " like '%" . $input . "%' ";
             if ($where) {
-                if ($input == "all") {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $where . " ORDER BY " . $order;
-                } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where . " ORDER BY " . $order;
-                }
-            } else {
-                if ($input == "all") {
-                    $query = "SELECT * FROM " . $table . " ORDER BY " . $order;
-                } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'" . " ORDER BY " . $order;
-                }
+                $query.= $andor . $where;
             }
         } else {
             if ($where) {
-                if ($input == "all") {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $where;
-                } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%' " . $andor . " " . $where;
-                }
-            } else {
-                if ($input == "all") {
-                    $query = "SELECT * FROM " . $table;
-                } else {
-                    $query = "SELECT * FROM " . $table . " WHERE " . $field . " like '%" . $input . "%'";
-                }
+                $query .= " WHERE " . $where;
             }
         }
+        if ($order) {
+            $query .= " ORDER BY " . $order;
+        }
+        if ($limit) {
+            $query .= " LIMIT " . $limit;
+        }
+
 
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);
@@ -73,7 +69,9 @@ class dbconnect {
         } while ($row_rsUsuarios = mysql_fetch_assoc($rsUsuarios));
 
         $query_result = $this->query_result($totalRows);
+
         return $query_result;
+        //return $query ;
     }
 
     function query_result($totalRows) {
@@ -136,7 +134,11 @@ class dbconnect {
 
         $returnData = NULL;
         foreach ($myInput as $key => $value) {
-            $returnData .= $key . "='" . $value . "', ";
+            if ($value == "CURRENT_TIMESTAMP") {
+                $returnData .= $key . "=" . $value . ", ";
+            } else {
+                $returnData .= $key . "='" . $value . "', ";
+            }
         }
         $returnData = substr($returnData, 0, -2);
         return $returnData;

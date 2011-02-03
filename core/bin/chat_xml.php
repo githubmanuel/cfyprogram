@@ -41,7 +41,6 @@ require_once (PATH_site . 'core/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-
 $acction = "";
 if (isset($_GET['acction'])) {
     $acction = mysql_escape_string(substr(trim($_GET['acction']), 0, 255));
@@ -56,6 +55,12 @@ $recive = "";
 if (isset($_GET['recive'])) {
     $recive = mysql_escape_string(substr(trim($_GET['recive']), 0, 255));
 }
+
+$msg = "";
+if (isset($_GET['msg'])) {
+    $msg = mysql_escape_string(substr(trim($_GET['msg']), 0, 255));
+}
+
 switch ($acction) {
     case "online" :
         $myInput = array(online => "CURRENT_TIMESTAMP");
@@ -63,12 +68,24 @@ switch ($acction) {
         break;
 
     case "getuser" :
-        $xml = $myData->select("", "username", "all", "core_user", "", "", "username ASC", "");
+        $xml = $myData->select("username", "username", "all", "core_user", "", "", "username ASC", "");
         break;
 
     case "getsection" :
-        $where = " ( `from` = '".$username."' and `to` = '".$recive."') or ( `from` = '".$recive."' and `to` = '".$username."') ";
+        $where = " ( `from` = '" . $username . "' and `to` = '" . $recive . "') or ( `from` = '" . $recive . "' and `to` = '" . $username . "') ";
         $xml = $myData->select("", "", "all", "core_chat", $where, "", " id ASC", "");
+        $myInput = array(recd => "1");
+        $myData->update($myInput, " `from` ='" . $recive . "' and `to`='" . $username . "'", "core_chat");
+        break;
+
+    case "sendmessage" :
+        $mymInput = array('`from`' => $username, '`to`' => $recive, '`message`' => $msg);
+        $xml = $myData->insert($mymInput, "core_chat");
+        break;
+
+    case "updateusers" :
+        $where = " `to` = '" . $username . "'  group by `from` ";
+        $xml = $myData->select(" min(recd) as recd, `from` ", "", "all", "core_chat", $where, "", "", "");
         break;
 
     default :

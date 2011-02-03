@@ -182,29 +182,41 @@ chat_section{
     width: 150px;
     background-color: #C6D580;
     padding: 5px 5px 5px 5px;
+    border-right: solid 1px #ADB96E;
 }
 chat_section_tittle{
     font-weight: bold;
 }
 chat_section_text{
     width: 150px;
-    height: 200px;
+    height: 176px;
+    overflow: auto;
     background-color: #ffffff;
+}
+ftext{
+    width: 150px;
 }
 chat chat_text{
     display: block;
 }
-chat_section chat_section_text{
+chat_section, chat_section_text{
     display: block;
 }
 .msg_chat_my{
     background-color: #dddbdb;
 }
 .msg_chat{
-background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
-.msg_chat_my .msg_chat{
-    font-size: 10px;
+.msg_chat_my, .msg_chat{
+    font-size: 11px;
+}
+.input_chat{
+    width: 110px;
+}
+.button_chat{
+    width: 33px;
+    float: right;
 }
 fcontainer{
     display: block;

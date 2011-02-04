@@ -14,7 +14,7 @@
 // File:
 // Commnents:
 
-var chatAcction = "online";
+var chataction = "online";
 var dotCounter = 0;
 var myUser = "";
 var xcbutton = true;
@@ -106,16 +106,16 @@ function loadChat(){
 }
 
 function setOnline(){
-    acction = "online";
+    action = "online";
     $.ajax({
-        url: "core/bin/chat_xml.php?acction="+acction+"&username=admin"
+        url: "core/bin/chat_xml.php?action="+action+"&username=admin"
     });
 }
 
 function getUser(){
-    acction = "getuser";
+    action = "getuser";
     $.ajax({
-        url: "core/bin/chat_xml.php?acction="+acction,
+        url: "core/bin/chat_xml.php?action="+action,
         dataType: "xml",
         success: function(xml){
             $("chat_text").empty();
@@ -170,9 +170,9 @@ function closeSection(user){
 }
 
 function sectionChat(user){
-    acction = "getsection";
+    action = "getsection";
     $.ajax({
-        url: "core/bin/chat_xml.php?acction="+acction+"&username="+myUser+"&recive="+user,
+        url: "core/bin/chat_xml.php?action="+action+"&username="+myUser+"&recive="+user,
         dataType: "xml",
         success: function(xml){
             var totalRow = $(xml).find("total").text();
@@ -220,9 +220,9 @@ function inputChat(user){
 
 function sendMessage(user, msg){
     if (msg){
-        acction = "sendmessage";
+        action = "sendmessage";
         $.ajax({
-            url: "core/bin/chat_xml.php?acction="+acction+"&username="+myUser+"&recive="+user+"&msg="+msg,
+            url: "core/bin/chat_xml.php?action="+action+"&username="+myUser+"&recive="+user+"&msg="+msg,
             success: function(){
                 dotCounter = 0;
             }
@@ -235,9 +235,9 @@ function updateSection(){
         var user = $(this).attr("id").replace("section", "");
         sectionChat(user);
     });
-    acction = "updateusers";
+    action = "updateusers";
     $.ajax({
-        url: "core/bin/chat_xml.php?acction="+acction+"&username="+myUser,
+        url: "core/bin/chat_xml.php?action="+action+"&username="+myUser,
         dataType: "xml",
         success: function(xml){
             var totalRow = $(xml).find("total").text();

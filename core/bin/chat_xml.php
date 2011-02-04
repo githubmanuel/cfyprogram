@@ -41,9 +41,9 @@ require_once (PATH_site . 'core/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-$acction = "";
-if (isset($_GET['acction'])) {
-    $acction = mysql_escape_string(substr(trim($_GET['acction']), 0, 255));
+$action = "";
+if (isset($_GET['action'])) {
+    $action = mysql_escape_string(substr(trim($_GET['action']), 0, 255));
 }
 
 $username = "";
@@ -61,7 +61,7 @@ if (isset($_GET['msg'])) {
     $msg = mysql_escape_string(substr(trim($_GET['msg']), 0, 255));
 }
 
-switch ($acction) {
+switch ($action) {
     case "online" :
         $myInput = array(online => "CURRENT_TIMESTAMP");
         $xml = $myData->update($myInput, "username='" . $username . "'", "core_user");

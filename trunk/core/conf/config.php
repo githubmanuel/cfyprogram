@@ -29,4 +29,7 @@ $CORE["system"]["db_password"] = "12345";
 
 // Style variable
 $CORE["style"]["name"] = "base";
+
+// Company Name
+$CORE["system"]["company_name"] = "Test";
 ?>

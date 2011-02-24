@@ -34,6 +34,7 @@ class Apply_Style {
         $contents = str_replace('link href="', 'link href="' . $GLOBALS["CORE"]["system"]["site_url"] . 'styles/' . $GLOBALS["CORE"]["style"]["name"] . '/', $contents);
         // replace the tag line
         $contents = str_replace('--head--', $this->set_head(), $contents);
+        $contents = str_replace('--header--', '<company_name>'.$GLOBALS["CORE"]["system"]["company_name"].'</company_name>', $contents);
         $contents = str_replace('--module--<ul><li><a href="#">do not</a></li><li><a href="#">change</a></li><li><a href="#">this</a></li><li><a href="#">content</a></li></ul>--end module--', $this->set_module_menu(), $contents);
         $contents = str_replace('--menu--', '<?php echo $myMenu->printMenu($CORE["page"]["menu"]); ?>', $contents);
         $contents = str_replace('--content--<h1>Sample Content</h1><section><h2>This is only for testing</h2><p>Do not change the content of this section.</p></section>--end content--', '<user>Usuario:<b><?php echo $_SESSION["MM_Username"]; ?></b></user><?php require_once(PATH_site.$CORE["page"]["content"]); ?>', $contents);

@@ -52,7 +52,7 @@
                     <input name="password" type="password" class="text"/>
                 </li>
                 <li class="loginlabel"> </li>
-                <li class="loginfield"><img src="<?php echo $CORE["system"]["site_url"]; ?>core/image/isubmit.jpg" class="submit" onclick="$('.ajax_form').submit();"/>
+                <li class="loginfield"><img src="<?php echo $CORE["system"]["site_url"]; ?>modules/login/image/isubmit.jpg" class="submit" onclick="$('.ajax_form').submit();"/>
                     <input name="submit" type="submit" style="display:none" />
                 </li>
                 <li class="invalid_message">

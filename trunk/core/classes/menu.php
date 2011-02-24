@@ -265,6 +265,7 @@ class Menu {
         global $menu;
         $this->menu .= "<?$target $data?>\n";
     }
+
 }
 
 ?>

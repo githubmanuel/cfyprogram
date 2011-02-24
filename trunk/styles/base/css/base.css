@@ -119,7 +119,7 @@ nav ul a:hover, nav ul a:active, nav ul a:focus { /* this changes the background
 
 /* ~~ The footer ~~ */
 footer {
-    padding: 5px 10px 5px 0;
+    padding: 5px;
     background: #CCC49F;
     position: relative;/* this gives IE6 hasLayout to properly clear */
     clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
@@ -130,8 +130,8 @@ header, section, footer, aside, nav, content, figure {
     display: block;
 }
 footer address {
-    text-align: right;
-    margin-right: 150px;
+    float: right;
+    padding-right: 180px;
 }
 msg_bg{
     position: absolute;

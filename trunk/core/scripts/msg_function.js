@@ -55,8 +55,8 @@ $(window).resize(function(){
 function fixSize(){
     var winSize = $(window).height();
     if (winSize >= 600){
-        $(".sidebar").height(winSize-103);
-        $("nav ul a").height((winSize-200) / $("nav ul a").length);
+        $(".sidebar").height(winSize-72);
+        $("nav ul a").height((winSize-180) / $("nav ul a").length);
     }
 }
 

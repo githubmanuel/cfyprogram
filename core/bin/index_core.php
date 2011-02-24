@@ -34,7 +34,7 @@ if (isset($_GET['pid'])) { // asing page ID form url varible
 }
 
 if ($pid == 0) { // on ID 0, call the login page
-    $module_name = 'home';
+    $module_name = 'login';
     $page_name = 'login.php';
     $user_auth = FALSE;
     require_once(PATH_site . "core/classes/login_module.php"); // class that create the login screen

@@ -43,7 +43,7 @@ $xml = "";
 
 $sinput = "all";
 
-$xml = $myData->select("", "id", $sinput, "bk_destination", "", "", "id ASC", "");
+$xml = $myData->select("", "bk_destination", "all", "id ASC", "", "");
 $xml .= "</search-results>";
 echo $xml;
 ?>

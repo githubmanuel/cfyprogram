@@ -34,7 +34,7 @@ define('PATH_site', str_replace("/core/install", "/", dirname(PATH_thisScript)))
 
 require_once(PATH_site . 'core/classes/apply_style.php'); // class to apply the styles. see core/classes/apply_style.php for detail
 require_once(PATH_site . 'core/conf/global.php');
-require_once(PATH_site . "core/classes/conf_var.php"); // Class for read xml menus and call pages
+require_once(PATH_site . 'core/classes/conf_var.php'); // Class for read xml menus and call pages
 
 $myVar = new conf_var("core_module_var");
 

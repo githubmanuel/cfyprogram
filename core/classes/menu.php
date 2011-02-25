@@ -39,7 +39,7 @@ class Menu {
 
     function printMenu($file) {
 
-        $this->moduleid = $GLOBALS["CORE"]["page"]["module_menu_id"];
+        $this->moduleid = $GLOBALS["CORE"]["page"]["module_menu_id"]; // set default module ID;
 
         $xml_parser = xml_parser_create();
         xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, 0);
@@ -64,86 +64,7 @@ class Menu {
             }
         }
         xml_parser_free($xml_parser);
-
         return $this->menu;
-    }
-
-    function getModuleName($pid) {
-        $this->getId($pid);
-        $GLOBALS["CORE"]["page"]["module_menu_id"] = $this->modulePageId;
-        $moduleName = $GLOBALS["CORE"]["module"]["names"][$this->modulePageId];
-        return $moduleName;
-    }
-
-    function getPageName($pid, $xmlstr) {
-
-        if (!$this->pageId) {
-            $pageName = "index.php";
-        } else {
-            $xml = simplexml_load_file($xmlstr);
-            foreach ($xml->item as $item) {
-                if ($item["id"] == $this->pageId) {
-                    $pageName = $item->url;
-                } else {
-                    $l = 0;
-                    foreach ($item as $value) {
-                        $l = $l + 1;
-                    }
-                    if ($l > 3) {
-                        foreach ($item->submenu->subitem as $subitem) {
-                            if ($subitem["id"] == $this->pageId) {
-                                $pageName = $subitem->url;
-                                break;
-                            } else {
-                                $l = 0;
-                                foreach ($subitem as $value) {
-                                    $l = $l + 1;
-                                }
-                                if ($l > 3) {
-                                    foreach ($subitem->submenu->subitem as $subitem) {
-                                        if ($subitem["id"] == $this->pageId) {
-                                            $pageName = $subitem->url;
-                                            break;
-                                        } else {
-                                            $l = 0;
-                                            foreach ($subitem as $value) {
-                                                $l = $l + 1;
-                                            }
-                                            if ($l > 3) {
-                                                foreach ($subitem->submenu->subitem as $subitem) {
-                                                    if ($subitem["id"] == $this->pageId) {
-                                                        $pageName = $subitem->url;
-                                                        break;
-                                                    } else {
-                                                        $l = 0;
-                                                        foreach ($subitem as $value) {
-                                                            $l = $l + 1;
-                                                        }
-                                                        if ($l > 3) {
-                                                            foreach ($subitem->submenu->subitem as $subitem) {
-                                                                if ($subitem["id"] == $this->pageId) {
-                                                                    $pageName = $subitem->url;
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return $pageName;
-    }
-
-    function getId($pid) {
-        list($this->modulePageId, $this->pageId) = explode("-", $pid);
     }
 
     function startElement($parser, $name, $attrs) {
@@ -266,6 +187,82 @@ class Menu {
         $this->menu .= "<?$target $data?>\n";
     }
 
+    function getId($pid) {
+        list($this->modulePageId, $this->pageId) = explode("-", $pid);
+    }
+    
+    function getModuleName($pid) {
+        $this->getId($pid);
+        $GLOBALS["CORE"]["page"]["module_menu_id"] = $this->modulePageId;
+        $moduleName = $GLOBALS["CORE"]["module"]["names"][$this->modulePageId];
+        return $moduleName;
+    }
+
+    function getPageName($pid, $xmlstr) {
+        if (!$this->pageId) {
+            $pageName = "index.php";
+        } else {
+            $xml = simplexml_load_file($xmlstr);
+            foreach ($xml->item as $item) {
+                if ($item["id"] == $this->pageId) {
+                    $pageName = $item->url;
+                } else {
+                    $l = 0;
+                    foreach ($item as $value) {
+                        $l = $l + 1;
+                    }
+                    if ($l > 3) {
+                        foreach ($item->submenu->subitem as $subitem) {
+                            if ($subitem["id"] == $this->pageId) {
+                                $pageName = $subitem->url;
+                                break;
+                            } else {
+                                $l = 0;
+                                foreach ($subitem as $value) {
+                                    $l = $l + 1;
+                                }
+                                if ($l > 3) {
+                                    foreach ($subitem->submenu->subitem as $subitem) {
+                                        if ($subitem["id"] == $this->pageId) {
+                                            $pageName = $subitem->url;
+                                            break;
+                                        } else {
+                                            $l = 0;
+                                            foreach ($subitem as $value) {
+                                                $l = $l + 1;
+                                            }
+                                            if ($l > 3) {
+                                                foreach ($subitem->submenu->subitem as $subitem) {
+                                                    if ($subitem["id"] == $this->pageId) {
+                                                        $pageName = $subitem->url;
+                                                        break;
+                                                    } else {
+                                                        $l = 0;
+                                                        foreach ($subitem as $value) {
+                                                            $l = $l + 1;
+                                                        }
+                                                        if ($l > 3) {
+                                                            foreach ($subitem->submenu->subitem as $subitem) {
+                                                                if ($subitem["id"] == $this->pageId) {
+                                                                    $pageName = $subitem->url;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $pageName;
+    }
 }
 
 ?>

@@ -31,5 +31,5 @@ $CORE["system"]["db_password"] = "12345";
 $CORE["style"]["name"] = "base";
 
 // Company Name
-$CORE["system"]["company_name"] = "Test";
+$CORE["system"]["company_name"] = "Albatros Airlines";
 ?>

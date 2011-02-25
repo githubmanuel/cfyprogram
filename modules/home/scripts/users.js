@@ -48,34 +48,25 @@ window.onload = function ()
     userSearch("all");
 
     //handler for submitting the search form
-    document.getElementsByName("searchform")[0].onsubmit = function ()
-    {
+    document.getElementsByName("searchform")[0].onsubmit = function (){
         return userSearch(document.getElementsByName("searchinp")[0].value);
     }
 
-    document.getElementById("msgdiv").onclick = function(evt)
-    {
+    document.getElementById("msgdiv").onclick = function(evt){
         showMsg("");
     }
 
 }
 
-function showMsg(msg)
-{
+function showMsg(msg){
     document.getElementById("msgdiv").innerHTML = msg;
 	 	
-    if(msg.length==0)
-    {
+    if(msg.length==0){
         document.getElementById("msgdiv").style.display = "none";
-    }
-    else
-    {
-		
+    }else{
         document.getElementById("msgdiv").style.display = "inline";
     }
-	
     Effect.Pulsate("msgdiv");
-
 }
 
 function userSearch(input)

@@ -18,9 +18,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `cfy_base`
 --
-DROP DATABASE `cfy_base`;
-CREATE DATABASE `cfy_base` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `cfy_base`;
+-- DROP DATABASE `cfy_base`;
+-- CREATE DATABASE `cfy_base` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+-- USE `cfy_base`;
 -- --------------------------------------------------------
 
 --

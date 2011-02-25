@@ -27,6 +27,7 @@ $myMenu = new Menu();
 $pid = 0; // page ID, used to call pages
 $module_name = NULL; // name of the module used
 $user_auth = TRUE; // asing security to the page
+$xml_menu = ''; // xml used for menu content
 
 
 if (isset($_GET['pid'])) { // asing page ID form url varible
@@ -42,6 +43,7 @@ if ($pid == 0) { // on ID 0, call the login page
 } else {  // for any other ID call the class menu to asing the page
     $module_name = $myMenu->getModuleName($pid); // get the name of the module called
     $page_name = $myMenu->getPageName($pid, 'modules/' . $module_name . '/conf/menu.xml'); // get the page called
+    $xml_menu = 'modules/' . $module_name . '/conf/menu.xml'; // path tho the xml menu
 }
 if ($user_auth) { // check for user session open
     require_once(PATH_site . "core/bin/user_auth.php");
@@ -49,9 +51,9 @@ if ($user_auth) { // check for user session open
 
 
 $CORE["page"]["content"] = 'modules/' . $module_name . '/bin/' . $page_name; // path to the content page
-$CORE["page"]["menu"] = 'modules/' . $module_name . '/conf/menu.xml'; // path tho the xml menu
-$CORE["module"]["head_content"] = 'modules/' . $module_name . '/conf/config.php';
-$CORE["page"]["head_content"] = $CORE["module"]["head_content"];
+$CORE["page"]["menu"] = $xml_menu;
+$CORE["module"]["head_content"] = 'modules/' . $module_name . '/conf/config.php'; // head content used for module
+$CORE["page"]["head_content"] = $CORE["module"]["head_content"]; // head content use for page
 if (file_exists('modules/' . $module_name . '/conf/config_' . $page_name)) {
     $CORE["page"]["head_content"] = 'modules/' . $module_name . '/conf/config_' . $page_name;
 }

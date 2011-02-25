@@ -26,10 +26,24 @@ class dbconnect {
 
     function createConnection() {
         $msql = new Db;
-        $msql->connect();
     }
 
-    function select($select, $inputfield, $input, $table, $where, $andor, $order, $limit) {
+    function query_result($totalRows) {
+        $result = NULL;
+        $result .= "<total>$totalRows</total>";
+        if ($totalRows > 0) {
+            foreach ($this->data as $item) {
+                $result .= "<result>\r\n";
+                foreach ($item as $key => $value) {
+                    $result .= "<" . $key . ">" . $value . "</" . $key . ">\r\n";
+                }
+                $result .= "</result>\r\n";
+            }
+        }
+        return $result;
+    }
+
+    function select($select, $table, $where, $order, $group, $limit) {
         $this->createConnection();
         $query_result = NULL;
 
@@ -40,18 +54,14 @@ class dbconnect {
             $query .= " * ";
         }
         $query .= " FROM " . $table;
-        if ($input != "all") {
-            $query .= " WHERE " . $inputfield . " like '%" . $input . "%' ";
-            if ($where) {
-                $query.= $andor . $where;
-            }
-        } else {
-            if ($where) {
-                $query .= " WHERE " . $where;
-            }
-        }
+        if ($where != "all") {
+            $query .= " WHERE " . $where;
+        } 
         if ($order) {
             $query .= " ORDER BY " . $order;
+        }
+        if ($group){
+            $query .= " GROUP BY " . $group;
         }
         if ($limit) {
             $query .= " LIMIT " . $limit;
@@ -69,25 +79,9 @@ class dbconnect {
         } while ($row_rsUsuarios = mysql_fetch_assoc($rsUsuarios));
 
         $query_result = $this->query_result($totalRows);
-        
+
         //$query_result = $query;
         return $query_result;
-       
-    }
-
-    function query_result($totalRows) {
-        $result = NULL;
-        $result .= "<total>$totalRows</total>";
-        if ($totalRows > 0) {
-            foreach ($this->data as $item) {
-                $result .= "<result>\r\n";
-                foreach ($item as $key => $value) {
-                    $result .= "<" . $key . ">" . $value . "</" . $key . ">\r\n";
-                }
-                $result .= "</result>\r\n";
-            }
-        }
-        return $result;
     }
 
     function update($myInput, $key, $table) {
@@ -110,8 +104,8 @@ class dbconnect {
 
         $query = sprintf("INSERT INTO %s (%s) VALUES (%s) ",
                         $table,
-                        $this->getInsertKey($myInput),
-                        $this->getInsertValue($myInput));
+                        $this->getInsertKeyValue($myInput, TRUE),
+                        $this->getInsertKeyValue($myInput, FALSE));
 
         $query_result = mysql_query($query) or die(mysql_error());
         //$query_result = $query;
@@ -145,26 +139,18 @@ class dbconnect {
         return $returnData;
     }
 
-    function getInsertKey($myInput) {
+    function getInsertKeyValue($myInput, $isKey) {
         $returnData = NULL;
-
         foreach ($myInput as $key => $value) {
-            $returnData .= $key . ", ";
+            if ($isKey){
+                $returnData .= $key . ", ";
+            } else {
+                $returnData .= "'" . $value . "', ";
+            }
         }
         $returnData = substr($returnData, 0, -2);
         return $returnData;
     }
-
-    function getInsertValue($myInput) {
-        $returnData = NULL;
-        foreach ($myInput as $key => $value) {
-
-            $returnData .= "'" . $value . "', ";
-        }
-        $returnData = substr($returnData, 0, -2);
-        return $returnData;
-    }
-
 }
 
 ?>

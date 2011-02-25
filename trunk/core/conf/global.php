@@ -19,8 +19,8 @@
  */
 
 require_once(PATH_site . "core/conf/config.php"); // Configuration varibles
-// Modules Variables
 
+// Modules Variables
 $CORE["module"]["names"] = array(0=>"");
 $xml = simplexml_load_file(PATH_site . "core/conf/modules.xml");
 foreach ($xml->names as $item) {

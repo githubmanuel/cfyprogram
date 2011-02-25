@@ -68,12 +68,12 @@ switch ($action) {
         break;
 
     case "getuser" :
-        $xml = $myData->select("username", "username", "all", "core_user", "", "", "username ASC", "");
+        $xml = $myData->select("username", "core_user", "all", "username ASC", "", "");
         break;
 
     case "getsection" :
         $where = " ( `from` = '" . $username . "' and `to` = '" . $recive . "') or ( `from` = '" . $recive . "' and `to` = '" . $username . "') ";
-        $xml = $myData->select("", "", "all", "core_chat", $where, "", " id ASC", "");
+        $xml = $myData->select("", "core_chat", $where, "id ASC", "", "");
         $myInput = array(recd => "1");
         $myData->update($myInput, " `from` ='" . $recive . "' and `to`='" . $username . "'", "core_chat");
         break;
@@ -84,8 +84,8 @@ switch ($action) {
         break;
 
     case "updateusers" :
-        $where = " `to` = '" . $username . "'  group by `from` ";
-        $xml = $myData->select(" min(recd) as recd, `from` ", "", "all", "core_chat", $where, "", "", "");
+        $where = " `to` = '" . $username . "' ";
+        $xml = $myData->select(" min(recd) as recd, `from` ", "core_chat", $where, "", "`from`", "");
         break;
 
     default :

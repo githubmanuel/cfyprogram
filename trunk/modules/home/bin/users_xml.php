@@ -45,8 +45,12 @@ $sinput = "";
 if (isset($_GET['sinput'])) {
     $sinput = mysql_escape_string(substr(trim($_GET['sinput']), 0, 255));
 }
-
-$xml = $myData->select("", "username", $sinput, "core_user", "", "", "", "");
+if ($sinput == "all") {
+    $where = $sinput;
+} else {
+    $where = "username like '%" . $sinput . "%' ";
+}
+$xml = $myData->select("", "core_user", $where, "", "", "");
 $xml .= "</search-results>";
 echo $xml;
 ?>

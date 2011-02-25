@@ -56,7 +56,6 @@ class LoginModule {
      */
     function __construct() {
         $msql = new Db;
-        $msql->connect();
         $this->is_login();
     }
 
@@ -118,7 +117,6 @@ class LoginModule {
         $_SESSION['MM_Username'] = $_POST['username'];
         $_SESSION['MM_UserGroup'] = $this->userGroup;
     }
-
 }
 
 ?>

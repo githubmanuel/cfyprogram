@@ -21,20 +21,14 @@ require_once(PATH_site . "core/classes/db.php");
 require_once(PATH_site . "core/conf/global.php");
 
 class conf_var {
-
     function __construct($table) {
-
+        
         $msql = new Db;
-        $msql->connect();
-
         $query = "SELECT * FROM " . $table . " WHERE status=0 ORDER BY id ";
-
         $rsUsuarios = mysql_query($query);
         $row_rsUsuarios = mysql_fetch_assoc($rsUsuarios);
-
         $contents = NULL;
         $filename = PATH_site . "core/conf/modules.xml";
-
         $contents = '<?xml version="1.0" encoding="UTF-8"?>
                     <!--
 
@@ -54,7 +48,6 @@ class conf_var {
 
                     -->
                     <modules>';
-
         do {
            $contents .= '<names>
                             <id>'.$row_rsUsuarios["id"].'</id>
@@ -74,5 +67,4 @@ class conf_var {
             fclose($fr);
         }
     }
-
 ?>

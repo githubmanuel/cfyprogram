@@ -41,44 +41,9 @@ require(PATH_site . "core/conf/global.php");
 
 class Db {
 
-    /**
-     * Connects to mysql and check if the table is existing
-     * @return void
-     * @access public
-     */
-    function connect() {
-
+    function __construct() {
         $connect = mysql_connect($GLOBALS["CORE"]["system"]["db_host"], $GLOBALS["CORE"]["system"]["db_username"], $GLOBALS["CORE"]["system"]["db_password"]);
         $select_db = mysql_select_db($GLOBALS["CORE"]["system"]["db_name"], $connect);
-        /*if (!$connect) {
-            $errno = mysql_errno();
-            switch ($errno) {
-                case 1045 : {
-                        $this->error();
-                        break;
-                    }
-            }
-        } elseif (!$select_db) {
-            $this->error();
-            break;
-        }*/
     }
-    /**
-     * Displays the html in the page with mysql error
-     * @return void
-     * @access private
-     */
-    function error() {
-        echo "<div style='width:350;margin:auto;text-align:center;font-family:Arial'>" .
-        "<span style='font-size:15px;color:red'>MYSQL SERVER ERROR : " . mysql_error() .
-        "</span></div>";
-        echo "<div style='width:350;margin:auto;text-align:center;margin-top:10px;font-family:Arial'>" .
-        "You must edit first the <b>config.php</b> file and input your correct MySQL account, this" .
-        "file is located under this <b>login</b> folder." .
-        "<p>Note: if  the database TABLE doesn't exist this module will automatically create one.</p>" .
-        "<p>After done editing the config.php try to refresh this page</p>.</div>";
-        die();
-    }
-
 }
 ?> 

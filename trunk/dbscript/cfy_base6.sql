@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `cfy_base` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `cfy_base`;
+CREATE DATABASE  IF NOT EXISTS `albatros_cfy_base` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `albatros_cfy_base`;
 -- MySQL dump 10.13  Distrib 5.1.40, for Win32 (ia32)
 --
 -- Host: localhost    Database: cfy_base
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `core_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user` (
-  `username` varchar(15) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `password` varchar(15) NOT NULL,
   `level` int(11) NOT NULL,
   `creation_date` datetime NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `core_user` (
 
 LOCK TABLES `core_user` WRITE;
 /*!40000 ALTER TABLE `core_user` DISABLE KEYS */;
-INSERT INTO `core_user` VALUES ('admin','juan316',0,'2010-10-05 01:01:01',0,'2011-02-01 14:36:35'),('general','12345',0,'2010-10-05 04:48:00',0,'0000-00-00 00:00:00');
+INSERT INTO `core_user` VALUES ('admin','juan316',0,'2010-10-05 01:01:01',0,'2011-02-01 14:36:35');
 /*!40000 ALTER TABLE `core_user` ENABLE KEYS */;
 UNLOCK TABLES;
 

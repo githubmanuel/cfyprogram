@@ -58,10 +58,8 @@ $myInput = array(print_name => $print, status => $status);
 
 $result = $myData->update($myInput, "id=" . $id, "core_module_var");
 
-$sinput = "all";
-
 if ($result == "1"){
-    $xml = $myData->select("", "id", $sinput, "core_module_var", "", "", "id ASC", "");
+    $xml = $myData->select("", "core_module_var", "all", "id ASC", "", "");
 }else{
     $xml = "error";
 }

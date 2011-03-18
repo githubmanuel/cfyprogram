@@ -18,7 +18,7 @@ var speed = 200;
 
 $(document).ready(function(){
     showmsg("Espere un momento por favor...");
-    getXML("modules/booking/bin/destination_xml.php", "appendResult");
+    getXML("modules/booking/bin/destination_xml.php?action=search", "appendResult");
 });
 
 function getXML(xmlfile, callback){
@@ -26,7 +26,12 @@ function getXML(xmlfile, callback){
         type: "GET",
         url: xmlfile,
         dataType: "xml",
-        success: eval(callback)
+        timeout: 5000,
+        success: eval(callback),
+        error: function(err, e){
+                hidemsg();
+            alert("error : " + err + " - " + e);
+        }
     });
 }
     
@@ -94,17 +99,17 @@ function appendResult(xml){
                 $("#newbotton").slideDown(speed);
             });
         });
-        $("#item-new").slideDown(speed);;
+        $("#item-new").slideDown(speed);
     });
     hidemsg();
 }
 
 function editCall(id, name){
-    getXML("modules/booking/bin/destination_update.php?id="+id+"&name="+name, "handlerEdit");
+    getXML("modules/booking/bin/destination_xml.php?action=update&id="+id+"&name="+name, "handlerEdit");
 }
 
 function addNewCall(id, name){
-    getXML("modules/booking/bin/destination_insert.php?id="+id+"&name="+name, "handlerEdit")
+    getXML("modules/booking/bin/destination_xml.php?action=insert&id="+id+"&name="+name, "handlerEdit")
 }
 
 function handlerEdit(xml){
@@ -117,7 +122,7 @@ function handlerEdit(xml){
 }
 
 function deleteCall(id){
-    getXML("modules/booking/bin/destination_delete.php?id="+id, "handlerDelete")
+    getXML("modules/booking/bin/destination_xml.php?action=delete&id="+id, "handlerDelete")
 }
 
 function handlerDelete(xml){

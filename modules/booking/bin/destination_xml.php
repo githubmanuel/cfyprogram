@@ -41,9 +41,46 @@ require_once (PATH_site . 'core/classes/dbquery.php');
 $myData = new dbconnect();
 $xml = "";
 
-$sinput = "all";
+$action = "";
+if (isset($_GET['action'])) {
+    $action = mysql_escape_string(substr(trim($_GET['action']), 0, 255));
+}
 
-$xml = $myData->select("", "bk_destination", "all", "id ASC", "", "");
+$id = "";
+if (isset($_GET['id'])) {
+    $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
+}
+
+$name = "";
+if (isset($_GET['name'])) {
+    $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
+}
+
+switch ($action) {
+    case "search" :
+        $result = "1";
+        break;
+    case "update" :
+        $myInput = array(name => $name);
+        $result = $myData->update($myInput, "id=" . $id, "bk_destination");
+        break;
+    case "insert" :
+        $myInput = array(id => $id, name => $name);
+        $result = $myData->insert($myInput, "bk_destination");
+        break;
+    case "delete" :
+        $result = $myData->delete("id=" . $id, "bk_destination");
+        break;
+    default :
+        $xml = "no action";
+}
+
+if ($result == "1") { // check for the result, and read the xml.
+    $xml = $myData->select("", "bk_destination", "all", "id ASC", "", "");
+} else {
+    $xml = "error";
+}
+
 $xml .= "</search-results>";
 echo $xml;
 ?>

@@ -110,5 +110,5 @@
         </script>
 
     </div>
-    <div class="default">Default username: admin / password: juan316</div>
+<!--    <div class="default" >Default username: admin / password: juan316</div> -->
 </div>

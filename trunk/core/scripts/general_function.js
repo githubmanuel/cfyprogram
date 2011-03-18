@@ -84,7 +84,7 @@ function hidemsg(){
 
 function loadChat(){
     $("<chat>").appendTo("body");
-    $("<chat_tittle>").html(myUser).appendTo("chat");
+    $("<chat_tittle>").html(" Mensajeria ").appendTo("chat");
     $("<chat_text>").css("display", "none").appendTo("chat");
     $("chat_tittle").click(function(){
         if (xcbutton){

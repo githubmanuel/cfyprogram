@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `albatros_cfy_base` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `albatros_cfy_base`;
+CREATE DATABASE  IF NOT EXISTS `cfy_base` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `cfy_base`;
 -- MySQL dump 10.13  Distrib 5.1.40, for Win32 (ia32)
 --
 -- Host: localhost    Database: cfy_base
@@ -196,7 +196,7 @@ CREATE TABLE `core_module_var` (
 
 LOCK TABLES `core_module_var` WRITE;
 /*!40000 ALTER TABLE `core_module_var` DISABLE KEYS */;
-INSERT INTO `core_module_var` VALUES (2,'payroll','Nomina',0),(1,'home','Inicio',0),(3,'admin','Administracion',0),(5,'budget','Presupuesto',0),(4,'booking','Reservaciones',0);
+INSERT INTO `core_module_var` VALUES (99,'home','Conficuracion',0),(2,'payroll','Nomina',0),(3,'admin','Administracion',0),(5,'budget','Presupuesto',0),(4,'booking','Reservaciones',0);
 /*!40000 ALTER TABLE `core_module_var` ENABLE KEYS */;
 UNLOCK TABLES;
 

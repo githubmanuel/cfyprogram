@@ -27,7 +27,7 @@ if (defined('E_DEPRECATED')) {
 
 define('PATH_thisScript', str_replace('//', '/', str_replace('\\', '/', (PHP_SAPI == 'cgi' || PHP_SAPI == 'isapi' || PHP_SAPI == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME']))));
 
-define('PATH_site', str_replace("/modules/booking/bin", "/", dirname(PATH_thisScript)));
+define('PATH_site', str_replace("/modules/condo/bin", "/", dirname(PATH_thisScript)));
 
 
 //sleep(2);
@@ -57,7 +57,7 @@ if (isset($_GET['name'])) {
 }
 
 switch ($action) {
-    case "search" :
+    case "open" :
         $result = "1";
         break;
     case "update" :

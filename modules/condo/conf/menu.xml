@@ -29,8 +29,8 @@ Commnents:
     <submenu>
       <subitem id="2">
         <type>pid</type>
-        <url>destination.php</url>
-        <name>Destinos</name>
+        <url>owners.php</url>
+        <name>Propietarios</name>
       </subitem>
     </submenu>
   </item>

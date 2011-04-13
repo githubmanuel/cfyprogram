@@ -23,6 +23,7 @@
     <h2>Propietarios</h2>
     <p>Crear, Editar o Borrar los propietarios</p>
     <fcontainer>
+        <ftotal id="new"></ftotal>
     </fcontainer>
     <feditor>
     </feditor>

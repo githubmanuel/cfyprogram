@@ -18,7 +18,7 @@ var speed = 200;
 
 $(document).ready(function(){
     showmsg("Espere un momento por favor...");
-    getXML("modules/booking/bin/destination_xml.php?action=search", "appendResult");
+    openTable();
 });
 
 function getXML(xmlfile, callback){
@@ -29,56 +29,32 @@ function getXML(xmlfile, callback){
         timeout: 5000,
         success: eval(callback),
         error: function(err, e){
-                hidemsg();
+            hidemsg();
             alert("error : " + err + " - " + e);
         }
     });
 }
 
+function openTable(){
 
-function appendResult(xml){
+    getXML("modules/condo/bin/owners_xml.php?action=open", "appendOpenTable");
+
+}
+
+function handlerOpenTable(xml){
     $("fcontainer").empty();
     var totalRow = $(xml).find("total").text();
     if (totalRow > 0){
         $(xml).find("result").each(function(){
             var id = $(this).find("id").text();
             var name = $(this).find("name").text();
+            
+            appentOpenTable(id,name);
 
-            $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
-            $("<flabel>").attr("id", "label-"+id).html(name).appendTo("#item-"+id);
-            $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
-            $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
-            $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
-            $("<input>").attr("type", "text").attr("id", "name-"+id).attr("value", name).appendTo("#field-"+id);
-            $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
-            $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
-            $("#editbotton-"+id).click(function(){
-                $("#label-"+id).slideUp(speed, function(){
-                    $("#field-"+id).slideDown(speed);
-                });
-            });
-            $("#deletebotton-"+id).click(function(){
-                if(confirm("Esta seguro que desea borra el registro " + id)){
-                    showmsg("Su data se esta borrando.<br /><br />Espere un momento por favor....");
-                    deleteCall(id);
-                    $("#item-"+id).slideUp(speed, function(){
-                        $("#item-"+id).remove();
-                    });
-                }
-            });
-            $("#savebotton-"+id).click(function(){
-                showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
-                var newname = $("#name-"+id).val();
-                editCall(id, newname);
-            });
-            $("#cancelbotton-"+id).click(function(){
-                $("#field-"+id).slideUp(speed, function(){
-                    $("#label-"+id).slideDown(speed);
-                });
-            });
         });
     }
-    $("<ftotal>").attr("id", "new").html("Se encontraron " + totalRow + " registros").appendTo("fcontainer");
+    
+    $("#new").html("Se encontraron " + totalRow + " registros");
     $("<a>").attr("id", "newbotton").attr("title","Nuevo").addClass("newbotton").appendTo("#new");
     $("#newbotton").click(function(){
         $("#newbotton").slideUp(speed);
@@ -102,7 +78,46 @@ function appendResult(xml){
         });
         $("#item-new").slideDown(speed);
     });
+    
     hidemsg();
+
+}
+
+function appendOpenTable(id, name){
+    
+    $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
+    $("<flabel>").attr("id", "label-"+id).html(name).appendTo("#item-"+id);
+    $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
+    $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
+    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
+    $("<input>").attr("type", "text").attr("id", "name-"+id).attr("value", name).appendTo("#field-"+id);
+    $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
+    $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
+    $("#editbotton-"+id).click(function(){
+        $("#label-"+id).slideUp(speed, function(){
+            $("#field-"+id).slideDown(speed);
+        });
+    });
+    $("#deletebotton-"+id).click(function(){
+        if(confirm("Esta seguro que desea borra el registro " + id)){
+            showmsg("Su data se esta borrando.<br /><br />Espere un momento por favor....");
+            deleteCall(id);
+            $("#item-"+id).slideUp(speed, function(){
+                $("#item-"+id).remove();
+            });
+        }
+    });
+    $("#savebotton-"+id).click(function(){
+        showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
+        var newname = $("#name-"+id).val();
+        editCall(id, newname);
+    });
+    $("#cancelbotton-"+id).click(function(){
+        $("#field-"+id).slideUp(speed, function(){
+            $("#label-"+id).slideDown(speed);
+        });
+    });
+
 }
 
 function editCall(id, name){

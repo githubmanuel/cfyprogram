@@ -17,13 +17,9 @@
 
                     -->
                     <modules><names>
-                            <id>1</id>
-                            <name>home</name>
-                            <print>Inicio</print>
-                        </names><names>
                             <id>2</id>
                             <name>payroll</name>
-                            <print>Personal</print>
+                            <print>Nomina</print>
                         </names><names>
                             <id>3</id>
                             <name>admin</name>
@@ -36,4 +32,12 @@
                             <id>5</id>
                             <name>budget</name>
                             <print>Presupuesto</print>
+                        </names><names>
+                            <id>6</id>
+                            <name>condo</name>
+                            <print>Condominio</print>
+                        </names><names>
+                            <id>99</id>
+                            <name>home</name>
+                            <print>Configuración</print>
                         </names></modules>

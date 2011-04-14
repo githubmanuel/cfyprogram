@@ -30,7 +30,7 @@ $CORE["module"]["print_name"] = array(1 => 'Inicio');
 
 /* Ajax Login Module v1.1 */
 /* If login successful then it will redirect to */
-$CORE["login"]["success_login_goto"] = "?pid=1";
+$CORE["login"]["success_login_goto"] = "?pid=99";
 
 /* if the defined table in USERS_TABLE_NAME doesn't exist in the Database,
  * this module  will attempt to create.

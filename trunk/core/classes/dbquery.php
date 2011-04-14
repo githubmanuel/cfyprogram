@@ -79,8 +79,8 @@ class dbconnect {
         } while ($row_rsUsuarios = mysql_fetch_assoc($rsUsuarios));
 
         $query_result = $this->query_result($totalRows);
-
         //$query_result = $query;
+
         return $query_result;
     }
 

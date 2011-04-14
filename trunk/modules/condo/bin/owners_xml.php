@@ -56,27 +56,29 @@ if (isset($_GET['name'])) {
     $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
 }
 
+$table = "co_owners";
+
 switch ($action) {
     case "open" :
         $result = "1";
         break;
     case "update" :
         $myInput = array(name => $name);
-        $result = $myData->update($myInput, "id=" . $id, "bk_destination");
+        $result = $myData->update($myInput, "id=" . $id, $table);
         break;
     case "insert" :
         $myInput = array(id => $id, name => $name);
-        $result = $myData->insert($myInput, "bk_destination");
+        $result = $myData->insert($myInput, $table);
         break;
     case "delete" :
-        $result = $myData->delete("id=" . $id, "bk_destination");
+        $result = $myData->delete("id=" . $id, $table);
         break;
     default :
         $xml = "no action";
 }
 
 if ($result == "1") { // check for the result, and read the xml.
-    $xml = $myData->select("", "bk_destination", "all", "id ASC", "", "");
+    $xml = $myData->select("", $table, "all", "id_owners ASC", "", "");
 } else {
     $xml = "error";
 }

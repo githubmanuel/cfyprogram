@@ -17,7 +17,7 @@
 var speed = 200;
 
 $(document).ready(function(){
-    showmsg("Espere un momento por favor...");
+//    showmsg("Espere un momento por favor...");
     openTable();
 });
 
@@ -37,7 +37,7 @@ function getXML(xmlfile, callback){
 
 function openTable(){
 
-    getXML("modules/condo/bin/owners_xml.php?action=open", "appendOpenTable");
+    getXML("modules/condo/bin/owners_xml.php?action=open", "handlerOpenTable");
 
 }
 
@@ -46,15 +46,19 @@ function handlerOpenTable(xml){
     var totalRow = $(xml).find("total").text();
     if (totalRow > 0){
         $(xml).find("result").each(function(){
-            var id = $(this).find("id").text();
+            var id = $(this).find("id_owners").text();
+            var id_doc = $(this).find("id_doc").text();
             var name = $(this).find("name").text();
+            var lastname = $(this).find("lastname").text();
+            var address = $(this).find("address").text();
+            var creation_date = $(this).find("creation_date").text();
             
-            appentOpenTable(id,name);
+            appendOpenTable(id, id_doc, name, lastname, address, creation_date);
 
         });
     }
     
-    $("#new").html("Se encontraron " + totalRow + " registros");
+    $("<ftotal>").attr("id", "new").html("Se encontraron " + totalRow + " registros").appendTo("#fcontainer");
     $("<a>").attr("id", "newbotton").attr("title","Nuevo").addClass("newbotton").appendTo("#new");
     $("#newbotton").click(function(){
         $("#newbotton").slideUp(speed);
@@ -83,10 +87,10 @@ function handlerOpenTable(xml){
 
 }
 
-function appendOpenTable(id, name){
-    
+function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
+    alert(id + name);
     $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
-    $("<flabel>").attr("id", "label-"+id).html(name).appendTo("#item-"+id);
+    $("<flabel>").attr("id", "label-"+id).html(id_doc + "-" + name +" "+lastname ).appendTo("#item-"+id);
     $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
     $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
     $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);

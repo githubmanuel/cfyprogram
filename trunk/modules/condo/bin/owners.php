@@ -22,8 +22,23 @@
 <section>
     <h2>Propietarios</h2>
     <p>Crear, Editar o Borrar los propietarios</p>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Documento</td>
+                <td>Nombre</td>
+                <td>Apellidos</td>
+                <td>Direccion</td>
+                <td>Fecha de Registro</td>
+                          
+                </tr>
+            </thead>
+            <tbody id="trow">          
+            </tbody>
+        </table>
     <fcontainer>
-        <ftotal id="new"></ftotal>
     </fcontainer>
     <feditor>
     </feditor>

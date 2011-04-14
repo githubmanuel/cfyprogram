@@ -71,11 +71,11 @@ class LoginModule {
             if (isset($_GET['accesscheck'])) {
                 $GLOBALS["CORE"]["login"]["success_login_goto"] = $_GET['accesscheck'];
             }
-            $strSQL = "SELECT * FROM " . $GLOBALS["CORE"]["login"]["user_table_name"] . "
+            $strSQL = "SELECT username, level  FROM " . $GLOBALS["CORE"]["login"]["user_table_name"] . "
 					   WHERE username ='$username' AND password = '$password'";
             $result = mysql_query($strSQL);
             $row = mysql_fetch_row($result);
-            $this->userGroup = $row[2];
+            $this->userGroup = $row[1];
             $exist = count($row);
             if ($exist >= 2) {
                 $this->jscript_location();

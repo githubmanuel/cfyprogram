@@ -22,7 +22,15 @@
 <section>
     <h2>Propietarios</h2>
     <p>Crear, Editar o Borrar los propietarios</p>
-    <table>
+    <feditor style="display: none;">
+        Documento: <input type="text" id="id_doc" value=""/><br />
+        Nombre: <input type="text" id="name" value=""/><br />
+        Apellidos: <input type="text" id="lastname" value=""/><br />
+        Direccion: <input type="text" id="address" value=""/><br />
+
+    </feditor>
+   <fcontainer>
+          <table>
         <thead>
             <tr>
                 <td>Documento</td>
@@ -36,9 +44,8 @@
         <tbody id="trow">
         </tbody>
     </table>
-    <fcontainer>
+
     </fcontainer>
-    <feditor>
-    </feditor>
+
 </section>
 

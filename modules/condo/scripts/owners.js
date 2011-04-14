@@ -18,7 +18,7 @@ var speed = 200;
 var  styleChooser = false;
  
 $(document).ready(function(){
-//    showmsg("Espere un momento por favor...");
+    //    showmsg("Espere un momento por favor...");
     openTable();
 });
 
@@ -43,7 +43,7 @@ function openTable(){
 }
 
 function handlerOpenTable(xml){
-    $("fcontainer").empty();
+    //$("fcontainer").empty();
 
     styleChooser = false;
 
@@ -62,7 +62,7 @@ function handlerOpenTable(xml){
         });
     }
     
-    $("<ftotal>").attr("id", "new").html("Se encontraron " + totalRow + " registros").appendTo("#fcontainer");
+    $("<ftotal>").attr("id", "new").html("Se encontraron " + totalRow + " registros").appendTo("fcontainer");
     $("<a>").attr("id", "newbotton").attr("title","Nuevo").addClass("newbotton").appendTo("#new");
     $("#newbotton").click(function(){
         $("#newbotton").slideUp(speed);
@@ -97,7 +97,6 @@ function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
     var a = "";
     if(styleChooser) a = "1"; else a = "2";
 
-
     $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
     $("<td>").attr("id", "id_doc-"+id).html(id_doc).appendTo("#item-"+id);
     $("<td>").attr("id", "name-"+id).html(name).appendTo("#item-"+id);
@@ -109,13 +108,13 @@ function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
     $("<flabel>").attr("id", "label-"+id).appendTo("#editor-"+id);
     $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
     $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
-    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#editor-"+id);
-    $("<input>").attr("type", "text").attr("id", "name-"+id).attr("value", name).appendTo("#field-"+id);
+    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("feditor");
     $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
     $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
     $("#editbotton-"+id).click(function(){
         $("#label-"+id).slideUp(speed, function(){
             $("#field-"+id).slideDown(speed);
+            $("feditor").slideDown(speed);
         });
     });
     $("#deletebotton-"+id).click(function(){
@@ -136,6 +135,7 @@ function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
         $("#field-"+id).slideUp(speed, function(){
             $("#label-"+id).slideDown(speed);
         });
+        $("feditor").slideUp(speed);
     });
 
 }

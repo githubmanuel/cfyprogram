@@ -43,3 +43,9 @@ ftotal{
 .editor{
     background-color: #FFFFFF;
 }
+feditor{
+    width: 350px;
+    display: block;
+    float: right;
+
+}

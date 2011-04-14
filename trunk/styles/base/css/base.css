@@ -247,45 +247,27 @@ fcontainer{
     display: block;
     float: left;
 }
-flabel{
-    width: 250px;
-    height: 25px;
-    padding-top: 5px;
-    display: block;
-    float: left;
-    clear: both;
-}
-ffield{
-    width: 250px;
-    height: 25px;
-    padding-top: 5px;
-    display: block;
-    float: left;
-}
-fitem{
-    font-size:13px;
-    font-weight:bold;
-    clear: both;
-    height: 30px;
-    display: block;
-    float: left;
-}
-
-
-ftotal{
-    width: 250px;
-    height: 25px;
-    padding-top: 2px;
-    float: left;
-    clear: both;
-    font-size:12px;
+thead{
+    background-color: #ADB96E;
+    color: #ffffff;
+    padding: 5px;
+    margin: 5px;
     text-align: center;
-    display: block;
-    margin-top: 3px;
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: #cccccc;
 }
+tbody{
+    display: inline;
+    padding: 5px;
+    margin: 5px;
+}
+.row1{
+    background-color: #FFFFFF;
+
+}
+.row2{
+    background-color: #CCC49F;
+}
+
+/* botton used on all the pages to edit */
 .editbotton, .savebotton, .cancelbotton, .deletebotton, .newbotton{
     display: block;
     width: 25px;

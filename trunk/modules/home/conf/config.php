@@ -20,10 +20,6 @@
 
 $head_script = '<link rel="stylesheet" type="text/css" href="' . $CORE["system"]["site_url"] . 'modules/home/css/home.css">';
 
-if ($pid == 0) {
-    $head_script .= '<link rel="stylesheet" type="text/css" href="' . $CORE["system"]["site_url"] . 'modules/home/css/login.css">';
-}
-
 echo $head_script;
 ?>
 

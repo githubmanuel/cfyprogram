@@ -17,11 +17,6 @@ Commnents:
 
 -->
 <menu>
-    <item id="0">
-        <type>pid</type>
-        <url>index.php</url>
-        <name>Principal</name>
-    </item>
     <item id="1">
         <type>submenu</type>
         <url>#</url>

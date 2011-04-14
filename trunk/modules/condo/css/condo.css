@@ -1,0 +1,45 @@
+/* styles for content in general*/
+
+flabel{
+
+    height: 25px;
+    padding-top: 5px;
+    display: block;
+    float: left;
+    clear: both;
+}
+
+ffield{
+
+    height: 25px;
+    padding-top: 5px;
+    display: block;
+    float: left;
+}
+
+fitem{
+    font-size:13px;
+    font-weight:bold;
+    clear: both;
+    height: 30px;
+    display: block;
+    float: left;
+}
+
+ftotal{
+
+    height: 25px;
+    padding-top: 2px;
+    float: left;
+    clear: both;
+    font-size:12px;
+    text-align: center;
+    display: block;
+    margin-top: 3px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #cccccc;
+}
+.editor{
+    background-color: #FFFFFF;
+}

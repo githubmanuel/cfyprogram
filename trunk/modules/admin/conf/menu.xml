@@ -17,26 +17,9 @@ Commnents:
 
 -->
 <menu>
-  <item id="0">
-    <type>pid</type>
-    <url>index.php</url>
-    <name>Principal</name>
-  </item>
-  <item id="1">
-    <type>submenu</type>
-    <url>#</url>
-    <name>Ayuda</name>
-    <submenu>
-      <subitem id="2">
+    <item id="1">
         <type>url</type>
-        <url>docs/license.txt</url>
-        <name>Docs</name>
-      </subitem>
-    </submenu>
-  </item>
-  <item id="3">
-    <type>url</type>
-    <url>core/bin/logout.php</url>
-    <name>Salir</name>
-  </item>
+        <url>core/bin/logout.php</url>
+        <name>Salir</name>
+    </item>
 </menu>

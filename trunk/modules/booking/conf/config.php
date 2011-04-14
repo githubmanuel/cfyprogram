@@ -18,6 +18,11 @@
 
  */
 
+if ($pid != 0) {
+    $head_script .= '<link href="' . $CORE["system"]["site_url"] . 'modules/booking/css/booking.css" rel="stylesheet" type="text/css" />';
+
+    echo $head_script;
+}
 echo "";
 ?>
 

@@ -15,7 +15,8 @@
 // Commnents:
 
 var speed = 200;
-
+var  styleChooser = false;
+ 
 $(document).ready(function(){
 //    showmsg("Espere un momento por favor...");
     openTable();
@@ -43,6 +44,9 @@ function openTable(){
 
 function handlerOpenTable(xml){
     $("fcontainer").empty();
+
+    styleChooser = false;
+
     var totalRow = $(xml).find("total").text();
     if (totalRow > 0){
         $(xml).find("result").each(function(){
@@ -88,12 +92,24 @@ function handlerOpenTable(xml){
 }
 
 function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
-    alert(id + name);
-    $("<fitem>").attr("id", "item-"+id).appendTo("fcontainer");
-    $("<flabel>").attr("id", "label-"+id).html(id_doc + "-" + name +" "+lastname ).appendTo("#item-"+id);
+
+    styleChooser = !styleChooser;
+    var a = "";
+    if(styleChooser) a = "1"; else a = "2";
+
+
+    $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
+    $("<td>").attr("id", "id_doc-"+id).html(id_doc).appendTo("#item-"+id);
+    $("<td>").attr("id", "name-"+id).html(name).appendTo("#item-"+id);
+    $("<td>").attr("id", "lastname-"+id).html(lastname).appendTo("#item-"+id);
+    $("<td>").attr("id", "address-"+id).html(address).appendTo("#item-"+id);
+    $("<td>").attr("id", "creation_date-"+id).html(creation_date).appendTo("#item-"+id);
+    $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
+
+    $("<flabel>").attr("id", "label-"+id).appendTo("#editor-"+id);
     $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
     $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
-    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#item-"+id);
+    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("#editor-"+id);
     $("<input>").attr("type", "text").attr("id", "name-"+id).attr("value", name).appendTo("#field-"+id);
     $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
     $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);

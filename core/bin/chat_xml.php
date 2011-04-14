@@ -51,6 +51,11 @@ if (isset($_GET['username'])) {
     $username = mysql_escape_string(substr(trim($_GET['username']), 0, 255));
 }
 
+$password = "";
+if (isset($_GET['password'])) {
+    $password = mysql_escape_string(substr(trim($_GET['password']), 0, 255));
+}
+
 $recive = "";
 if (isset($_GET['recive'])) {
     $recive = mysql_escape_string(substr(trim($_GET['recive']), 0, 255));
@@ -62,6 +67,11 @@ if (isset($_GET['msg'])) {
 }
 
 switch ($action) {
+    case "login" :
+        $where = "username = '" .$username. "' and password = '" . $password . "' ";
+        $xml = $myData->select("username", "core_user", $where, "", "", "");
+        break;
+
     case "online" :
         $myInput = array(online => "CURRENT_TIMESTAMP");
         $xml = $myData->update($myInput, "username='" . $username . "'", "core_user");

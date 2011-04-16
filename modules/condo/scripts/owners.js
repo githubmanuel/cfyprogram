@@ -14,14 +14,17 @@
 // File:
 // Commnents:
 
-var speed = 200;
-var  styleChooser = false;
+var speed = 200; // effect speed 0,2 min
+var styleChooser = false; // variable for change color on table row
+var xml_url = "modules/condo/bin/owners_xml.php"; // url for the xml php file
+var edit_id = 0;
  
 $(document).ready(function(){
-    //    showmsg("Espere un momento por favor...");
-    openTable();
+    showmsg("Espere un momento por favor..."); // msg bos for client
+    openTable(); // function to get data
 });
 
+// ajax call, return xml
 function getXML(xmlfile, callback){
     $.ajax({
         type: "GET",
@@ -36,17 +39,65 @@ function getXML(xmlfile, callback){
     });
 }
 
-function openTable(){
+function setBottonEvent(){
+    // event for new data
+    $("#newbotton").click(function(){
+        edit_id = 0;
+        $("#newbotton").slideUp(speed, function(){// hide new botton
+            $("feditor").slideDown(speed);// show editor panel
+        });
+    });
 
-    getXML("modules/condo/bin/owners_xml.php?action=open", "handlerOpenTable");
+    // function for cancel edit
+    $("#cancelbotton").click(function(){
+        $("feditor").slideUp(speed, function(){ // hide editor panel
+            $("#botton-edit-"+edit_id).slideDown(speed); // show editor bottons
+            $("#newbotton").slideDown(speed);// show new botton
+        });
+    });
 
+    // function for save edit
+    $("#savebotton").click(function(){
+        showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
+        var newid_doc = $("#id_doc").val();
+        var newname = $("#name").val();
+        var newlastname = $("#lastname").val();
+        var newaddress = $("#address").val();
+        var action = "update";
+
+        if (edit_id == 0){
+            action = "insert"
+        }
+        // edit function
+        editCall(action, edit_id, newid_doc, newname, newlastname, newaddress);
+
+        // clean off the form
+        $("#id_doc").attr("value", "");
+        $("#name").attr("value", "");
+        $("#lastname").attr("value", "");
+        $("#address").attr("value", "");
+        $("feditor").slideUp(speed); // close editor panel
+        $("#newbotton").slideDown(speed); // show new botton
+    
+    });
 }
 
-function handlerOpenTable(xml){
-    //$("fcontainer").empty();
+// function to get data
+function openTable(){
+    // ajax call, search for all data
+    getXML(xml_url+"?action=open", "handlerOpenTable");
+    setBottonEvent();
+}
 
+// get data from xml and put it in on local var
+function handlerOpenTable(xml){
+    // empty table row for new data
+    $("#trow").empty();
+
+    // initilize the var for color rows
     styleChooser = false;
 
+    // get xml data to local variables
     var totalRow = $(xml).find("total").text();
     if (totalRow > 0){
         $(xml).find("result").each(function(){
@@ -56,114 +107,84 @@ function handlerOpenTable(xml){
             var lastname = $(this).find("lastname").text();
             var address = $(this).find("address").text();
             var creation_date = $(this).find("creation_date").text();
-            
-            appendOpenTable(id, id_doc, name, lastname, address, creation_date);
 
+            // function to append data to page
+            appendOpenTable(id, id_doc, name, lastname, address, creation_date);
         });
     }
-    
-    $("<ftotal>").attr("id", "new").html("Se encontraron " + totalRow + " registros").appendTo("fcontainer");
-    $("<a>").attr("id", "newbotton").attr("title","Nuevo").addClass("newbotton").appendTo("#new");
-    $("#newbotton").click(function(){
-        $("#newbotton").slideUp(speed);
-        $("<fitem>").attr("id", "item-new").css("display", "none").insertBefore("#new");
-        $("<ffield>").attr("id", "field-new").appendTo("#item-new");
-        $("<input>").attr("type", "text").attr("id", "id-new").attr("value", "id").attr("size", "2").appendTo("#field-new");
-        $("<input>").attr("type", "text").attr("id", "name-new").attr("value", "name").appendTo("#field-new");
-        $("<a>").attr("id", "cancelbotton-new").attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-new");
-        $("<a>").attr("id", "savebotton-new").attr("title","Guardar").addClass("savebotton").appendTo("#field-new");
-        $("#savebotton-new").click(function(){
-            showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
-            var newid = $("#id-new").val();
-            var newname = $("#name-new").val();
-            addNewCall(newid, newname);
-        });
-        $("#cancelbotton-new").click(function(){
-            $("#item-new").slideUp(speed, function(){
-                $(this).remove();
-                $("#newbotton").slideDown(speed);
-            });
-        });
-        $("#item-new").slideDown(speed);
-    });
-    
-    hidemsg();
 
+    // show total and add new botton
+    $("ftotal span").empty();
+    $("ftotal span").html("Se encontraron " + totalRow + " registros");
+    
+    // hide msg box when data load is finish
+    hidemsg();
 }
 
+// put data on table
 function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
 
+    // select color for row
     styleChooser = !styleChooser;
     var a = "";
     if(styleChooser) a = "1"; else a = "2";
 
+    // create a row on fill with data
     $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
     $("<td>").attr("id", "id_doc-"+id).html(id_doc).appendTo("#item-"+id);
     $("<td>").attr("id", "name-"+id).html(name).appendTo("#item-"+id);
     $("<td>").attr("id", "lastname-"+id).html(lastname).appendTo("#item-"+id);
     $("<td>").attr("id", "address-"+id).html(address).appendTo("#item-"+id);
     $("<td>").attr("id", "creation_date-"+id).html(creation_date).appendTo("#item-"+id);
-    $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
 
-    $("<flabel>").attr("id", "label-"+id).appendTo("#editor-"+id);
-    $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#label-"+id);
-    $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#label-"+id);
-    $("<ffield>").attr("id", "field-"+id).css("display", "none").appendTo("feditor");
-    $("<a>").attr("id", "cancelbotton-"+id).attr("title","Cancelar").addClass("cancelbotton").appendTo("#field-"+id);
-    $("<a>").attr("id", "savebotton-"+id).attr("title","Guardar").addClass("savebotton").appendTo("#field-"+id);
+    // create editor bottons on table
+    $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
+    $("<fbotton>").attr("id", "botton-edit-"+id).appendTo("#editor-"+id);
+    $("<a>").attr("id", "deletebotton-"+ id).attr("title","Borrar").addClass("deletebotton").appendTo("#botton-edit-"+id);
+    $("<a>").attr("id", "editbotton-"+ id).attr("title","Editar").addClass("editbotton").appendTo("#botton-edit-"+id);
+
+    // event for edit
     $("#editbotton-"+id).click(function(){
-        $("#label-"+id).slideUp(speed, function(){
-            $("#field-"+id).slideDown(speed);
-            $("feditor").slideDown(speed);
+        edit_id = id;
+        $("#botton-edit-"+id).slideUp(speed, function(){ // hide edit botton
+            $("feditor").slideDown(speed); // show editor panel
         });
+        // TODO: Edit function -  pass variable
     });
+
+    // event for delete
     $("#deletebotton-"+id).click(function(){
         if(confirm("Esta seguro que desea borra el registro " + id)){
             showmsg("Su data se esta borrando.<br /><br />Espere un momento por favor....");
-            deleteCall(id);
-            $("#item-"+id).slideUp(speed, function(){
-                $("#item-"+id).remove();
-            });
+            deleteCall(id); // function to delete items
         }
     });
-    $("#savebotton-"+id).click(function(){
-        showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
-        var newname = $("#name-"+id).val();
-        editCall(id, newname);
-    });
-    $("#cancelbotton-"+id).click(function(){
-        $("#field-"+id).slideUp(speed, function(){
-            $("#label-"+id).slideDown(speed);
-        });
-        $("feditor").slideUp(speed);
-    });
-
 }
 
-function editCall(id, name){
-    getXML("modules/booking/bin/destination_xml.php?action=update&id="+id+"&name="+name, "handlerEdit");
+// delete function
+function deleteCall(id){
+    // ajax call to delete item
+    getXML(xml_url+"?action=delete&id="+id, "handlerEditCall")
 }
 
-function addNewCall(id, name){
-    getXML("modules/booking/bin/destination_xml.php?action=insert&id="+id+"&name="+name, "handlerEdit")
+// edit function
+function editCall(action, id, id_doc, name, lastname, address ){
+    // ajax call to edit and insert base on action
+    getXML(xml_url+"?action="+action+"&id="+id+"&id_doc="+id_doc+"&name="+name+"&lastname="+lastname+"&address="+address, "handlerEditCall");
 }
 
-function handlerEdit(xml){
-    if ($(xml).find("update-result").text()!=" error"){
-        appendResult(xml);
+// handler result for edit and insert
+function handlerEditCall(xml){
+    if ($(xml).find("search-results").text()!=" error"){
+        handlerOpenTable(xml);
     }else{
         alert("error");
     }
-    hidemsg();
 }
 
-function deleteCall(id){
-    getXML("modules/booking/bin/destination_xml.php?action=delete&id="+id, "handlerDelete")
-}
 
-function handlerDelete(xml){
-    if ($(xml).find("update-result").text()==" error"){
-        alert("error");
-    }
-    hidemsg();
-}
+
+
+
+
+

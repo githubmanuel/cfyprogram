@@ -50,10 +50,21 @@ $id = "";
 if (isset($_GET['id'])) {
     $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-
+$id_doc = "";
+if (isset($_GET['id_doc'])) {
+    $id_doc = mysql_escape_string(substr(trim($_GET['id_doc']), 0, 255));
+}
 $name = "";
 if (isset($_GET['name'])) {
     $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
+}
+$lastname = "";
+if (isset($_GET['lastname'])) {
+    $lastname = mysql_escape_string(substr(trim($_GET['lastname']), 0, 255));
+}
+$address = "";
+if (isset($_GET['address'])) {
+    $address = mysql_escape_string(substr(trim($_GET['address']), 0, 255));
 }
 
 $table = "co_owners";
@@ -63,15 +74,15 @@ switch ($action) {
         $result = "1";
         break;
     case "update" :
-        $myInput = array(name => $name);
-        $result = $myData->update($myInput, "id=" . $id, $table);
+        $myInput = array(id_doc => $id_doc, name => $name, lasname => $lastname, address => $address);
+        $result = $myData->update($myInput, "id_owners=" . $id, $table);
         break;
     case "insert" :
-        $myInput = array(id => $id, name => $name);
+        $myInput = array(id_doc => $id_doc, name => $name, lastname => $lastname, address => $address);
         $result = $myData->insert($myInput, $table);
         break;
     case "delete" :
-        $result = $myData->delete("id=" . $id, $table);
+        $result = $myData->delete("id_owners=" . $id, $table);
         break;
     default :
         $xml = "no action";
@@ -82,7 +93,6 @@ if ($result == "1") { // check for the result, and read the xml.
 } else {
     $xml = "error";
 }
-
 $xml .= "</search-results>";
 echo $xml;
 ?>

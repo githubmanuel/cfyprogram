@@ -1,7 +1,7 @@
 /* styles for content in general*/
 
 flabel{
-
+    width: 100px;
     height: 25px;
     padding-top: 5px;
     display: block;
@@ -10,7 +10,7 @@ flabel{
 }
 
 ffield{
-
+    width: 100px;
     height: 25px;
     padding-top: 5px;
     display: block;
@@ -27,7 +27,7 @@ fitem{
 }
 
 ftotal{
-
+    width:100%;
     height: 25px;
     padding-top: 2px;
     float: left;
@@ -40,12 +40,19 @@ ftotal{
     border-top-style: solid;
     border-top-color: #cccccc;
 }
-.editor{
-    background-color: #FFFFFF;
-}
-feditor{
-    width: 350px;
+fbotton{
+    height: 25px;
     display: block;
     float: right;
+    clear: both;
+}
+.editor{
+    background-color: #FFFFFF;
+    width: 50px;
+}
+fcontainer {
+
+}
+fcontainer table{
 
 }

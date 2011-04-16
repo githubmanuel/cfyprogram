@@ -247,16 +247,25 @@ fcontainer{
     display: block;
     float: left;
 }
+
+feditor{
+    width: 350px;
+    display: block;
+    float: right;
+}
+
 thead{
     background-color: #ADB96E;
     color: #ffffff;
     padding: 5px;
-    margin: 5px;
     text-align: center;
 }
 tbody{
     padding: 5px;
-    margin: 5px;
+}
+
+tr{
+    height: 27px;
 }
 .row1{
     background-color: #FFFFFF;

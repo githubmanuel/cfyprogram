@@ -23,28 +23,41 @@
     <h2>Propietarios</h2>
     <p>Crear, Editar o Borrar los propietarios</p>
     <feditor style="display: none;">
-        Documento: <input type="text" id="id_doc" value=""/><br />
-        Nombre: <input type="text" id="name" value=""/><br />
-        Apellidos: <input type="text" id="lastname" value=""/><br />
-        Direccion: <input type="text" id="address" value=""/><br />
+        <flabel>Documento:</flabel>
+        <ffield><input type="text" id="id_doc" value=""/></ffield>
+        <flabel>Nombre:</flabel>
+        <ffield><input type="text" id="name" value=""/></ffield>
+        <flabel>Apellidos:</flabel>
+        <ffield><input type="text" id="lastname" value=""/></ffield>
+        <flabel>Direccion:</flabel>
+        <ffield><input type="text" id="address" value=""/></ffield>
+        <flabel>
+            <fbotton id="botton-save">
+                <a id="cancelbotton" title="Cancelar" class="cancelbotton" ></a>
+                <a id="savebotton" title="Guardar" class="savebotton"></a>
+            </fbotton>
+        </flabel>
 
     </feditor>
-   <fcontainer>
-          <table>
-        <thead>
-            <tr>
-                <td>Documento</td>
-                <td>Nombre</td>
-                <td>Apellidos</td>
-                <td>Direccion</td>
-                <td>Fecha de Registro</td>
-                <td>&nbsp;</td>
-            </tr>
-        </thead>
-        <tbody id="trow">
-        </tbody>
-    </table>
-
+    <fcontainer>
+        <table>
+            <thead>
+                <tr>
+                    <td>Documento</td>
+                    <td>Nombre</td>
+                    <td>Apellidos</td>
+                    <td>Direccion</td>
+                    <td>Fecha de Registro</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody id="trow">
+            </tbody>
+        </table>
+        <ftotal>
+            <span></span>
+            <a id="newbotton"  title="Nuevo" class="newbotton" ></a>
+        </ftotal>
     </fcontainer>
 
 </section>

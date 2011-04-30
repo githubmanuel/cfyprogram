@@ -65,6 +65,10 @@ $msg = "";
 if (isset($_GET['msg'])) {
     $msg = mysql_escape_string(substr(trim($_GET['msg']), 0, 255));
 }
+$lastId = "";
+if (isset($_GET['lastId'])) {
+    $lastId = mysql_escape_string(substr(trim($_GET['lastId']), 0, 255));
+}
 
 switch ($action) {
     case "login" :
@@ -82,7 +86,11 @@ switch ($action) {
         break;
 
     case "getsection" :
+        
         $where = " ( `from` = '" . $username . "' and `to` = '" . $recive . "') or ( `from` = '" . $recive . "' and `to` = '" . $username . "') ";
+        if (isset($lastId)){
+            $where .= " AND id > '" . $lastId . "' ";
+        }
         $xml = $myData->select("", "core_chat", $where, "id ASC", "", "");
         $myInput = array(recd => "1");
         $myData->update($myInput, " `from` ='" . $recive . "' and `to`='" . $username . "'", "core_chat");

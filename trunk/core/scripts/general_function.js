@@ -174,7 +174,7 @@ function closeSection(user){
 function sectionChat(user){
     action = "getsection";
     $.ajax({
-        url: "core/bin/chat_xml.php?action="+action+"&username="+myUser+"&recive="+user,
+        url: "core/bin/chat_xml.php?action="+action+"&username="+myUser+"&recive="+user+"&lastId="+lastId[user],
         dataType: "xml",
         success: function(xml){
             var totalRow = $(xml).find("total").text();

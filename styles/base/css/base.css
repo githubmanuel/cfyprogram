@@ -24,7 +24,7 @@ Commnents:
 body {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-size: 0.9em;
-    color: #666;
+    color: #221122;
     text-decoration: none;
     background-color: #FFF;
     margin: 0px;
@@ -44,11 +44,11 @@ a img { /* this selector removes the default blue border displayed in some brows
 }
 /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
 a:link {
-    color: #42413C;
+    color: #444444;
     text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
 }
 a:visited {
-    color: #6E6C64;
+    color: #111133;
     text-decoration: underline;
 }
 a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
@@ -61,7 +61,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 /* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
 header {
-    background: #ADB96E;
+    background: #aabb88;
     height: 30px;
     padding: 5px 5px 0 0;
     text-align: right;
@@ -73,7 +73,7 @@ header {
 .sidebar {
     float: left;
     width: 180px;
-    background: #EADCAE;
+    background: #cccc88;
     padding-bottom: 10px;
     margin-right: 15px;
 }
@@ -108,14 +108,14 @@ nav ul a, nav ul a:visited { /* grouping these selectors makes sure that your li
                              background: #C6D580;
 }
 nav ul a:hover, nav ul a:active, nav ul a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
-                                                  background: #ADB96E;
+                                                  background: #aabb88;
                                                   color: #FFF;
 }
 
 /* ~~ The footer ~~ */
 footer {
     padding: 5px;
-    background: #CCC49F;
+    background: #aa9966;
     position: relative;/* this gives IE6 hasLayout to properly clear */
     clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
 }
@@ -183,7 +183,7 @@ chat{
     bottom: 0px;
     right: 0px;
     width: 150px;
-    background-color: #C6D580;
+    background-color: #888866;
     padding: 5px 5px 5px 5px;
     font-size: 11px;
 }
@@ -200,9 +200,9 @@ chat_section{
     bottom: 0px;
     right: 160px;
     width: 150px;
-    background-color: #C6D580;
+    background-color: #888866;
     padding: 5px 5px 5px 5px;
-    border-right: solid 1px #ADB96E;
+    border-right: solid 1px #aabb88;
 }
 chat_section_tittle{
     font-weight: bold;
@@ -255,7 +255,7 @@ feditor{
 }
 
 thead{
-    background-color: #ADB96E;
+    background-color: #cccc88;
     color: #ffffff;
     padding: 5px;
     text-align: center;
@@ -272,7 +272,7 @@ tr{
 
 }
 .row2{
-    background-color: #CCC49F;
+    background-color: #aabb88;
 }
 
 /* botton used on all the pages to edit */

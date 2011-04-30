@@ -17,25 +17,13 @@
 
                     -->
                     <modules><names>
-                            <id>2</id>
-                            <name>payroll</name>
-                            <print>Nomina</print>
-                        </names><names>
                             <id>3</id>
-                            <name>admin</name>
-                            <print>Administración</print>
-                        </names><names>
-                            <id>4</id>
                             <name>booking</name>
                             <print>Reservaciones</print>
                         </names><names>
-                            <id>5</id>
+                            <id>4</id>
                             <name>budget</name>
                             <print>Presupuesto</print>
-                        </names><names>
-                            <id>6</id>
-                            <name>condo</name>
-                            <print>Condominio</print>
                         </names><names>
                             <id>99</id>
                             <name>home</name>

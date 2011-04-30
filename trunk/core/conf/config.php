@@ -18,18 +18,18 @@
 
  */
 
-// System variable
-$CORE["system"]["site_url"] = "http://localhost/cfy/";
+// Site URL
+$CORE["system"]["site_url"] = "http://lab.pajarraco.com/cfy/";
 
 // DB variables
 $CORE["system"]["db_host"] = "localhost";
 $CORE["system"]["db_name"] = "cfy_base";
 $CORE["system"]["db_username"] = "cfyadmin";
-$CORE["system"]["db_password"] = "12345";
+$CORE["system"]["db_password"] = "cheale23";
 
-// Style variable
+// Style
 $CORE["style"]["name"] = "base";
 
 // Company Name
-$CORE["system"]["company_name"] = "Albatros Airlines";
+$CORE["system"]["company_name"] = "Lab pajarraco.com";
 ?>

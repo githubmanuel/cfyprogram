@@ -57,7 +57,7 @@ function fixSize(){
     if (winSize >= 600){
         $(".sidebar").height(winSize-72);
         if ($("nav ul a").length > 3){
-            $("nav ul a").height((winSize-180) / $("nav ul a").length);
+            //$("nav ul a").width((winSize-230) / $("nav ul a").length);
         }
     }
 }

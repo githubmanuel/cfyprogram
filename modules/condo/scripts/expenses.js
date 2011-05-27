@@ -16,7 +16,7 @@
 
 var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
-var xml_url = "modules/condo/bin/owners_xml.php"; // url for the xml php file
+var xml_url = "modules/condo/bin/expenses_xml.php"; // url for the xml php file
 var edit_id = 0;
  
 $(document).ready(function(){
@@ -59,19 +59,22 @@ function setBottonEvent(){
     // function for save edit
     $("#savebotton").click(function(){
         showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
-        var newid_doc = $("#id_doc").val();
+        var newcode = $("#code").val();
         var newname = $("#name").val();
-        var newlastname = $("#lastname").val();
-        var newaddress = $("#address").val();
+        var newdescription = $("#description").val();
+        var newtype = $("#type").val();
+        var newamount = $("#amount").val();
 
         // edit function
-        editCall(edit_id, newid_doc, newname, newlastname, newaddress);
+        editCall(edit_id, newcode, newname, newdescription, newtype, newamount);
 
         // clean off the form
-        $("#id_doc").attr("value", "");
+        $("#code").attr("value", "");
         $("#name").attr("value", "");
-        $("#lastname").attr("value", "");
-        $("#address").attr("value", "");
+        $("#description").attr("value", "");
+        $("#type").attr("value", "");
+        $("#amount").attr("value", "");
+        
         $("feditor").slideUp(speed); // close editor panel
         $("#newbotton").slideDown(speed); // show new botton
     
@@ -97,15 +100,16 @@ function handlerOpenTable(xml){
     var totalRow = $(xml).find("total").text();
     if (totalRow > 0){
         $(xml).find("result").each(function(){
-            var id = $(this).find("id_owners").text();
-            var id_doc = $(this).find("id_doc").text();
+            var id = $(this).find("id_expenses").text();
+            var code = $(this).find("code").text();
             var name = $(this).find("name").text();
-            var lastname = $(this).find("lastname").text();
-            var address = $(this).find("address").text();
+            var description = $(this).find("description").text();
+            var type = $(this).find("type").text();
+            var amount = $(this).find("amount").text();
             var creation_date = $(this).find("creation_date").text();
 
             // function to append data to page
-            appendOpenTable(id, id_doc, name, lastname, address, creation_date);
+            appendOpenTable(id, code, name, description, type, amount, creation_date);
         });
     }
 
@@ -118,7 +122,7 @@ function handlerOpenTable(xml){
 }
 
 // put data on table
-function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
+function appendOpenTable(id, code, name, description, type, amount, creation_date ){
 
     // select color for row
     styleChooser = !styleChooser;
@@ -127,10 +131,11 @@ function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
 
     // create a row on fill with data
     $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
-    $("<td>").attr("id", "id_doc-"+id).html(id_doc).appendTo("#item-"+id);
+    $("<td>").attr("id", "code-"+id).html(code).appendTo("#item-"+id);
     $("<td>").attr("id", "name-"+id).html(name).appendTo("#item-"+id);
-    $("<td>").attr("id", "lastname-"+id).html(lastname).appendTo("#item-"+id);
-    $("<td>").attr("id", "address-"+id).html(address).appendTo("#item-"+id);
+    $("<td>").attr("id", "description-"+id).html(description).appendTo("#item-"+id);
+    $("<td>").attr("id", "type-"+id).html(type).appendTo("#item-"+id);
+    $("<td>").attr("id", "amount-"+id).html(amount).appendTo("#item-"+id);
     $("<td>").attr("id", "creation_date-"+id).html(creation_date).appendTo("#item-"+id);
 
     // create editor bottons on table
@@ -143,15 +148,17 @@ function appendOpenTable(id, id_doc, name, lastname, address, creation_date ){
     $("#editbotton-"+id).click(function(){
         edit_id = id;
 
-        var editid_doc = $("#id_doc-"+id).html();
+        var editcode = $("#code-"+id).html();
         var editname = $("#name-"+id).html();
-        var editlastname = $("#lastname-"+id).html();
-        var editaddress = $("#address-"+id).html();
+        var editdescription = $("#description-"+id).html();
+        var edittype = $("#type-"+id).html();
+        var editamount = $("#amount-"+id).html();
         
-        $("#id_doc").attr("value", editid_doc);
+        $("#code").attr("value", editcode);
         $("#name").attr("value", editname);
-        $("#lastname").attr("value", editlastname);
-        $("#address").attr("value", editaddress);
+        $("#description").attr("value", editdescription);
+        $("#type").attr("value", edittype);
+        $("#amount").attr("value", editamount);
         
         $("#botton-edit-"+id).slideUp(speed, function(){ // hide edit botton
             $("feditor").slideDown(speed); // show editor panel
@@ -174,13 +181,13 @@ function deleteCall(id){
 }
 
 // edit function
-function editCall(id, id_doc, name, lastname, address){
+function editCall(id, code, name, description, type, amount){
     // ajax call to edit and insert base on action
     var action = "update";
     if (id == 0){
         action = "insert"
     }
-    getXML(xml_url+"?action="+action+"&id="+id+"&id_doc="+id_doc+"&name="+name+"&lastname="+lastname+"&address="+address, "handlerEditCall");
+    getXML(xml_url+"?action="+action+"&id="+id+"&code="+code+"&name="+name+"&description="+description+"&type="+type+"&amount="+amount, "handlerEditCall");
 }
 
 // handler result for edit and insert

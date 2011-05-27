@@ -264,7 +264,7 @@ CREATE TABLE `co_owners` (
   `id_doc` varchar(45) NOT NULL,
   `name` varchar(100) NOT NULL,
   `lastname` varchar(200) NOT NULL,
-  `addess` text NOT NULL,
+  `address` text NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_owners`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;

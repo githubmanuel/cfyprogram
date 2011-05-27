@@ -32,7 +32,7 @@ some modification on the original files
 /* The outermost container of the Menu Bar, an auto width box with no margin or padding */
 ul.MenuBarHorizontal
 {
-	margin-left: 180px;
+	margin-left: 30px;
 	list-style-type: none;
 	font-size: 100%;
 	cursor: default;

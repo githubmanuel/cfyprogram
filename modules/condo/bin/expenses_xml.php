@@ -50,46 +50,49 @@ $id = "";
 if (isset($_GET['id'])) {
     $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-$id_doc = "";
-if (isset($_GET['id_doc'])) {
-    $id_doc = mysql_escape_string(substr(trim($_GET['id_doc']), 0, 255));
+$code = "";
+if (isset($_GET['code'])) {
+    $code = mysql_escape_string(substr(trim($_GET['code']), 0, 255));
 }
 $name = "";
 if (isset($_GET['name'])) {
     $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
 }
-$lastname = "";
-if (isset($_GET['lastname'])) {
-    $lastname = mysql_escape_string(substr(trim($_GET['lastname']), 0, 255));
+$description = "";
+if (isset($_GET['description'])) {
+    $description = mysql_escape_string(substr(trim($_GET['description']), 0, 255));
 }
-$address = "";
-if (isset($_GET['address'])) {
-    $address = mysql_escape_string(substr(trim($_GET['address']), 0, 255));
+$type = "";
+if (isset($_GET['type'])) {
+    $type = mysql_escape_string(substr(trim($_GET['type']), 0, 255));
 }
-
-$table = "co_owners";
+$amount = "";
+if (isset($_GET['amount'])) {
+    $amount = mysql_escape_string(substr(trim($_GET['amount']), 0, 255));
+}
+$table = "co_expenses";
 
 switch ($action) {
     case "open" :
         $result = "1";
         break;
     case "update" :
-        $myInput = array(id_doc => $id_doc, name => $name, lastname => $lastname, address => $address);
-        $result = $myData->update($myInput, "id_owners=" . $id, $table);
+        $myInput = array(code => $code, name => $name, description => $description, type => $type, amount => $amount);
+        $result = $myData->update($myInput, "id_expenses=" . $id, $table);
         break;
     case "insert" :
-        $myInput = array(id_doc => $id_doc, name => $name, lastname => $lastname, address => $address);
+        $myInput = array(code => $code, name => $name, description => $description, type => $type, amount => $amount);
         $result = $myData->insert($myInput, $table);
         break;
     case "delete" :
-        $result = $myData->delete("id_owners=" . $id, $table);
+        $result = $myData->delete("id_expenses=" . $id, $table);
         break;
     default :
         $xml = "no action";
 }
 
 if ($result == "1") { // check for the result, and read the xml.
-    $xml = $myData->select("", $table, "all", "id_owners ASC", "", "");
+    $xml = $myData->select("", $table, "all", "id_expenses ASC", "", "");
 } else {
     $xml = "error";
 }

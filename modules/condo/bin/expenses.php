@@ -18,19 +18,21 @@
  */
 ?>
 
-<h1>Configuración de Propietarios</h1>
+<h1>Gastos</h1>
 <section>
-    <h2>Propietarios</h2>
-    <p>Crear, Editar o Borrar los propietarios</p>
+    <h2>Gastos Generales</h2>
+    <p>Crear, Editar o Borrar los gastos</p>
     <feditor style="display: none;">
-        <flabel>Documento:</flabel>
-        <ffield><input type="text" id="id_doc" value=""/></ffield>
+        <flabel>Codigo:</flabel>
+        <ffield><input type="text" id="code" value=""/></ffield>
         <flabel>Nombre:</flabel>
         <ffield><input type="text" id="name" value=""/></ffield>
-        <flabel>Apellidos:</flabel>
-        <ffield><input type="text" id="lastname" value=""/></ffield>
-        <flabel>Direccion:</flabel>
-        <ffield><input type="text" id="address" value=""/></ffield>
+        <flabel>Descripcion:</flabel>
+        <ffield><input type="text" id="description" value=""/></ffield>
+        <flabel>Tipo:</flabel>
+        <ffield><input type="text" id="type" value=""/></ffield>
+          <flabel>Monto:</flabel>
+        <ffield><input type="text" id="amount" value=""/></ffield>
         <flabel>
             <fbotton id="botton-save">
                 <a id="cancelbotton" title="Cancelar" class="cancelbotton" ></a>
@@ -42,10 +44,11 @@
         <table>
             <thead>
                 <tr>
-                    <td>Documento</td>
+                    <td>Codigo</td>
                     <td>Nombre</td>
-                    <td>Apellidos</td>
-                    <td>Direccion</td>
+                    <td>Descripcion</td>
+                    <td>Tipo</td>
+                    <td>Monto</td>
                     <td>Fecha de Registro</td>
                     <td>&nbsp;</td>
                 </tr>

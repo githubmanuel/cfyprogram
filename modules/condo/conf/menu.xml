@@ -27,7 +27,12 @@ Commnents:
         <url>expenses.php</url>
         <name>Gastos</name>
     </item>
-    <item id="3">
+        <item id="3">
+        <type>pid</type>
+        <url>bill.php</url>
+        <name>Recibo</name>
+    </item>
+    <item id="99">
         <type>url</type>
         <url>core/bin/logout.php</url>
         <name>Salir</name>

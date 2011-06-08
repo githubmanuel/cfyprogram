@@ -1,0 +1,32 @@
+{
+"totalRows": "3", 
+"result":[
+		{
+			"id_expenses": "3", 
+			"code": "010101", 
+			"name": "Agua", 
+			"description": "Gastos de Agua Potable", 
+			"type": "Fijo", 
+			"amount": "123", 
+			"creation_date": "2011-05-26 16:48:07"
+		}, 
+		{
+			"id_expenses": "4", 
+			"code": "010102", 
+			"name": "Telefono", 
+			"description": "Gastos de Telefono", 
+			"type": "Fijo", 
+			"amount": "123", 
+			"creation_date": "2011-05-26 16:50:32"
+		}, 
+		{
+			"id_expenses": "5", 
+			"code": "010201", 
+ 			"name": "Vijilancia", 
+			"description": "Compañia de Vijilantes SOS", 
+			"type": "Fijo", 
+			"amount": "43545", 
+			"creation_date": "2011-05-26 16:51:56"
+		}
+	]
+}

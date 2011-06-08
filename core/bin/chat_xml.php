@@ -105,6 +105,12 @@ switch ($action) {
         $where = " `to` = '" . $username . "' ";
         $xml = $myData->select(" min(recd) as recd, `from` ", "core_chat", $where, "", "`from`", "");
         break;
+    
+    case "checknewmessage" :
+        $where = " `to` = '" . $username . "' and recd = 0 ";
+        $xml = $myData->select(" max(sent)as sent, `from`, `message` ", "core_chat", $where, "", "`from`", "");
+        break;
+    
 
     default :
         $xml = "1";

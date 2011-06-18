@@ -22,22 +22,24 @@ $(document).ready(function(){
 });
 
 function getDatajson (jsonFile, callBack){
-    $.getJSON(jsonFile, eval(callBack))    
+    try {
+        $.getJSON(jsonFile, eval(callBack));
+    } catch (e) { 
+        alert(e);
+    } 
 }
 
 function openTable(){
-    getDatajson(urlJson+"?action=open", handlerOpenTable)
+    getDatajson(urlJson+"?action=open", handlerOpenTable);
 }
 
 function handlerOpenTable(data){
     if (data.result != "error"){
         $.each(data.result, function(i, field){
             alert (field.id_expenses);
-         
         });
     }else{
         alert("Error lejendo la base de datos");
     }
-    
 }
 

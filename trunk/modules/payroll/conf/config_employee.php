@@ -13,23 +13,16 @@
   License: New BSD License (see docs/license.txt)
   Redistributions of files must retain the copyright notice.
 
-  File: config
-  Commnents: Configuration file.
+  File:
+  Commnents:
 
  */
 
-// Site URL
-$CORE["system"]["site_url"] = "http://localhost/";
+if ($pid != 0) {
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/payroll/scripts/employee.js"></SCRIPT>';
 
-// DB variables
-$CORE["system"]["db_host"] = "localhost";
-$CORE["system"]["db_name"] = "cfy_base";
-$CORE["system"]["db_username"] = "cfyadmin";
-$CORE["system"]["db_password"] = "cheale23";
-
-// Style
-$CORE["style"]["name"] = "base";
-
-// Company Name
-$CORE["system"]["company_name"] = "Lab pajarraco.com";
+    echo $head_script;
+}
+echo "";
 ?>
+

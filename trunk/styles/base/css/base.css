@@ -280,6 +280,9 @@ tbody{
 tr{
     height: 27px;
 }
+td{
+    padding: 0 5px 0 5px;
+}
 .row1{
     background-color: #FFFFFF;
 

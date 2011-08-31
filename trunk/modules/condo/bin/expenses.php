@@ -33,12 +33,10 @@
         <ffield><input type="text" id="type" value=""/></ffield>
           <flabel>Monto:</flabel>
         <ffield><input type="text" id="amount" value=""/></ffield>
-        <flabel>
             <fbotton id="botton-save">
                 <a id="cancelbotton" title="Cancelar" class="cancelbotton" ></a>
                 <a id="savebotton" title="Guardar" class="savebotton"></a>
             </fbotton>
-        </flabel>
     </feditor>
     <fcontainer>
         <table>

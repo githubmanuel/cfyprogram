@@ -18,21 +18,19 @@
  */
 ?>
 
-<h1>Empleados</h1>
+<h1>Asignaciones</h1>
 <section>
-    <h2>Listado de emleados</h2>
+    <h2>Listado de asignaciones</h2>
     <p></p>
     <feditor style="display: none;">
         <flabel>Nombre:</flabel>
         <ffield><input type="text" id="name" value=""/></ffield>
-        <flabel>Cargo:</flabel>
-        <ffield><input type="text" id="position" value=""/></ffield>
-        <flabel>Fecha de Ingreso:</flabel>
-        <ffield><input type="text" id="started_date" value=""/></ffield>
-        <flabel>Sueldo:</flabel>
-        <ffield><input type="text" id="income" value=""/></ffield>
-        <flabel>Periodo:</flabel>
-        <ffield><input type="text" id="period" value=""/></ffield>
+        <flabel>Tipo:</flabel>
+        <ffield><input type="text" id="type" value=""/></ffield>
+        <flabel>Monto:</flabel>
+        <ffield><input type="text" id="amount" value=""/></ffield>
+        <flabel>Porcentaje:</flabel>
+        <ffield><input type="text" id="percentage" value=""/></ffield>
         <fbotton id="botton-save">
             <a id="cancelbotton" title="Cancelar" class="cancelbotton" ></a>
             <a id="savebotton" title="Guardar" class="savebotton"></a>
@@ -43,10 +41,9 @@
             <thead>
                 <tr>
                     <td>Nombre</td>
-                    <td>Cargo</td>
-                    <td>Fecha de Ingreso</td>
-                    <td>Sueldo</td>
-                    <td>Periodo</td>
+                    <td>tipo</td>
+                    <td>Monto</td>
+                    <td>Porcentaje</td>
                     <td>Fecha de Registro</td>
                     <td>&nbsp;</td>
                 </tr>

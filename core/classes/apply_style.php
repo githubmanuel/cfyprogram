@@ -48,7 +48,7 @@ class Apply_Style {
 
     function set_head() {
         $head_menu  = '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/menu_bar.js" ></script>';
-        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.4.4.js" ></script>';
+        $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery-1.6.2.min.js" ></script>';
         $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/jquery.form.js" ></script>';
         $head_menu .= '<script src="' . $GLOBALS["CORE"]["system"]["site_url"] . 'core/scripts/general_function.js" ></script>';
         $head_menu .= '<link href="'  . $GLOBALS["CORE"]["system"]["site_url"] . 'core/css/menu_bar.css" rel="stylesheet" type="text/css" />';

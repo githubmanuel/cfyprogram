@@ -30,9 +30,9 @@ class dbconnect {
 
     function query_result($totalRows) {
         $result = NULL;
-        $result .= '{"totalRows": "'.$totalRows.'", ';
+        $result .= '{"totalRows": "'.$totalRows.'"';
         if ($totalRows > 0) {
-            $result .= '"result":[';
+            $result .= ', "result":[';
             foreach ($this->data as $item) {
                 $result .= '{';
                 foreach ($item as $key => $value) {
@@ -42,8 +42,9 @@ class dbconnect {
                 $result .= '}, ';
             }
             $result = substr($result, 0, -2);
-            $result .= ']}';
+            $result .= ']';
         }
+        $result .= '}';
         return $result;
     }
 

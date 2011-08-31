@@ -23,8 +23,6 @@
     <h2>Listado de emleados</h2>
     <p></p>
     <feditor style="display: none;">
-        <flabel>Codigo:</flabel>
-        <ffield><input type="text" id="code" value=""/></ffield>
         <flabel>Nombre:</flabel>
         <ffield><input type="text" id="name" value=""/></ffield>
         <flabel>Cargo:</flabel>

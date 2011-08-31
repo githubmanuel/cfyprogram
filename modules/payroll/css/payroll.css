@@ -1,7 +1,7 @@
 /* styles for content in general*/
 
 flabel{
-    width: 100px;
+    width: 170px;
     height: 25px;
     padding-top: 5px;
     display: block;
@@ -10,7 +10,7 @@ flabel{
 }
 
 ffield{
-    width: 100px;
+    width: 180px;
     height: 25px;
     padding-top: 5px;
     display: block;
@@ -46,6 +46,9 @@ fbotton{
     float: right;
     clear: both;
 }
+#botton-save{
+    padding-right: 20px;
+}
 .editor{
     background-color: #FFFFFF;
     width: 50px;
@@ -55,4 +58,7 @@ fcontainer {
 }
 fcontainer table{
 
+}
+input {
+    width: 150px;
 }

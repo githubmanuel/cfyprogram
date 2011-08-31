@@ -31,12 +31,10 @@
         <ffield><input type="text" id="lastname" value=""/></ffield>
         <flabel>Direccion:</flabel>
         <ffield><input type="text" id="address" value=""/></ffield>
-        <flabel>
             <fbotton id="botton-save">
                 <a id="cancelbotton" title="Cancelar" class="cancelbotton" ></a>
                 <a id="savebotton" title="Guardar" class="savebotton"></a>
             </fbotton>
-        </flabel>
     </feditor>
     <fcontainer>
         <table>

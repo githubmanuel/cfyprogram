@@ -20,26 +20,25 @@ Commnents:
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Albatros Airlines - CFY program</title>
-        <link href="http://albatrosair.com.ve/cfy/styles/base/css/base.css" rel="stylesheet" type="text/css">
+        <title>CFY program</title>
+        <link href="http://lab.pajarraco.com/cfy/styles/base/css/base.css" rel="stylesheet" type="text/css">
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="http://albatrosair.com.ve/cfy/core/scripts/menu_bar.js" ></script><script src="http://albatrosair.com.ve/cfy/core/scripts/jquery-1.4.4.js" ></script><script src="http://albatrosair.com.ve/cfy/core/scripts/jquery.form.js" ></script><script src="http://albatrosair.com.ve/cfy/core/scripts/general_function.js" ></script><link href="http://albatrosair.com.ve/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
+        <script src="http://lab.pajarraco.com/cfy/core/scripts/menu_bar.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery-1.4.4.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery.form.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/general_function.js" ></script><link href="http://lab.pajarraco.com/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
     </head>
 
     <body>
         <div class="container">
             <header>
-                <company_name>Albatros Airlines</company_name>
+                <company_name>Lab pajarraco.com</company_name>
                 CFY Business Management Suite
             </header>
             <div class="sidebar">
                 <nav>
-                    <ul><li><a href="?pid=3">Reservaciones</a></li><li><a href="?pid=4">Presupuesto</a></li><li><a href="?pid=99">Configuración</a></li></ul>
+                    <ul><li><a href="?pid=2">Nomina</a></li><li><a href="?pid=3">Administración</a></li><li><a href="?pid=5">Presupuesto</a></li><li><a href="?pid=6">Condominio</a></li><li><a href="?pid=99">Configuración</a></li></ul>
                 </nav>
                 <aside>
-                    <p>Tan lejos como quieras...</p>
                 </aside>
                 <!-- end .sidebar -->
             </div>
@@ -56,6 +55,6 @@ Commnents:
             </footer>
             <!-- end .container -->
         </div>
-        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"http://albatrosair.com.ve/cfy/core/image/MenuBarDownHover.gif", imgRight:"http://albatrosair.com.ve/cfy/core/image/MenuBarRightHover.gif"});</script>
+        <script type="text/javascript">var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"http://lab.pajarraco.com/cfy/core/image/MenuBarDownHover.gif", imgRight:"http://lab.pajarraco.com/cfy/core/image/MenuBarRightHover.gif"});</script>
     </body>
 </html>

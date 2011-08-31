@@ -45,25 +45,25 @@ $id = "";
 if (isset($_GET['id'])) {
     $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-$code = "";
-if (isset($_GET['code'])) {
-    $code = mysql_escape_string(substr(trim($_GET['code']), 0, 255));
-}
 $name = "";
 if (isset($_GET['name'])) {
     $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
 }
-$description = "";
-if (isset($_GET['description'])) {
-    $description = mysql_escape_string(substr(trim($_GET['description']), 0, 255));
+$position = "";
+if (isset($_GET['position'])) {
+    $position = mysql_escape_string(substr(trim($_GET['position']), 0, 255));
 }
-$type = "";
-if (isset($_GET['type'])) {
-    $type = mysql_escape_string(substr(trim($_GET['type']), 0, 255));
+$started_date = "";
+if (isset($_GET['started_date'])) {
+    $started_date = mysql_escape_string(substr(trim($_GET['started_date']), 0, 255));
 }
-$amount = "";
-if (isset($_GET['amount'])) {
-    $amount = mysql_escape_string(substr(trim($_GET['amount']), 0, 255));
+$income = "";
+if (isset($_GET['income'])) {
+    $income = mysql_escape_string(substr(trim($_GET['income']), 0, 255));
+}
+$period = "";
+if (isset($_GET['period'])) {
+    $period = mysql_escape_string(substr(trim($_GET['period']), 0, 255));
 }
 $table = "pa_employee";
 
@@ -72,11 +72,11 @@ switch ($action) {
         $result = "1";
         break;
     case "update" :
-        $myInput = array(code => $code, name => $name, description => $description, type => $type, amount => $amount);
+        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
         $result = $myData->update($myInput, "id_employee=" . $id, $table);
         break;
     case "insert" :
-        $myInput = array(code => $code, name => $name, description => $description, type => $type, amount => $amount);
+        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
         $result = $myData->insert($myInput, $table);
         break;
     case "delete" :

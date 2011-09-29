@@ -19,15 +19,20 @@ Commnents:
 <menu>
     <item id="1">
         <type>pid</type>
+        <url>payroll.php</url>
+        <name>Nomina</name>
+    </item>
+    <item id="2">
+        <type>pid</type>
         <url>employee.php</url>
         <name>Empleados</name>
     </item>
-    <item id="2">
+    <item id="3">
         <type>pid</type>
         <url>assignment.php</url>
         <name>Asignaciones</name>
     </item>
-    <item id="3">
+    <item id="4">
         <type>url</type>
         <url>core/bin/logout.php</url>
         <name>Salir</name>

@@ -17,7 +17,7 @@
 var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
 var edit_id = 0;
-var urlJson = "modules/payroll/bin/assignment.json.php";
+var urlJson = "modules/payroll/bin/payroll.json.php";
 
 
 $(document).ready(function(){
@@ -58,18 +58,19 @@ function setBottonEvent(){
         showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
         
         var newname = $("#name").val();
-        var newtype = $("#type").val();
-        var newamount = $("#amount").val();
+        var newposition = $("#position").val();
+        var newstarted_date = $("#started_date").val();
+        var newincome = $("#income").val();
         var newperiod = $("#period").val();
 
-
         // edit function
-        editCall(edit_id, newname, newtype, newamount, newperiod);
+        editCall(edit_id, newname, newposition, newstarted_date, newincome, newperiod);
 
         // clean off the form
         $("#name").attr("value", "");
-        $("#type").attr("value", "");
-        $("#amount").attr("value", "");
+        $("#position").attr("value", "");
+        $("#started_date").attr("value", "");
+        $("#income").attr("value", "");
         $("#period").attr("value", "");
         $("feditor").slideUp(speed); // close editor panel
         $("#newbotton").slideDown(speed); // show new botton
@@ -95,15 +96,73 @@ function handlerOpenTable(data){
         var totalRow = data.totalRows;
         if (totalRow > 0){            
             $.each(data.result, function(i, field){
-                var id = field.id_assignment;
-                var name = field.name;
-                var type = field.type;
-                var amount = field.amount;
+                var id = field.id_payroll;
+                var employee = field.employee;
+                var position = field.position;
+                var income = field.income;
                 var period = field.period;
-                var creation_date = field.creation_date;
+                var assignment = field.assignment;
+                var assignment_amount = field.assignment_amount;
+                var assignment_type = field.assignment_type;
+                var assignment_period = field.assignment_period;
+                
+                var amount = 0;
+                var valor_period = 0;
+                var valor_assignment_period = 0;
+                 
+
+                switch (period) {
+                    case "Semanal":
+                        valor_period = 7;
+                        break;
+                    case "Quincenal":
+                        valor_period = 15;
+                        break;
+                    case "Mensual":
+                        valor_period = 30;
+                        break; 
+                    case "Anual":
+                        valor_period = 365;
+                        break;
+                    default:
+                        alert("Error en Periodo");
+                        break;
+                }
+                switch (assignment_period) {
+                    case "Semanal":
+                        valor_assignment_period  = 7;
+                        break;
+                    case "Quincenal":
+                        valor_assignment_period  = 15;
+                        break;
+                    case "Mensual":
+                        valor_assignment_period  = 30;
+                        break; 
+                    case "Anual":
+                        valor_assignment_period  = 365;
+                        break;
+                    default:
+                        alert("Error en Periodo de Asignacion");
+                        break;
+                }
+                
+                switch(assignment_type)
+                {
+                    case "Dias":
+                        amount = Math.round((((income/valor_period)*assignment_amount)/valor_assignment_period)*100)/100;
+                        break;
+                    case "Monto":
+                        amount = income  + assignment_amount;
+                        break;
+                    case "Porcentaje":
+                        amount = income + (income * assignment_amount);
+                        break;
+                    default:
+                        alert("Error en Assignacion");
+                }
 
                 // function to append data to page
-                appendOpenTable(id, name, type, amount, period, creation_date);
+                appendOpenTable(id, employee, position, income, assignment, amount);
 
             });
         }
@@ -122,7 +181,7 @@ function handlerOpenTable(data){
 }
 
 // put data on table
-function appendOpenTable(id, name, type, amount, period, creation_date){
+function appendOpenTable(id, employee, position, income, assignment, amount){
 
     // select color for row
     styleChooser = !styleChooser;
@@ -131,11 +190,11 @@ function appendOpenTable(id, name, type, amount, period, creation_date){
 
     // create a row on fill with data
     $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
-    $("<td>").attr("id", "name-"+id).html(name).appendTo("#item-"+id);
-    $("<td>").attr("id", "type-"+id).html(type).appendTo("#item-"+id);
-    $("<td>").attr("id", "amount-"+id).html(amount).appendTo("#item-"+id);
-    $("<td>").attr("id", "period-"+id).html(period).appendTo("#item-"+id);
-    $("<td>").attr("id", "creation_date-"+id).html(creation_date).appendTo("#item-"+id);
+    $("<td>").attr("id", "name-"+id).html(employee).appendTo("#item-"+id);
+    $("<td>").attr("id", "position-"+id).html(position).appendTo("#item-"+id);
+    $("<td>").attr("id", "income-"+id).html(income).appendTo("#item-"+id);
+    $("<td>").attr("id", "period-"+id).html(assignment).appendTo("#item-"+id);
+    $("<td>").attr("id", "creation_date-"+id).html(amount).appendTo("#item-"+id);
 
     // create editor bottons on table
     $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
@@ -149,14 +208,13 @@ function appendOpenTable(id, name, type, amount, period, creation_date){
         edit_id = id;
 
         var editname = $("#name-"+id).html();
-        var edittype = $("#type-"+id).html();
-        var editamount = $("#amount-"+id).html();
+        var editposition = $("#position-"+id).html();
+        var editincome = $("#income-"+id).html();
         var editperiod = $("#period-"+id).html();
-
         
         $("#name").attr("value", editname);
-        $("#type").attr("value", edittype);
-        $("#amount").attr("value", editamount);
+        $("#position").attr("value", editposition);
+        $("#income").attr("value", editincome);
         $("#period").attr("value", editperiod);
         
         $("#botton-edit-"+id).slideUp(speed, function(){ // hide edit botton
@@ -180,13 +238,13 @@ function deleteCall(id){
 }
 
 // edit function
-function editCall(id, name, type, amount, period){
+function editCall(id, name, position, started_date, income, period){
     // ajax call to edit and insert base on action
     var action = "update";
     if (id == 0){
         action = "insert"
     }
-    getDatajson(urlJson+"?action="+action+"&id="+id+"&name="+name+"&type="+type+"&amount="+amount+"&period="+period, "handlerEditCall");
+    getDatajson(urlJson+"?action="+action+"&id="+id+"&name="+name+"&position="+position+"&started_date="+started_date+"&income="+income+"&period="+period, "handlerEditCall");
 }
 
 // handler result for edit and insert

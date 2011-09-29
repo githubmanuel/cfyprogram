@@ -49,41 +49,46 @@ $name = "";
 if (isset($_GET['name'])) {
     $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
 }
-$type = "";
-if (isset($_GET['type'])) {
-    $type = mysql_escape_string(substr(trim($_GET['type']), 0, 255));
+$position = "";
+if (isset($_GET['position'])) {
+    $position = mysql_escape_string(substr(trim($_GET['position']), 0, 255));
 }
-$amount = "";
-if (isset($_GET['amount'])) {
-    $amount = mysql_escape_string(substr(trim($_GET['amount']), 0, 255));
+$started_date = "";
+if (isset($_GET['started_date'])) {
+    $started_date = mysql_escape_string(substr(trim($_GET['started_date']), 0, 255));
+}
+$income = "";
+if (isset($_GET['income'])) {
+    $income = mysql_escape_string(substr(trim($_GET['income']), 0, 255));
 }
 $period = "";
 if (isset($_GET['period'])) {
     $period = mysql_escape_string(substr(trim($_GET['period']), 0, 255));
 }
-$table = "pa_assignment";
+$table = "pa_payroll";
+$view = "view_pa_payroll";
 
 switch ($action) {
     case "open" :
         $result = "1";
         break;
     case "update" :
-        $myInput = array(name => $name, type => $type, amount => $amount, period => $period);
-        $result = $myData->update($myInput, "id_assignment=" . $id, $table);
+        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
+        $result = $myData->update($myInput, "id_payroll=" . $id, $table);
         break;
     case "insert" :
-        $myInput = array(name => $name, type => $type, amount => $amount, period => $period);
+        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
         $result = $myData->insert($myInput, $table);
         break;
     case "delete" :
-        $result = $myData->delete("id_assignment=" . $id, $table);
+        $result = $myData->delete("id_payroll=" . $id, $table);
         break;
     default :
         $xml = "no action";
 }
 
 if ($result == "1") { // check for the result, and read the xml.
-    $json = $myData->select("", $table, "all", "id_assignment ASC", "", "");
+    $json = $myData->select("", $view, "all", "id_payroll ASC", "", "");
 } else {
     $json = '{"result":"error"}';
 }

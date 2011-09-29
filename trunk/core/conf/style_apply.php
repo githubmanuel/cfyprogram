@@ -25,7 +25,7 @@ Commnents:
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <script src="http://lab.pajarraco.com/cfy/core/scripts/menu_bar.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery-1.4.4.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery.form.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/general_function.js" ></script><link href="http://lab.pajarraco.com/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
+        <script src="http://lab.pajarraco.com/cfy/core/scripts/menu_bar.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery-1.6.2.min.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/jquery.form.js" ></script><script src="http://lab.pajarraco.com/cfy/core/scripts/general_function.js" ></script><link href="http://lab.pajarraco.com/cfy/core/css/menu_bar.css" rel="stylesheet" type="text/css" /><?php require_once(PATH_site.$CORE["module"]["head_content"]); ?><?php require_once(PATH_site.$CORE["page"]["head_content"]); ?>
     </head>
 
     <body>

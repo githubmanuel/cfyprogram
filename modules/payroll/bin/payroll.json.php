@@ -65,11 +65,36 @@ $period = "";
 if (isset($_GET['period'])) {
     $period = mysql_escape_string(substr(trim($_GET['period']), 0, 255));
 }
+$jsondata = "";
+if (isset($_GET['jsondata'])) {
+    $jsondata = mysql_escape_string(substr(trim($_GET['jsondata']), 0, 255));
+}
+
+
 $table = "pa_payroll";
 $view = "view_pa_payroll";
 
+
 switch ($action) {
     case "open" :
+        $result = "1";
+        break;
+    case "getdata" :
+        switch ($jsondata) {
+            case "employee":
+                $table = "pa_employee";
+                $sort = "id_employee ASC";
+                break;
+
+            case "assignment":
+                $table = "pa_assignment";
+                $sort = "id_assignment ASC";
+                break;
+
+            default:
+                break;
+        }
+        $json2 = $myData->select("", $table, "all", $sort, "", "");
         $result = "1";
         break;
     case "update" :
@@ -88,7 +113,11 @@ switch ($action) {
 }
 
 if ($result == "1") { // check for the result, and read the xml.
-    $json = $myData->select("", $view, "all", "id_payroll ASC", "", "");
+    if (isset($json2)){
+        $json = $json2;
+    }else{
+        $json = $myData->select("", $view, "all", "id_payroll ASC", "", "");
+    }
 } else {
     $json = '{"result":"error"}';
 }

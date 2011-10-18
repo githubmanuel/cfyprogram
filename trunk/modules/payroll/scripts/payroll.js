@@ -18,7 +18,9 @@ var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
 var edit_id = 0;
 var urlJson = "modules/payroll/bin/payroll.json.php";
-
+var jsonEmployee = {};
+var jsonAssignment = {};
+var jsonSelector = 0;
 
 $(document).ready(function(){
     showmsg("Espere un momento por favor..."); // msg bos for client
@@ -31,6 +33,21 @@ function getDatajson (jsonFile, callBack){
     } catch (e) { 
         alert(e);
     } 
+}
+
+function getJsonData(){
+    getDatajson(urlJson+"?action=getdata&jsondata=employee", handlerGetJsonData);
+    getDatajson(urlJson+"?action=getdata&jsondata=assignment", handlerGetJsonData);
+}
+
+function handlerGetJsonData(data){
+    if (jsonSelector == 0){
+        jsonEmployee = data;
+        jsonSelector = 1;
+    }else{
+        jsonAssignment = data;
+        jsonSelector = 0;
+    }    
 }
 
 function setBottonEvent(){
@@ -81,6 +98,7 @@ function setBottonEvent(){
 function openTable(){
     getDatajson(urlJson+"?action=open", handlerOpenTable);
     setBottonEvent();
+    getJsonData();
 }
 
 function handlerOpenTable(data){
@@ -109,7 +127,6 @@ function handlerOpenTable(data){
                 var amount = 0;
                 var valor_period = 0;
                 var valor_assignment_period = 0;
-                 
 
                 switch (period) {
                     case "Semanal":
@@ -169,15 +186,13 @@ function handlerOpenTable(data){
     }else{
         alert("Error lejendo la base de datos");
     }
-
+    
     // show total and add new botton
     $("ftotal span").empty();
     $("ftotal span").html("Se encontraron " + totalRow + " registros");
     
     // hide msg box when data load is finish
     hidemsg();
-    
-    
 }
 
 // put data on table

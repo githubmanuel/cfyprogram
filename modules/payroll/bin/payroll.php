@@ -24,13 +24,14 @@
     <p>Asignaciones por empleado</p>
     <feditor style="display: none;">
         <flabel>Nombre de Emplado:</flabel>
+        <input type="hidden" id="id" value="" />
         <ffield>
-            <select name="employee_name">
+            <select name="employee_name" id="employee_name" >
             </select>
         </ffield>
         <flabel>Asignacion:</flabel>
         <ffield>
-            <select name="assignment_name">
+            <select name="assignment_name" id="assignment_name">
             </select>
         </ffield>
         <fbotton id="botton-save">

@@ -82,11 +82,13 @@ switch ($action) {
     case "getdata" :
         switch ($jsondata) {
             case "employee":
+                $select = " id_employee as id, name ";
                 $table = "pa_employee";
                 $sort = "id_employee ASC";
                 break;
 
             case "assignment":
+                $select = " id_assignment as id, name ";
                 $table = "pa_assignment";
                 $sort = "id_assignment ASC";
                 break;
@@ -94,7 +96,7 @@ switch ($action) {
             default:
                 break;
         }
-        $json2 = $myData->select("", $table, "all", $sort, "", "");
+        $json2 = $myData->select($select, $table, "all", $sort, "", "");
         $result = "1";
         break;
     case "update" :

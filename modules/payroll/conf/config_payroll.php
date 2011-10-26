@@ -20,6 +20,7 @@
 
 if ($pid != 0) {
     $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'modules/payroll/scripts/payroll.js"></SCRIPT>';
+    $head_script .= '<SCRIPT language="javascript" type="text/javascript" src="' . $CORE["system"]["site_url"] . 'core/scripts/jquery.jCombo.min.js"></SCRIPT>';
 
     echo $head_script;
 }

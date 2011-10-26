@@ -18,9 +18,6 @@ var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
 var edit_id = 0;
 var urlJson = "modules/payroll/bin/payroll.json.php";
-var jsonEmployee = {};
-var jsonAssignment = {};
-var jsonSelector = 0;
 
 $(document).ready(function(){
     showmsg("Espere un momento por favor..."); // msg bos for client
@@ -33,21 +30,6 @@ function getDatajson (jsonFile, callBack){
     } catch (e) { 
         alert(e);
     } 
-}
-
-function getJsonData(){
-    getDatajson(urlJson+"?action=getdata&jsondata=employee", handlerGetJsonData);
-    getDatajson(urlJson+"?action=getdata&jsondata=assignment", handlerGetJsonData);
-}
-
-function handlerGetJsonData(data){
-    if (jsonSelector == 0){
-        jsonEmployee = data;
-        jsonSelector = 1;
-    }else{
-        jsonAssignment = data;
-        jsonSelector = 0;
-    }    
 }
 
 function setBottonEvent(){
@@ -76,29 +58,22 @@ function setBottonEvent(){
         
         var newname = $("#name").val();
         var newposition = $("#position").val();
-        var newstarted_date = $("#started_date").val();
-        var newincome = $("#income").val();
-        var newperiod = $("#period").val();
 
         // edit function
-        editCall(edit_id, newname, newposition, newstarted_date, newincome, newperiod);
+        editCall(edit_id, newname, newposition);
 
         // clean off the form
         $("#name").attr("value", "");
         $("#position").attr("value", "");
-        $("#started_date").attr("value", "");
-        $("#income").attr("value", "");
-        $("#period").attr("value", "");
         $("feditor").slideUp(speed); // close editor panel
         $("#newbotton").slideDown(speed); // show new botton
-    
     });
 }
 
 function openTable(){
     getDatajson(urlJson+"?action=open", handlerOpenTable);
+    //getJsonData();
     setBottonEvent();
-    getJsonData();
 }
 
 function handlerOpenTable(data){
@@ -205,11 +180,11 @@ function appendOpenTable(id, employee, position, income, assignment, amount){
 
     // create a row on fill with data
     $("<tr>").attr("id", "item-"+id).addClass("row"+a).appendTo("#trow");
-    $("<td>").attr("id", "name-"+id).html(employee).appendTo("#item-"+id);
+    $("<td>").attr("id", "employee-"+id).html(employee).appendTo("#item-"+id);
     $("<td>").attr("id", "position-"+id).html(position).appendTo("#item-"+id);
     $("<td>").attr("id", "income-"+id).html(income).appendTo("#item-"+id);
-    $("<td>").attr("id", "period-"+id).html(assignment).appendTo("#item-"+id);
-    $("<td>").attr("id", "creation_date-"+id).html(amount).appendTo("#item-"+id);
+    $("<td>").attr("id", "assignment-"+id).html(assignment).appendTo("#item-"+id);
+    $("<td>").attr("id", "amount-"+id).html(amount).appendTo("#item-"+id);
 
     // create editor bottons on table
     $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
@@ -222,16 +197,16 @@ function appendOpenTable(id, employee, position, income, assignment, amount){
     $("#editbotton-"+id).bind("click", function(){
         edit_id = id;
 
-        var editname = $("#name-"+id).html();
-        var editposition = $("#position-"+id).html();
-        var editincome = $("#income-"+id).html();
-        var editperiod = $("#period-"+id).html();
-        
-        $("#name").attr("value", editname);
-        $("#position").attr("value", editposition);
-        $("#income").attr("value", editincome);
-        $("#period").attr("value", editperiod);
-        
+        var editid = id;
+        var editemployee = $("#employee-"+id).html();
+        var editassignment = $("#assignment-"+id).html();
+        $("#id").attr("value", editid);
+        $("#employee_name").jCombo(urlJson+"?action=getdata&jsondata=employee", {
+            selected_name: editemployee
+        });
+        $("#assignment_name").jCombo(urlJson+"?action=getdata&jsondata=assignment", {
+            selected_name: editassignment
+        });        
         $("#botton-edit-"+id).slideUp(speed, function(){ // hide edit botton
             $("feditor").slideDown(speed); // show editor panel
         });
@@ -253,13 +228,13 @@ function deleteCall(id){
 }
 
 // edit function
-function editCall(id, name, position, started_date, income, period){
+function editCall(id, name, position){
     // ajax call to edit and insert base on action
     var action = "update";
     if (id == 0){
         action = "insert"
     }
-    getDatajson(urlJson+"?action="+action+"&id="+id+"&name="+name+"&position="+position+"&started_date="+started_date+"&income="+income+"&period="+period, "handlerEditCall");
+    getDatajson(urlJson+"?action="+action+"&id="+id+"&name="+name+"&position="+position, "handlerEditCall");
 }
 
 // handler result for edit and insert

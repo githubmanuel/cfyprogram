@@ -24,6 +24,64 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `cfy_base` /*!40100 DEFAULT CHARACTER S
 USE `cfy_base`;
 
 --
+-- Table structure for table `ad_expenses`
+--
+
+DROP TABLE IF EXISTS `ad_expenses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_expenses` (
+  `id_expenses` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `type` varchar(5) DEFAULT NULL,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_expenses`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_expenses`
+--
+
+LOCK TABLES `ad_expenses` WRITE;
+/*!40000 ALTER TABLE `ad_expenses` DISABLE KEYS */;
+INSERT INTO `ad_expenses` VALUES (1,'13701','hghfgh','gfhfghfghfg','1',5464,'2011-11-04 14:49:57');
+/*!40000 ALTER TABLE `ad_expenses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ad_expenses`
+--
+
+DROP TABLE IF EXISTS `ad_expenses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ad_expenses` (
+  `id_expenses` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(45) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `type` varchar(5) DEFAULT NULL,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_expenses`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ad_expenses`
+--
+
+LOCK TABLES `ad_expenses` WRITE;
+/*!40000 ALTER TABLE `ad_expenses` DISABLE KEYS */;
+INSERT INTO `ad_expenses` VALUES (1,'13701','hghfgh','gfhfghfghfg','1',5464,'2011-11-04 14:49:57');
+/*!40000 ALTER TABLE `ad_expenses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `am_client`
 --
 
@@ -178,7 +236,7 @@ CREATE TABLE `core_module_var` (
 
 LOCK TABLES `core_module_var` WRITE;
 /*!40000 ALTER TABLE `core_module_var` DISABLE KEYS */;
-INSERT INTO `core_module_var` VALUES (2,'payroll','Nomina',0),(99,'home','ConfiguraciÃ³n',0),(3,'admin','AdministraciÃ³n',0),(5,'budget','Presupuesto',0),(4,'booking','Reservaciones',1),(6,'condo','Condominio',0);
+INSERT INTO `core_module_var` VALUES (2,'payroll','Nomina',0),(99,'home','ConfiguraciÃ³n',0),(3,'admin','AdministraciÃ³n',0),(5,'budget','Presupuesto',0),(4,'booking','Reservaciones',1),(6,'condo','Condominio',1);
 /*!40000 ALTER TABLE `core_module_var` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +285,7 @@ CREATE TABLE `pa_assignment` (
   `period` varchar(10) NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_assignment`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +294,7 @@ CREATE TABLE `pa_assignment` (
 
 LOCK TABLES `pa_assignment` WRITE;
 /*!40000 ALTER TABLE `pa_assignment` DISABLE KEYS */;
-INSERT INTO `pa_assignment` VALUES (1,'Vacacaiones','Dias',30,'Anual','2011-08-31 20:34:36');
+INSERT INTO `pa_assignment` VALUES (1,'Vacacaiones','Dias',30,'Anual','2011-08-31 20:34:36'),(2,'LPH','Dias',1,'Mensual','2011-11-04 13:22:34'),(3,'Utilidades','Dias',60,'Anual','2011-11-04 13:23:06'),(4,'Comisiones','Porcentaje',3,'Mensual','2011-11-04 13:41:24');
 /*!40000 ALTER TABLE `pa_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +314,7 @@ CREATE TABLE `pa_employee` (
   `period` varchar(50) DEFAULT NULL,
   `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_employee`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +323,7 @@ CREATE TABLE `pa_employee` (
 
 LOCK TABLES `pa_employee` WRITE;
 /*!40000 ALTER TABLE `pa_employee` DISABLE KEYS */;
-INSERT INTO `pa_employee` VALUES (1,'Ernesto La Fontaine','Presidente','2011-01-01',5500,'Mensual','2011-08-31 17:49:33'),(2,'Alejandra','Vise-Presidente','2011-02-23',4350,'Quincenal','2011-08-31 17:50:08');
+INSERT INTO `pa_employee` VALUES (1,'Ernesto La Fontaine','Presidente','2011-01-01',5500,'Mensual','2011-08-31 17:49:33'),(2,'Alejandra','Vise-Presidente','2011-02-23',4350,'Quincenal','2011-08-31 17:50:08'),(4,'Jose Peres','Asistente','2011-01-01',1500,'Mensual','2011-11-04 13:24:09');
 /*!40000 ALTER TABLE `pa_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +339,7 @@ CREATE TABLE `pa_payroll` (
   `id_employee` int(11) NOT NULL,
   `id_assignment` int(11) NOT NULL,
   PRIMARY KEY (`id_payroll`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +348,7 @@ CREATE TABLE `pa_payroll` (
 
 LOCK TABLES `pa_payroll` WRITE;
 /*!40000 ALTER TABLE `pa_payroll` DISABLE KEYS */;
-INSERT INTO `pa_payroll` VALUES (1,1,1),(2,2,1);
+INSERT INTO `pa_payroll` VALUES (1,1,1),(2,2,1),(6,4,2),(5,2,2),(7,4,1),(8,4,3),(9,1,4);
 /*!40000 ALTER TABLE `pa_payroll` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,4 +407,4 @@ USE `cfy_base`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-09-29 11:25:14
+-- Dump completed on 2011-11-04 10:25:18

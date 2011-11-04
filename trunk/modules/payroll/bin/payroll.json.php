@@ -45,26 +45,15 @@ $id = "";
 if (isset($_GET['id'])) {
     $id = mysql_escape_string(substr(trim($_GET['id']), 0, 255));
 }
-$name = "";
-if (isset($_GET['name'])) {
-    $name = mysql_escape_string(substr(trim($_GET['name']), 0, 255));
+$employee = "";
+if (isset($_GET['employee'])) {
+    $employee = mysql_escape_string(substr(trim($_GET['employee']), 0, 255));
 }
-$position = "";
-if (isset($_GET['position'])) {
-    $position = mysql_escape_string(substr(trim($_GET['position']), 0, 255));
+$assignment = "";
+if (isset($_GET['assignment'])) {
+    $assignment = mysql_escape_string(substr(trim($_GET['assignment']), 0, 255));
 }
-$started_date = "";
-if (isset($_GET['started_date'])) {
-    $started_date = mysql_escape_string(substr(trim($_GET['started_date']), 0, 255));
-}
-$income = "";
-if (isset($_GET['income'])) {
-    $income = mysql_escape_string(substr(trim($_GET['income']), 0, 255));
-}
-$period = "";
-if (isset($_GET['period'])) {
-    $period = mysql_escape_string(substr(trim($_GET['period']), 0, 255));
-}
+
 $jsondata = "";
 if (isset($_GET['jsondata'])) {
     $jsondata = mysql_escape_string(substr(trim($_GET['jsondata']), 0, 255));
@@ -100,11 +89,11 @@ switch ($action) {
         $result = "1";
         break;
     case "update" :
-        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
+        $myInput = array(id_employee => $employee, id_assignment => $assignment);
         $result = $myData->update($myInput, "id_payroll=" . $id, $table);
         break;
     case "insert" :
-        $myInput = array(name => $name, position => $position, started_date => $started_date, income => $income, period => $period);
+        $myInput = array(id_employee => $employee, id_assignment => $assignment);
         $result = $myData->insert($myInput, $table);
         break;
     case "delete" :
@@ -118,7 +107,7 @@ if ($result == "1") { // check for the result, and read the xml.
     if (isset($json2)){
         $json = $json2;
     }else{
-        $json = $myData->select("", $view, "all", "id_payroll ASC", "", "");
+        $json = $myData->select("", $view, "all", "employee ASC", "", "");
     }
 } else {
     $json = '{"result":"error"}';

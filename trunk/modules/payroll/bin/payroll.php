@@ -23,13 +23,13 @@
     <h2>Nomina de Empleados</h2>
     <p>Asignaciones por empleado</p>
     <feditor style="display: none;">
-        <flabel>Nombre de Emplado:</flabel>
+        <flabel>Nombre de Empleado:</flabel>
         <input type="hidden" id="id" value="" />
         <ffield>
             <select name="employee_name" id="employee_name" >
             </select>
         </ffield>
-        <flabel>Asignacion:</flabel>
+        <flabel>Asignación:</flabel>
         <ffield>
             <select name="assignment_name" id="assignment_name">
             </select>
@@ -46,8 +46,8 @@
                     <td>Nombre</td>
                     <td>Cargo</td>
                     <td>Sueldo</td>
-                    <td>Asignacion</td>
-                    <td>Monto de Asignacion</td>
+                    <td>Asignación</td>
+                    <td>Monto de Asignación</td>
                     <td>&nbsp;</td>
                 </tr>
             </thead>

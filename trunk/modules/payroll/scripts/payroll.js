@@ -37,6 +37,8 @@ function setBottonEvent(){
     $("#newbotton").unbind();
     $("#newbotton").bind("click", function(){
         edit_id = 0;
+        $("#employee_name").jCombo(urlJson+"?action=getdata&jsondata=employee");
+        $("#assignment_name").jCombo(urlJson+"?action=getdata&jsondata=assignment");
         $("#newbotton").slideUp(speed, function(){// hide new botton
             $("feditor").slideDown(speed);// show editor panel
         });
@@ -54,17 +56,19 @@ function setBottonEvent(){
     // function for save edit
     $("#savebotton").unbind();
     $("#savebotton").bind("click", function(){
-        showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
+        //showmsg("Su data se esta actualizando.<br /><br />Espere un momento por favor....");
         
-        var newname = $("#name").val();
-        var newposition = $("#position").val();
-
+        var newemployee = $("#employee_name").val();
+        var newassignment = $("#assignment_name").val();
+        
+        //alert (newemployee + " - " + newassignment);
+        // 
         // edit function
-        editCall(edit_id, newname, newposition);
+        editCall(edit_id, newemployee, newassignment);
 
         // clean off the form
-        $("#name").attr("value", "");
-        $("#position").attr("value", "");
+        $("#employee_name").jCombo(urlJson+"?action=getdata&jsondata=employee");
+        $("#assignment_name").jCombo(urlJson+"?action=getdata&jsondata=assignment");
         $("feditor").slideUp(speed); // close editor panel
         $("#newbotton").slideDown(speed); // show new botton
     });
@@ -92,10 +96,10 @@ function handlerOpenTable(data){
                 var id = field.id_payroll;
                 var employee = field.employee;
                 var position = field.position;
-                var income = field.income;
+                var income = parseFloat(field.income);
                 var period = field.period;
                 var assignment = field.assignment;
-                var assignment_amount = field.assignment_amount;
+                var assignment_amount = parseFloat(field.assignment_amount);
                 var assignment_type = field.assignment_type;
                 var assignment_period = field.assignment_period;
                 
@@ -142,12 +146,15 @@ function handlerOpenTable(data){
                 {
                     case "Dias":
                         amount = Math.round((((income/valor_period)*assignment_amount)/valor_assignment_period)*100)/100;
+                         
                         break;
                     case "Monto":
-                        amount = income  + assignment_amount;
+                        amount = income + assignment_amount;
+                        
                         break;
                     case "Porcentaje":
-                        amount = income + (income * assignment_amount);
+                        amount = ((income * assignment_amount)/100)+income;
+                        
                         break;
                     default:
                         alert("Error en Assignacion");
@@ -184,7 +191,7 @@ function appendOpenTable(id, employee, position, income, assignment, amount){
     $("<td>").attr("id", "position-"+id).html(position).appendTo("#item-"+id);
     $("<td>").attr("id", "income-"+id).html(income).appendTo("#item-"+id);
     $("<td>").attr("id", "assignment-"+id).html(assignment).appendTo("#item-"+id);
-    $("<td>").attr("id", "amount-"+id).html(amount).appendTo("#item-"+id);
+    $("<td>").attr("id", "amount-"+id).css("text-align", "right").html(amount).appendTo("#item-"+id);
 
     // create editor bottons on table
     $("<td>").attr("id", "editor-"+id).addClass("editor").appendTo("#item-"+id);
@@ -195,6 +202,7 @@ function appendOpenTable(id, employee, position, income, assignment, amount){
     // event for edit
     $("#editbotton-"+id).unbind();
     $("#editbotton-"+id).bind("click", function(){
+        showmsg("Espere un momento por favor...");
         edit_id = id;
 
         var editid = id;
@@ -210,6 +218,7 @@ function appendOpenTable(id, employee, position, income, assignment, amount){
         $("#botton-edit-"+id).slideUp(speed, function(){ // hide edit botton
             $("feditor").slideDown(speed); // show editor panel
         });
+        hidemsg();
     });
 
     // event for delete
@@ -228,13 +237,14 @@ function deleteCall(id){
 }
 
 // edit function
-function editCall(id, name, position){
+function editCall(id, employee, assignment){
     // ajax call to edit and insert base on action
     var action = "update";
     if (id == 0){
         action = "insert"
     }
-    getDatajson(urlJson+"?action="+action+"&id="+id+"&name="+name+"&position="+position, "handlerEditCall");
+    //alert (urlJson+"?action="+action+"&id="+id+"&employee="+employee+"&assignment="+assignment);
+    getDatajson(urlJson+"?action="+action+"&id="+id+"&employee="+employee+"&assignment="+assignment, "handlerEditCall");
 }
 
 // handler result for edit and insert

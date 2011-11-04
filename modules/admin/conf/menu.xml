@@ -18,6 +18,11 @@ Commnents:
 -->
 <menu>
     <item id="1">
+        <type>pid</type>
+        <url>expenses.php</url>
+        <name>Gastos</name>
+    </item>
+    <item id="2">
         <type>url</type>
         <url>core/bin/logout.php</url>
         <name>Salir</name>

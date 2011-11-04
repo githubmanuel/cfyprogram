@@ -16,14 +16,15 @@
 
 var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
+var urlJson = "modules/payroll/bin/payroll.json.php"; // url for the json php file
 var edit_id = 0;
-var urlJson = "modules/payroll/bin/payroll.json.php";
 
 $(document).ready(function(){
     showmsg("Espere un momento por favor..."); // msg bos for client
-    openTable();
+    openTable(); // function to get data
 });
 
+// ajax call, return json
 function getDatajson (jsonFile, callBack){
     try {
         $.getJSON(jsonFile, eval(callBack));
@@ -76,7 +77,6 @@ function setBottonEvent(){
 
 function openTable(){
     getDatajson(urlJson+"?action=open", handlerOpenTable);
-    //getJsonData();
     setBottonEvent();
 }
 

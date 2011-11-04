@@ -16,7 +16,7 @@
 
 var speed = 200; // effect speed 0,2 min
 var styleChooser = false; // variable for change color on table row
-var xml_url = "modules/condo/bin/expenses_xml.php"; // url for the xml php file
+var urlJson = "modules/admin/bin/expenses.json.php"; // url for the json php file
 var edit_id = 0;
  
 $(document).ready(function(){
@@ -24,19 +24,13 @@ $(document).ready(function(){
     openTable(); // function to get data
 });
 
-// ajax call, return xml
-function getXML(xmlfile, callback){
-    $.ajax({
-        type: "GET",
-        url: xmlfile,
-        dataType: "xml",
-        timeout: 5000,
-        success: eval(callback),
-        error: function(err, e){
-            hidemsg();
-            alert("error : " + err + " - " + e);
-        }
-    });
+// ajax call, return json
+function getDatajson (jsonFile, callBack){
+    try {
+        $.getJSON(jsonFile, eval(callBack));
+    } catch (e) { 
+        alert(e);
+    } 
 }
 
 function setBottonEvent(){
@@ -86,13 +80,12 @@ function setBottonEvent(){
 
 // function to get data
 function openTable(){
-    // ajax call, search for all data
-    getXML(xml_url+"?action=open", "handlerOpenTable");
+    getDatajson(urlJson+"?action=open", handlerOpenTable);
     setBottonEvent();
 }
 
 // get data from xml and put it in on local var
-function handlerOpenTable(xml){
+function handlerOpenTable(data){
     // empty table row for new data
     $("#trow").empty();
 
@@ -100,28 +93,30 @@ function handlerOpenTable(xml){
     styleChooser = false;
 
     // get xml data to local variables
-    var totalRow = $(xml).find("total").text();
-    if (totalRow > 0){
-        $(xml).find("result").each(function(){
-            var id = $(this).find("id_expenses").text();
-            var code = $(this).find("code").text();
-            var name = $(this).find("name").text();
-            var description = $(this).find("description").text();
-            var type = $(this).find("type").text();
-            var amount = $(this).find("amount").text();
-            var creation_date = $(this).find("creation_date").text();
+    if (data.result != "error"){
+        var totalRow = data.totalRows;
+        if (totalRow > 0){            
+            $.each(data.result, function(i, field){
+                var id = field.id_expenses;
+                var code = field.code;
+                var name = field.name;
+                var description = field.description;
+                var type = field.type;
+                var amount = field.amount;
+                var creation_date = field.creation_date;
 
-            // function to append data to page
-            appendOpenTable(id, code, name, description, type, amount, creation_date);
-        });
-    }
+                // function to append data to page
+                appendOpenTable(id, code, name, description, type, amount, creation_date);
+            });
+        }
 
-    // show total and add new botton
-    $("ftotal span").empty();
-    $("ftotal span").html("Se encontraron " + totalRow + " registros");
+        // show total and add new botton
+        $("ftotal span").empty();
+        $("ftotal span").html("Se encontraron " + totalRow + " registros");
     
-    // hide msg box when data load is finish
-    hidemsg();
+        // hide msg box when data load is finish
+        hidemsg();
+    }
 }
 
 // put data on table
@@ -181,7 +176,7 @@ function appendOpenTable(id, code, name, description, type, amount, creation_dat
 // delete function
 function deleteCall(id){
     // ajax call to delete item
-    getXML(xml_url+"?action=delete&id="+id, "handlerEditCall")
+    getDatajson(urlJson+"?action=delete&id="+id, "handlerEditCall")
 }
 
 // edit function
@@ -191,15 +186,15 @@ function editCall(id, code, name, description, type, amount){
     if (id == 0){
         action = "insert"
     }
-    getXML(xml_url+"?action="+action+"&id="+id+"&code="+code+"&name="+name+"&description="+description+"&type="+type+"&amount="+amount, "handlerEditCall");
+    getDatajson(urlJson+"?action="+action+"&id="+id+"&code="+code+"&name="+name+"&description="+description+"&type="+type+"&amount="+amount, "handlerEditCall");
 }
 
 // handler result for edit and insert
-function handlerEditCall(xml){
-    if ($(xml).find("search-results").text()!=" error"){
-        handlerOpenTable(xml);
+function handlerEditCall(data){
+    if (data.result != "error"){
+        handlerOpenTable(data);
     }else{
-        alert("error");
+        alert("error en edicion");
     }
 }
 

@@ -19,7 +19,7 @@
  */
 
 if ($pid != 0) {
-    $head_script .= '<link href="' . $CORE["system"]["site_url"] . 'modules/budget/css/budget.css" rel="stylesheet" type="text/css" />';
+    $head_script .= '<link href="' . $CORE["system"]["site_url"] . 'modules/cost/css/cost.css" rel="stylesheet" type="text/css" />';
 
     echo $head_script;
 }

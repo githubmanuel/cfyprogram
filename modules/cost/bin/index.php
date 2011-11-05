@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?php
+/*
 
 CFY program = CFY Business Management Suite
 
@@ -12,19 +12,14 @@ Mail: mail@pajarraco.com
 License: New BSD License (see docs/license.txt)
 Redistributions of files must retain the copyright notice.
 
-File: 
-Commnents: 
+File: index.php
+Commnents: Startup file.
 
--->
-<menu>
-    <item id="1">
-        <type>pid</type>
-        <url>profit.php</url>
-        <name>Ganancia</name>
-    </item>
-    <item id="2">
-        <type>url</type>
-        <url>core/bin/logout.php</url>
-        <name>Salir</name>
-    </item>
-</menu>
+*/
+?>
+
+<h1>Budget File</h1>
+<section>
+    <h2>Probando el insert</h2>
+    <p>Este si lo puedes cambiar.</p>
+</section>

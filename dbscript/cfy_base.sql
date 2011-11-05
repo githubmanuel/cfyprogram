@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.15, for Win32 (x86)
 --
--- Host: pajarraco.com    Database: cfy_base
+-- Host: lab.pajarraco.com    Database: cfy_base
 -- ------------------------------------------------------
 -- Server version	5.1.57
 
@@ -22,35 +22,6 @@
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `cfy_base` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `cfy_base`;
-
---
--- Table structure for table `ad_expenses`
---
-
-DROP TABLE IF EXISTS `ad_expenses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ad_expenses` (
-  `id_expenses` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(45) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `description` text,
-  `type` varchar(5) DEFAULT NULL,
-  `amount` decimal(10,0) DEFAULT NULL,
-  `creation_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_expenses`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ad_expenses`
---
-
-LOCK TABLES `ad_expenses` WRITE;
-/*!40000 ALTER TABLE `ad_expenses` DISABLE KEYS */;
-INSERT INTO `ad_expenses` VALUES (1,'13701','hghfgh','gfhfghfghfg','1',5464,'2011-11-04 14:49:57');
-/*!40000 ALTER TABLE `ad_expenses` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ad_expenses`
@@ -126,6 +97,33 @@ LOCK TABLES `bk_destination` WRITE;
 /*!40000 ALTER TABLE `bk_destination` DISABLE KEYS */;
 INSERT INTO `bk_destination` VALUES (0,'Caracas');
 /*!40000 ALTER TABLE `bk_destination` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bu_profit`
+--
+
+DROP TABLE IF EXISTS `bu_profit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bu_profit` (
+  `id_profit` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `amount` decimal(2,0) NOT NULL,
+  `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_profit`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bu_profit`
+--
+
+LOCK TABLES `bu_profit` WRITE;
+/*!40000 ALTER TABLE `bu_profit` DISABLE KEYS */;
+INSERT INTO `bu_profit` VALUES (1,'Porcentaje de Ganancia Accesorios','Porcentaje',25,'2011-11-05 18:09:14'),(2,'Porcentaje de Ganancia Contruccion Cocinas','Porcentaje',30,'2011-11-05 18:09:42');
+/*!40000 ALTER TABLE `bu_profit` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -236,7 +234,7 @@ CREATE TABLE `core_module_var` (
 
 LOCK TABLES `core_module_var` WRITE;
 /*!40000 ALTER TABLE `core_module_var` DISABLE KEYS */;
-INSERT INTO `core_module_var` VALUES (2,'payroll','Nomina',0),(99,'home','ConfiguraciÃ³n',0),(3,'admin','AdministraciÃ³n',0),(5,'budget','Presupuesto',0),(4,'booking','Reservaciones',1),(6,'condo','Condominio',1);
+INSERT INTO `core_module_var` VALUES (4,'payroll','Nomina',0),(99,'home','ConfiguraciÃ³n',0),(3,'admin','AdministraciÃ³n',0),(5,'budget','Presupuesto',0),(7,'booking','Reservaciones',1),(6,'condo','Condominio',1),(2,'cost','Costos',0);
 /*!40000 ALTER TABLE `core_module_var` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,4 +405,4 @@ USE `cfy_base`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-11-04 10:25:18
+-- Dump completed on 2011-11-05 14:08:44
